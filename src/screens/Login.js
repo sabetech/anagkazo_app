@@ -5,7 +5,7 @@ import { FilledButton } from "../components/FilledButton";
 import { Input } from "../components/Input";
 import { AuthContext } from "../contexts/AuthContext";
 
-export function Login() {
+export function Login({ navigation }) {
   const [index_number, setIndexNumber] = React.useState("");
   const { login } = React.useContext(AuthContext);
 
@@ -24,6 +24,8 @@ export function Login() {
         style={styles.loginButton}
         onPress={() => {
           login(index_number);
+
+          navigation.navigate("home");
         }}
       />
     </View>

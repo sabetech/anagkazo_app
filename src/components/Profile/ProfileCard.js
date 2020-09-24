@@ -19,6 +19,7 @@ import {
 import PropTypes from "prop-types";
 
 import profileStyles from "./ProfileStyle";
+import CardInfo from "../HomeDashboard/CardInfo";
 
 const styles = StyleSheet.create({ ...profileStyles });
 
@@ -47,10 +48,27 @@ class ProfileCard extends Component {
         { key: "3", title: "AVERAGE BUSSED", count: "3 M" },
       ],
     },
+    studentInfo: {
+      name: "",
+      class: "",
+    },
   };
 
   componentDidMount() {
-    console.log("component will mount here ...");
+    // console.log("component will mount here ...");
+    // fetch("http://192.168.8.156/acc_membership/public/api/app/student/700446", {
+    //   method: "GET",
+    // })
+    //   .then((response) => response.json())
+    //   .then((responseJson) => {
+    //     console.log(responseJson);
+    //     this.setState({
+    //       studentInfo: responseJson,
+    //     });
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
   }
 
   handleIndexChange = (index) => {
@@ -77,7 +95,7 @@ class ProfileCard extends Component {
   renderLabel = (props) => ({ route }) => {
     const routes = props.navigationState.routes;
 
-    console.log(routes);
+    //console.log(routes);
 
     let labels = [];
     routes.forEach((e, index) => {
@@ -113,13 +131,15 @@ class ProfileCard extends Component {
   };
 
   renderContactHeader = () => {
-    const { avatar, avatarBackground, name, bio } = this.props;
+    const { photo_url, name } = this.state.studentInfo;
 
     return (
       <View style={styles.headerContainer}>
         <View style={styles.coverContainer}>
           <ImageBackground
-            source={{ uri: avatarBackground }}
+            source={{
+              uri: this.props.avatarBackground,
+            }}
             style={styles.coverImage}
           >
             <View style={styles.coverTitleContainer}>
@@ -127,12 +147,19 @@ class ProfileCard extends Component {
             </View>
             <View style={styles.coverMetaContainer}>
               <Text style={styles.coverName}>{name}</Text>
-              <Text style={styles.coverBio}>{bio}</Text>
+              <Text style={styles.coverBio}>
+                {this.state.studentInfo.class}
+              </Text>
             </View>
           </ImageBackground>
         </View>
         <View style={styles.profileImageContainer}>
-          <Image source={{ uri: avatar }} style={styles.profileImage} />
+          <Image
+            source={{
+              uri: "http://anagkazo.firstlovegallery.com/" + photo_url,
+            }}
+            style={styles.profileImage}
+          />
         </View>
       </View>
     );
@@ -152,42 +179,7 @@ class ProfileCard extends Component {
           />
         </View>
         <ScrollView style={(styles.scroll, { height: 290 })}>
-          <View style={styles2.card}>
-            <View style={styles2.valueTitle}>
-              <Text style={{ fontSize: 50 }}>Wacenta Service</Text>
-              <Text style={{ fontSize: 16 }}>"This Wacenta too"</Text>
-            </View>
-          </View>
-          <View style={styles2.card}>
-            <View style={styles2.valueTitle}>
-              <Text style={{ fontSize: 50 }}>Wacenta Service</Text>
-              <Text style={{ fontSize: 16 }}>"This Wacenta too"</Text>
-            </View>
-          </View>
-          <View style={styles2.card}>
-            <View style={styles2.valueTitle}>
-              <Text style={{ fontSize: 50 }}>Wacenta Service</Text>
-              <Text style={{ fontSize: 16 }}>"This Wacenta too"</Text>
-            </View>
-          </View>
-          <View style={styles2.card}>
-            <View style={styles2.valueTitle}>
-              <Text style={{ fontSize: 50 }}>Wacenta Service</Text>
-              <Text style={{ fontSize: 16 }}>"This Wacenta too"</Text>
-            </View>
-          </View>
-          <View style={styles2.card}>
-            <View style={styles2.valueTitle}>
-              <Text style={{ fontSize: 50 }}>Wacenta Service</Text>
-              <Text style={{ fontSize: 16 }}>"This Wacenta too"</Text>
-            </View>
-          </View>
-          <View style={styles2.card}>
-            <View style={styles2.valueTitle}>
-              <Text style={{ fontSize: 50 }}>Wacenta Service</Text>
-              <Text style={{ fontSize: 16 }}>"This Wacenta too"</Text>
-            </View>
-          </View>
+          <CardInfo />
         </ScrollView>
       </View>
     );
@@ -200,10 +192,15 @@ const styles2 = StyleSheet.create({
     marginBottom: 15,
     height: 150,
     marginHorizontal: 10,
-    borderRadius: 10,
+    borderRadius: 3,
   },
   valueTitle: {
     paddingHorizontal: 10,
+  },
+  imgDim: {
+    height: "100%",
+    width: "30%",
+    flex: 0.1,
   },
 });
 

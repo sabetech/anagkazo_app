@@ -14,18 +14,16 @@ const Card = (props) => {
       }}
     >
       <View style={styles.card}>
-        {/* <Image
+        <Image
           source={{
-            uri: `https://unsplash.com/photos/ktrLmQlZLUI/download?force=true&w=640`,
+            uri: `https://anagkazo.firstlovegallery.com/storage/student_photo/700446.JPG`,
           }}
-          style={styles.imageDim}
-        /> */}
-        <View style={styles.videoTitle}>
-          <Text style={{ fontSize: 25 }} ellipsizeMode="tail" numberOfLines={2}>
-            {props.title}
-          </Text>
-          <Text style={{ fontSize: 16 }}>{props.description}</Text>
-        </View>
+          style={styles.imgDim}
+        />
+        {/* <View style={styles.valueTitle}>
+          <Text style={{ fontSize: 50 }}>Wacenta Service</Text>
+          <Text style={{ fontSize: 16 }}>"This Wacenta too"</Text>
+        </View> */}
       </View>
     </TouchableOpacity>
   );
@@ -33,12 +31,16 @@ const Card = (props) => {
 
 const styles = StyleSheet.create({
   card: {
+    backgroundColor: "white",
     elevation: 10,
     marginBottom: 50,
-    height: 230,
+    height: 150,
+    marginHorizontal: 10,
+    borderWidth: 4,
+    borderRadius: 10,
   },
   imageDim: {
-    width: "100%",
+    width: 100,
     height: 200,
   },
   videoTitle: {

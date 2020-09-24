@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Text,
   View,
+  FlatList,
 } from "react-native";
 import {
   TabView,
@@ -15,6 +16,7 @@ import {
   TabViewPagerScroll,
   TabViewPagerPan,
 } from "react-native-tab-view";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import PropTypes from "prop-types";
 
@@ -51,24 +53,29 @@ class ProfileCard extends Component {
     studentInfo: {
       name: "",
       class: "",
+      attnData: [],
     },
   };
 
   componentDidMount() {
-    // console.log("component will mount here ...");
-    // fetch("http://192.168.8.156/acc_membership/public/api/app/student/700446", {
-    //   method: "GET",
-    // })
-    //   .then((response) => response.json())
-    //   .then((responseJson) => {
-    //     console.log(responseJson);
-    //     this.setState({
-    //       studentInfo: responseJson,
-    //     });
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
+    console.log("Retrieve Student basic info from here");
+    fetch(
+      "http://192.168.8.156/acc_membership/public/api/app/student/700446/get_dashboard_values",
+      {
+        method: "GET",
+      }
+    )
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson);
+
+        this.setState({
+          studentInfo: responseJson,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   handleIndexChange = (index) => {
@@ -134,7 +141,7 @@ class ProfileCard extends Component {
     const { photo_url, name } = this.state.studentInfo;
 
     return (
-      <View style={styles.headerContainer}>
+      <View style={[styles.headerContainer, { elevation: 5 }]}>
         <View style={styles.coverContainer}>
           <ImageBackground
             source={{
@@ -171,16 +178,26 @@ class ProfileCard extends Component {
         <View style={styles.cardContainer}>
           {this.renderContactHeader()}
           <TabView
-            style={[styles.tabContainer, this.props.tabContainerStyle]}
+            style={[
+              styles.tabContainer,
+              this.props.tabContainerStyle,
+              { elevation: 10 },
+            ]}
             navigationState={this.state.tabs}
             renderScene={this.renderScene}
             renderTabBar={this.renderTabBar}
             onIndexChange={this.handleIndexChange}
           />
         </View>
-        <ScrollView style={(styles.scroll, { height: 290 })}>
-          <CardInfo />
-        </ScrollView>
+        <View style={{ height: 475 }}>
+          <FlatList
+            data={this.state.studentInfo.attnData}
+            renderItem={({ item }) => {
+              return <CardInfo title={item.title} value={item.value} />;
+            }}
+            keyExtractor={(item) => item.id + ""}
+          />
+        </View>
       </View>
     );
   }

@@ -3,8 +3,6 @@ import {
   Animated,
   Image,
   ImageBackground,
-  Platform,
-  ScrollView,
   StyleSheet,
   Text,
   View,
@@ -17,6 +15,7 @@ import {
   TabViewPagerPan,
 } from "react-native-tab-view";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { AttnActionButton } from "../AttnActionButton";
 
 import PropTypes from "prop-types";
 
@@ -60,7 +59,7 @@ class ProfileCard extends Component {
   componentDidMount() {
     console.log("Retrieve Student basic info from here");
     fetch(
-      "http://192.168.8.156/acc_membership/public/api/app/student/700446/get_dashboard_values",
+      "http://192.168.8.158/acc_membership/public/api/app/student/700446/get_dashboard_values",
       {
         method: "GET",
       }

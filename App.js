@@ -5,6 +5,10 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Login } from "./src/screens/Login";
 import Home from "./src/screens/Home";
 import { AuthContext } from "./src/contexts/AuthContext";
+import Profile_full from "./src/screens/Profile_full";
+import Members from "./src/screens/Members";
+import Attendance from "./src/screens/Attendance";
+import QR_code_scanner from "./src/screens/Attendance_Screens/QR_code_scanner";
 
 const MyNavStack = createStackNavigator();
 
@@ -17,10 +21,9 @@ function MainDrawer() {
       screenOptions={{ headerShown: false }}
     >
       <Drawer.Screen name="home" component={Home}></Drawer.Screen>
-      <Drawer.Screen name="profile" component={Home}></Drawer.Screen>
-      <Drawer.Screen name="members" component={Home}></Drawer.Screen>
-      <Drawer.Screen name="attendance" component={Home}></Drawer.Screen>
-      <Drawer.Screen name="other" component={Home}></Drawer.Screen>
+      <Drawer.Screen name="profile" component={Profile_full}></Drawer.Screen>
+      <Drawer.Screen name="members" component={Members}></Drawer.Screen>
+      <Drawer.Screen name="attendance" component={Attendance}></Drawer.Screen>
     </Drawer.Navigator>
   );
 }
@@ -44,6 +47,10 @@ export default function App() {
           <MyNavStack.Screen
             name="home"
             component={MainDrawer}
+          ></MyNavStack.Screen>
+          <MyNavStack.Screen
+            name="qr_code_scanner"
+            component={QR_code_scanner}
           ></MyNavStack.Screen>
         </MyNavStack.Navigator>
       </NavigationContainer>

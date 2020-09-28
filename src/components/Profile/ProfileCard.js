@@ -8,14 +8,7 @@ import {
   View,
   FlatList,
 } from "react-native";
-import {
-  TabView,
-  TabBar,
-  TabViewPagerScroll,
-  TabViewPagerPan,
-} from "react-native-tab-view";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { AttnActionButton } from "../AttnActionButton";
+import { TabView, TabBar } from "react-native-tab-view";
 
 import PropTypes from "prop-types";
 
@@ -59,7 +52,7 @@ class ProfileCard extends Component {
   componentDidMount() {
     console.log("Retrieve Student basic info from here");
     fetch(
-      "http://192.168.8.158/acc_membership/public/api/app/student/700446/get_dashboard_values",
+      "http://192.168.8.168/acc_membership/public/api/app/student/700446/get_dashboard_values",
       {
         method: "GET",
       }
@@ -188,11 +181,17 @@ class ProfileCard extends Component {
             onIndexChange={this.handleIndexChange}
           />
         </View>
-        <View style={{ height: 475 }}>
+        <View style={{ height: 475, marginHorizontal: 12 }}>
           <FlatList
             data={this.state.studentInfo.attnData}
             renderItem={({ item }) => {
-              return <CardInfo title={item.title} value={item.value} />;
+              return (
+                <CardInfo
+                  title={item.title}
+                  value={item.value}
+                  extra_details={item.extra_details}
+                />
+              );
             }}
             keyExtractor={(item) => item.id + ""}
           />
@@ -201,23 +200,5 @@ class ProfileCard extends Component {
     );
   }
 }
-
-const styles2 = StyleSheet.create({
-  card: {
-    elevation: 5,
-    marginBottom: 15,
-    height: 150,
-    marginHorizontal: 10,
-    borderRadius: 3,
-  },
-  valueTitle: {
-    paddingHorizontal: 10,
-  },
-  imgDim: {
-    height: "100%",
-    width: "30%",
-    flex: 0.1,
-  },
-});
 
 export default ProfileCard;

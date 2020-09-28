@@ -1,18 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, FlatList } from "react-native";
-import CardInfo from "CardInfo";
+import CardInfo from "./CardInfo";
 
-const DashboardCardList = () => {
+const DashboardCardList = ({ studentInfo, handler }) => {
   return (
     <View style={{ height: 475, marginHorizontal: 12 }}>
       <FlatList
-        data={this.state.studentInfo.attnData}
+        data={studentInfo.attnData}
         renderItem={({ item }) => {
           return (
             <CardInfo
               title={item.title}
               value={item.value}
               extra_details={item.extra_details}
+              handler={handler}
             />
           );
         }}

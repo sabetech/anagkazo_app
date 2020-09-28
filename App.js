@@ -34,6 +34,9 @@ export default function App() {
       console.log("login", index_number);
       //async code goes here ..
     },
+    detailsShown: {
+      val: false,
+    },
   }));
 
   return (

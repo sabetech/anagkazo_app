@@ -13,7 +13,9 @@ import { TabView, TabBar } from "react-native-tab-view";
 import PropTypes from "prop-types";
 
 import profileStyles from "./ProfileStyle";
-import CardInfo from "../HomeDashboard/CardInfo";
+import DashboardCardList from "../HomeDashboard/DashboardCardList";
+import Dashboard_Details from "../HomeDashboard/Dashboard_Details_Screen";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const styles = StyleSheet.create({ ...profileStyles });
 
@@ -27,6 +29,12 @@ class ProfileCard extends Component {
     tabContainerStyle: PropTypes.oneOfType([PropTypes.number, PropTypes.object])
       .isRequired,
   };
+
+  constructor(props) {
+    super(props)
+
+    this.handler = this.handler.bind(this);
+  }
 
   static defaultProps = {
     containerStyle: {},
@@ -47,6 +55,7 @@ class ProfileCard extends Component {
       class: "",
       attnData: [],
     },
+    detailsShown: false,
   };
 
   componentDidMount() {
@@ -164,6 +173,12 @@ class ProfileCard extends Component {
     );
   };
 
+  handler() {
+    this.setState({
+      detailsShown: true,
+    });
+  }
+
   render() {
     return (
       <View style={[styles.container, this.props.containerStyle]}>
@@ -181,21 +196,15 @@ class ProfileCard extends Component {
             onIndexChange={this.handleIndexChange}
           />
         </View>
-        <View style={{ height: 475, marginHorizontal: 12 }}>
-          <FlatList
-            data={this.state.studentInfo.attnData}
-            renderItem={({ item }) => {
-              return (
-                <CardInfo
-                  title={item.title}
-                  value={item.value}
-                  extra_details={item.extra_details}
-                />
-              );
-            }}
-            keyExtractor={(item) => item.id + ""}
+
+        {!this.state.detailsShown ? (
+          <DashboardCardList
+            studentInfo={this.state.studentInfo}
+            handler={this.handler}
           />
-        </View>
+        ) : (
+          <Dashboard_Details />
+        )}
       </View>
     );
   }

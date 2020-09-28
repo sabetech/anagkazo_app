@@ -5,16 +5,13 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 
-const CardInfo = ({ title, value, extra_details }) => {
-  const navigation = useNavigation();
+import { AuthContext } from "../../contexts/AuthContext";
 
+const CardInfo = ({ title, value, extra_details, handler }) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.navigate("Dashboard_Details_Screen", {
-          videoId: props.videoId,
-          title: props.title,
-        });
+        handler();
       }}
     >
       <ImageBackground

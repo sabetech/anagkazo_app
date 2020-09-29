@@ -1,17 +1,16 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, ImageBackground } from "react-native";
 //import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableHighlight } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 
-import { AuthContext } from "../../contexts/AuthContext";
-
-const CardInfo = ({ title, value, extra_details, handler }) => {
+//NEEDLESS TO SAY, I HATE THE STRUCTURE OF MY CODE ... ANYWAYS .. BABY REACT NATIVE STEPS SO YEAH
+const CardInfo = ({ id, title, value, extra_details, handler }) => {
   return (
-    <TouchableOpacity
+    <TouchableHighlight
       onPress={() => {
-        handler();
+        handler(true, id);
       }}
     >
       <ImageBackground
@@ -58,7 +57,7 @@ const CardInfo = ({ title, value, extra_details, handler }) => {
           <Text style={{ color: "rgb(255,255,255)" }}>{extra_details}</Text>
         </LinearGradient>
       </ImageBackground>
-    </TouchableOpacity>
+    </TouchableHighlight>
   );
 };
 

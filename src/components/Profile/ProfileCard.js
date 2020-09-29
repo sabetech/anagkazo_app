@@ -7,15 +7,17 @@ import {
   Text,
   View,
   FlatList,
+  ActivityIndicator,
 } from "react-native";
 import { TabView, TabBar } from "react-native-tab-view";
+import AsyncStorage from "@react-native-community/async-storage";
 
 import PropTypes from "prop-types";
 
 import profileStyles from "./ProfileStyle";
 import DashboardCardList from "../HomeDashboard/DashboardCardList";
 import Dashboard_Details from "../HomeDashboard/Dashboard_Details_Screen";
-import { AuthContext } from "../../contexts/AuthContext";
+import { BASE_URL } from "../../config/index";
 
 const styles = StyleSheet.create({ ...profileStyles });
 
@@ -31,7 +33,7 @@ class ProfileCard extends Component {
   };
 
   constructor(props) {
-    super(props)
+    super(props);
 
     this.handler = this.handler.bind(this);
   }
@@ -45,39 +47,49 @@ class ProfileCard extends Component {
     tabs: {
       index: 0,
       routes: [
-        { key: "1", title: "MEMBERS", count: 687 },
-        { key: "2", title: "PASTORAL POINT", count: 1224 },
-        { key: "3", title: "AVERAGE BUSSED", count: "3 M" },
+        { key: "1", title: "MEMBERS", count: 0 },
+        { key: "2", title: "PASTORAL POINT", count: 0 },
       ],
     },
     studentInfo: {
       name: "",
       class: "",
       attnData: [],
+      memberCount: 0,
     },
     detailsShown: false,
+    dashboardItemToShow: "",
+    loading: false,
   };
 
   componentDidMount() {
-    console.log("Retrieve Student basic info from here");
-    fetch(
-      "http://192.168.8.168/acc_membership/public/api/app/student/700446/get_dashboard_values",
-      {
-        method: "GET",
-      }
-    )
+    this.setState({
+      loading: true,
+    });
+
+    AsyncStorage.getItem("student_index").then((res) => {
+      this.getStudentDashboardData(res);
+    });
+  }
+
+  getStudentDashboardData = (myStudentIndex) => {
+    fetch(`${BASE_URL}/student/${myStudentIndex}/get_dashboard_values`, {
+      method: "GET",
+    })
       .then((response) => response.json())
       .then((responseJson) => {
-        console.log(responseJson);
-
         this.setState({
           studentInfo: responseJson,
+        });
+        this.state.tabs.routes[0].count = responseJson.memberCount;
+        this.setState({
+          loading: false,
         });
       })
       .catch((error) => {
         console.error(error);
       });
-  }
+  };
 
   handleIndexChange = (index) => {
     this.setState({
@@ -173,9 +185,10 @@ class ProfileCard extends Component {
     );
   };
 
-  handler() {
+  handler(detailShownState, vala) {
     this.setState({
-      detailsShown: true,
+      detailsShown: detailShownState,
+      dashboardItemToShow: vala,
     });
   }
 
@@ -197,13 +210,25 @@ class ProfileCard extends Component {
           />
         </View>
 
+        {this.state.loading ? (
+          <ActivityIndicator
+            style={{ marginTop: 10 }}
+            size="large"
+            color="darkblue"
+          />
+        ) : null}
+
         {!this.state.detailsShown ? (
           <DashboardCardList
             studentInfo={this.state.studentInfo}
             handler={this.handler}
           />
         ) : (
-          <Dashboard_Details />
+          <Dashboard_Details
+            fetchItem={this.state.dashboardItemToShow}
+            handler={this.handler}
+            studentIndex={this.state.studentInfo.index_number}
+          />
         )}
       </View>
     );

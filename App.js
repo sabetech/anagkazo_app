@@ -9,6 +9,8 @@ import Profile_full from "./src/screens/Profile_full";
 import Members from "./src/screens/Members";
 import Attendance from "./src/screens/Attendance";
 import QR_code_scanner from "./src/screens/Attendance_Screens/QR_code_scanner";
+import AsyncStorage from "@react-native-community/async-storage";
+import { BASE_URL } from "./src/config/index";
 
 const MyNavStack = createStackNavigator();
 
@@ -30,9 +32,26 @@ function MainDrawer() {
 
 export default function App() {
   const auth = React.useMemo(() => ({
-    login: (index_number) => {
-      console.log("login", index_number);
-      //async code goes here ..
+    login: async (index_number) => {
+      try {
+        const response = await fetch(`${BASE_URL}/student/${index_number}`, {
+          method: "GET",
+        });
+
+        const studentJson = await response.json();
+
+        if (studentJson[0] == "failed") {
+          return false;
+        }
+
+        await AsyncStorage.setItem(
+          "student_index",
+          studentJson.index_number.toString()
+        );
+        return true;
+      } catch (error) {
+        console.log(error);
+      }
     },
     detailsShown: {
       val: false,

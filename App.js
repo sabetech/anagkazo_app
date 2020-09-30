@@ -11,6 +11,7 @@ import Attendance from "./src/screens/Attendance";
 import QR_code_scanner from "./src/screens/Attendance_Screens/QR_code_scanner";
 import AsyncStorage from "@react-native-community/async-storage";
 import { BASE_URL } from "./src/config/index";
+import { DrawerContent } from "./src/screens/DrawerContent";
 
 const MyNavStack = createStackNavigator();
 
@@ -20,7 +21,8 @@ function MainDrawer() {
   return (
     <Drawer.Navigator
       initialRouteName="home"
-      screenOptions={{ headerShown: false }}
+      //screenOptions={{ headerShown: false }}
+      drawerContent={(props) => <DrawerContent {...props} />}
     >
       <Drawer.Screen name="home" component={Home}></Drawer.Screen>
       <Drawer.Screen name="profile" component={Profile_full}></Drawer.Screen>

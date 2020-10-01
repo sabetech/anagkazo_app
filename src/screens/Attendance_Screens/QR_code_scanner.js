@@ -3,11 +3,14 @@ import { StyleSheet, Text, View, Button } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { BASE_URL } from "../../config/index";
 import AwesomeAlert from "react-native-awesome-alerts";
+import * as Haptics from "expo-haptics";
+import { useNavigation } from "@react-navigation/native";
 
 export default function QR_code_scanner() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+  const navigation = useNavigation();
 
   useEffect(() => {
     (async () => {
@@ -49,6 +52,7 @@ export default function QR_code_scanner() {
   };
 
   const handleAfterAttendanceSubmitted = (json) => {
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
     setShowAlert(true);
   };
 
@@ -79,20 +83,15 @@ export default function QR_code_scanner() {
       <AwesomeAlert
         show={showAlert}
         showProgress={false}
-        title="AwesomeAlert"
-        message="I have a message for you!"
+        title="Success"
+        message="You have successfully CheckedIn"
         closeOnTouchOutside={true}
         closeOnHardwareBackPress={false}
         showCancelButton={true}
-        showConfirmButton={true}
-        cancelText="No, cancel"
-        confirmText="Yes, delete it"
-        confirmButtonColor="#DD6B55"
+        cancelText="OK"
+        confirmButtonColor="#33DD55"
         onCancelPressed={() => {
-          this.hideAlert();
-        }}
-        onConfirmPressed={() => {
-          this.hideAlert();
+          navigation.goBack();
         }}
       />
     </View>

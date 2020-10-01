@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, Text, View, Image, ImageBackground } from "react-native";
 //import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { TouchableHighlight } from "react-native-gesture-handler";
-import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 
 //NEEDLESS TO SAY, I HATE THE STRUCTURE OF MY CODE ... ANYWAYS .. BABY REACT NATIVE STEPS SO YEAH

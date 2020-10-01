@@ -6,7 +6,6 @@ import {
   StyleSheet,
   Text,
   View,
-  FlatList,
   ActivityIndicator,
 } from "react-native";
 import { TabView, TabBar } from "react-native-tab-view";

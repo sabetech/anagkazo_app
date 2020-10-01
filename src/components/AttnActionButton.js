@@ -4,10 +4,10 @@ import { StyleSheet, View } from "react-native";
 import ActionButton from "react-native-action-button";
 import { Ionicons } from "@expo/vector-icons";
 
-export default function AttnActionButton() {
+export default function AttnActionButton(props) {
   const navigation = useNavigation();
   return (
-    <View style={{ flex: 1, backgroundColor: "#f3f3f3", elevation: 20 }}>
+    <View style={{ elevation: 20, zIndex: 100, ...props }}>
       {/* Rest of the app comes ABOVE the action button component !*/}
       <ActionButton
         buttonColor="rgba(231,76,60,1)"

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -21,7 +21,6 @@ function MainDrawer() {
   return (
     <Drawer.Navigator
       initialRouteName="home"
-      //screenOptions={{ headerShown: false }}
       drawerContent={(props) => <DrawerContent {...props} />}
     >
       <Drawer.Screen name="home" component={Home}></Drawer.Screen>
@@ -33,6 +32,17 @@ function MainDrawer() {
 }
 
 export default function App() {
+  const [initialRoute, setInitialRoute] = useState("login");
+  useEffect(() => {
+    AsyncStorage.getItem("student_index")
+      .then(() => {
+        setInitialRoute("home");
+      })
+      .catch(() => {
+        setInitialRoute("login");
+      });
+  }, []);
+
   const auth = React.useMemo(() => ({
     login: async (index_number) => {
       try {
@@ -64,7 +74,7 @@ export default function App() {
     <AuthContext.Provider value={auth}>
       <NavigationContainer>
         <MyNavStack.Navigator
-          initialRouteName="login"
+          initialRouteName={initialRoute}
           screenOptions={{ headerShown: false }}
         >
           <MyNavStack.Screen name="login" component={Login}></MyNavStack.Screen>

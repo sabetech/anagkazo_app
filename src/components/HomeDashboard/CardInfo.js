@@ -10,7 +10,7 @@ const CardInfo = ({ id, title, value, extra_details, handler }) => {
   return (
     <TouchableHighlight
       onPress={() => {
-        handler(true, id);
+        if (handler != null) handler(true, id);
       }}
     >
       <ImageBackground

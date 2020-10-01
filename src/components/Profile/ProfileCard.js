@@ -115,8 +115,6 @@ class ProfileCard extends Component {
   renderLabel = (props) => ({ route }) => {
     const routes = props.navigationState.routes;
 
-    //console.log(routes);
-
     let labels = [];
     routes.forEach((e, index) => {
       labels.push(index === props.navigationState.index ? "black" : "gray");

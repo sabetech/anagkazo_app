@@ -1,22 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import {
   Avatar,
   Title,
   Caption,
-  Paragraph,
   Drawer,
   Text,
   TouchableRipple,
   Switch,
 } from "react-native-paper";
-
+import AsyncStorage from "@react-native-community/async-storage";
 import { BASE_URL } from "../config/index";
-
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export function DrawerContent(props) {
+  //
+  const [myIndexNumber, setIndexNumber] = useState();
+  const [myStudentName, setStudentName] = useState();
+  const [myClass, setStudentClass] = useState();
+
+  useEffect(() => {
+    AsyncStorage.getItem("student_index").then((index_number) => {
+      fetch(`${BASE_URL}/student/${index_number}`, {
+        method: "GET",
+      })
+        .then((response) => response.json())
+        .then((responseJson) => {
+          setIndexNumber(responseJson.index_number);
+          setStudentName(responseJson.name);
+          setStudentClass(responseJson.class);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    });
+  }, []);
+
   return (
     <View style={{ flex: 1 }}>
       <DrawerContentScrollView {...props}>
@@ -25,14 +45,13 @@ export function DrawerContent(props) {
             <View>
               <Avatar.Image
                 source={{
-                  uri:
-                    "http://anagkazo.firstlovegallery.com/storage/student_photo/700446.JPG",
+                  uri: `http://anagkazo.firstlovegallery.com/storage/student_photo/${myIndexNumber}.JPG`,
                 }}
                 size={75}
               />
               <View>
-                <Title style={styles.title}>Name of student here</Title>
-                <Caption style={styles.caption}>Class goes here</Caption>
+                <Title style={styles.title}>{myStudentName}</Title>
+                <Caption style={styles.caption}>{myClass}</Caption>
               </View>
             </View>
           </View>
@@ -98,7 +117,11 @@ export function DrawerContent(props) {
               size={size}
             />
           )}
-          onPress={() => {}}
+          onPress={() => {
+            AsyncStorage.removeItem("student_index").then(() => {
+              props.navigation.navigate("login");
+            });
+          }}
         ></DrawerItem>
       </Drawer.Section>
     </View>

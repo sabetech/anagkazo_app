@@ -1,7 +1,7 @@
 import React from "react";
 
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import FLOWPrayer_Screen from "./Attendance_Screens/FLOWPrayer_Screen";
 import PropheticEncounter_Screen from "./Attendance_Screens/PropheticEncounter_Screen";
@@ -12,18 +12,18 @@ const Tab = createMaterialBottomTabNavigator();
 
 export default function AttendanceTabs() {
   return (
-    <Tab.Navigator
-      initialRouteName="FLOWPrayer_Screen"
-      activeColor="white"
-      style={{ backgroundColor: "tomato" }}
-    >
+    <Tab.Navigator initialRouteName="FLOWPrayer_Screen" activeColor="white">
       <Tab.Screen
         name="FLOWPrayer_Screen"
         component={FLOWPrayer_Screen}
         options={{
           tabBarLabel: "FLOW Prayer",
           tabBarIcon: ({ color }) => (
-            <MaterialIcons name="flash-on" color={color} size={26} />
+            <MaterialCommunityIcons
+              name="alpha-p-box"
+              color={color}
+              size={26}
+            />
           ),
         }}
       />
@@ -33,7 +33,7 @@ export default function AttendanceTabs() {
         options={{
           tabBarLabel: "Prophetic Encounter",
           tabBarIcon: ({ color }) => (
-            <MaterialIcons name="toys" color={color} size={26} />
+            <MaterialCommunityIcons name="church" color={color} size={26} />
           ),
         }}
       />
@@ -43,7 +43,11 @@ export default function AttendanceTabs() {
         options={{
           tabBarLabel: "Anagkazo Live",
           tabBarIcon: ({ color }) => (
-            <MaterialIcons name="straighten" color={color} size={26} />
+            <MaterialCommunityIcons
+              name="access-point"
+              color={color}
+              size={26}
+            />
           ),
         }}
       />
@@ -53,7 +57,11 @@ export default function AttendanceTabs() {
         options={{
           tabBarLabel: "Special Events",
           tabBarIcon: ({ color }) => (
-            <MaterialIcons name="streetview" color={color} size={26} />
+            <MaterialCommunityIcons
+              name="account-group"
+              color={color}
+              size={26}
+            />
           ),
         }}
       />

@@ -154,9 +154,7 @@ class ProfileCard extends Component {
       <View style={[styles.headerContainer, { elevation: 5 }]}>
         <View style={styles.coverContainer}>
           <ImageBackground
-            source={{
-              uri: this.props.avatarBackground,
-            }}
+            source={require("../../res/imgs/card-dashboard-backgrnd.jpg")}
             style={styles.coverImage}
           >
             <View style={styles.coverTitleContainer}>

@@ -4,18 +4,12 @@ import CardInfo from "./CardInfo";
 
 const DashboardCardList = ({ studentInfo, handler }) => {
   return (
-    <View style={{ height: 475, marginHorizontal: 12 }}>
+    <View style={{ height: 530, marginHorizontal: 12 }}>
       <FlatList
         data={studentInfo.attnData}
         renderItem={({ item }) => {
           return (
-            <CardInfo
-              id={item.id}
-              title={item.title}
-              value={item.value}
-              extra_details={item.extra_details}
-              handler={handler}
-            />
+            <CardInfo id={item.id} title={item.title} value={item.value} />
           );
         }}
         keyExtractor={(item) => item.id + ""}

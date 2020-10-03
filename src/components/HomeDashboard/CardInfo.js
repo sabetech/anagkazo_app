@@ -20,7 +20,7 @@ const CardInfo = ({ id, title, value, extra_details, handler }) => {
           // Button Linear Gradient
           start={{ x: 0.0, y: 0.25 }}
           end={{ x: 1.5, y: -0.6 }}
-          colors={["rgba(32,150,255,0.9)", "rgba(5,255,163,0.4)"]}
+          colors={["rgba(255,255,255,0.9)", "rgba(255,255,255,0.4)"]}
           style={{
             padding: 15,
             height: 120,
@@ -33,27 +33,13 @@ const CardInfo = ({ id, title, value, extra_details, handler }) => {
               fontSize: 15,
               color: "#fff",
             }}
-          >
-            Click For More Details
-          </Text>
+          ></Text>
           <View style={{ flex: 1 }}>
-            <Text style={{ fontSize: 35, color: "rgb(255,255,255)" }}>
-              {title}
+            <Text style={{ fontSize: 24, color: "#000" }}>
+              {title}: {value}
             </Text>
           </View>
-          <View style={{ flex: 1 }}>
-            <Text
-              style={{
-                textAlign: "right",
-                alignSelf: "stretch",
-                fontSize: 45,
-                color: "rgb(255,255,255)",
-              }}
-            >
-              {value}
-            </Text>
-          </View>
-          <Text style={{ color: "rgb(255,255,255)" }}>{extra_details}</Text>
+          <View style={{ flex: 1 }}></View>
         </LinearGradient>
       </ImageBackground>
     </TouchableHighlight>
@@ -62,7 +48,6 @@ const CardInfo = ({ id, title, value, extra_details, handler }) => {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "white",
     elevation: 10,
     marginBottom: 5,
     height: 100,

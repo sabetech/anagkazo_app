@@ -8,9 +8,11 @@ export default {
     flex: 1,
   },
   coverBio: {
-    color: "#FFF",
+    color: "#000",
     fontSize: 15,
-    fontWeight: "600",
+    textAlign: "right",
+    marginRight: 10,
+    marginBottom: -10,
   },
   coverContainer: {
     marginBottom: 55,
@@ -26,16 +28,16 @@ export default {
     paddingLeft: 135,
   },
   coverName: {
-    color: "#FFF",
-    fontSize: 28,
-    fontWeight: "bold",
-    paddingBottom: 2,
+    color: "#000",
+    fontSize: 21,
+    textAlign: "right",
+    marginRight: 10,
   },
   coverTitle: {
     color: "#FFF",
     fontSize: 24,
     fontWeight: "bold",
-    textAlign: "center",
+    textAlign: "right",
   },
   coverTitleContainer: {
     backgroundColor: "transparent",

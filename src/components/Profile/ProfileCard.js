@@ -54,6 +54,7 @@ class ProfileCard extends Component {
       name: "",
       class: "",
       attnData: [],
+      index_number: "",
       memberCount: 0,
     },
     detailsShown: false,
@@ -204,7 +205,6 @@ class ProfileCard extends Component {
             onIndexChange={this.handleIndexChange}
           />
         </View>
-
         {this.state.loading ? (
           <ActivityIndicator
             style={{ marginTop: 10 }}
@@ -212,19 +212,7 @@ class ProfileCard extends Component {
             color="darkblue"
           />
         ) : null}
-
-        {!this.state.detailsShown ? (
-          <DashboardCardList
-            studentInfo={this.state.studentInfo}
-            handler={this.handler}
-          />
-        ) : (
-          <Dashboard_Details
-            fetchItem={this.state.dashboardItemToShow}
-            handler={this.handler}
-            studentIndex={this.state.studentInfo.index_number}
-          />
-        )}
+        <DashboardCardList studentInfo={this.state.studentInfo} />
       </View>
     );
   }

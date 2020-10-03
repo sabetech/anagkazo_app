@@ -99,5 +99,5 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     justifyContent: "center",
   },
-  input: { fontSize: 25 },
+  input: { fontSize: 21 },
 });

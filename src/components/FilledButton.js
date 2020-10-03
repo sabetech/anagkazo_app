@@ -1,5 +1,5 @@
 import React from "react";
-
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { StyleSheet, TouchableOpacity, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -18,7 +18,10 @@ export function FilledButton({ title, style, onPress }) {
           alignItems: "center",
         }}
       >
-        <Text style={styles.text}>{title.toUpperCase()}</Text>
+        <Text style={styles.text}>
+          <MaterialCommunityIcons name="login" size={22} color="white" />
+          {title.toUpperCase()}
+        </Text>
       </LinearGradient>
     </TouchableOpacity>
   );
@@ -33,7 +36,7 @@ const styles = StyleSheet.create({
   text: {
     color: "white",
     fontWeight: "500",
-    fontSize: 32,
+    fontSize: 28,
     padding: 15,
   },
 });

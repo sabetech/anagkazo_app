@@ -8,7 +8,7 @@ export default {
     flex: 1,
   },
   coverBio: {
-    color: "#000",
+    color: "#595959",
     fontSize: 15,
     textAlign: "right",
     marginRight: 10,
@@ -28,7 +28,7 @@ export default {
     paddingLeft: 135,
   },
   coverName: {
-    color: "#000",
+    color: "#595959",
     fontSize: 21,
     textAlign: "right",
     marginRight: 10,

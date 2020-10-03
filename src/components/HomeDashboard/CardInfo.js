@@ -1,20 +1,45 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, ImageBackground } from "react-native";
-//import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { Feather, MaterialIcons } from "@expo/vector-icons";
 import { TouchableHighlight } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "@react-navigation/native";
 
 //NEEDLESS TO SAY, I HATE THE STRUCTURE OF MY CODE ... ANYWAYS .. BABY REACT NATIVE STEPS SO YEAH
-const CardInfo = ({ id, title, value, extra_details, handler }) => {
+const CardInfo = ({ id, title, value, studentIndex, colorDetail }) => {
+  const navigation = useNavigation();
+
   return (
     <TouchableHighlight
       onPress={() => {
-        if (handler != null) handler(true, id);
+        navigation.navigate("dashboard-details", {
+          id: id,
+          studentIndex: studentIndex,
+          titleScreen: title,
+          colorDetail: colorDetail,
+        });
       }}
     >
       <ImageBackground
         source={require("../../res/imgs/card-dashboard-backgrnd.jpg")}
-        style={styles.image}
+        style={{
+          flex: 1,
+          resizeMode: "cover",
+          justifyContent: "center",
+          margin: 5,
+          borderRadius: 5,
+          borderWidth: 1,
+          borderColor: colorDetail,
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          shadowOpacity: 0.25,
+          shadowRadius: 3.84,
+
+          elevation: 5,
+        }}
       >
         <LinearGradient
           // Button Linear Gradient
@@ -32,10 +57,13 @@ const CardInfo = ({ id, title, value, extra_details, handler }) => {
               backgroundColor: "transparent",
               fontSize: 15,
               color: "#fff",
+              textAlign: "right",
             }}
-          ></Text>
+          >
+            <Feather name="arrow-right-circle" size={24} color={colorDetail} />
+          </Text>
           <View style={{ flex: 1 }}>
-            <Text style={{ fontSize: 24, color: "#000" }}>
+            <Text style={{ fontSize: 24, color: colorDetail }}>
               {title}: {value}
             </Text>
           </View>
@@ -56,13 +84,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
 
-  image: {
-    flex: 1,
-    resizeMode: "cover",
-    justifyContent: "center",
-    margin: 5,
-    borderRadius: 5,
-  },
+  image: {},
   valueTitle: {
     width: 300,
     marginLeft: 30,

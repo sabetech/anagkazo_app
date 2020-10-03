@@ -12,7 +12,7 @@ import {
 } from "react-native-paper";
 import AsyncStorage from "@react-native-community/async-storage";
 import { BASE_URL } from "../config/index";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 
 export function DrawerContent(props) {
   //
@@ -104,6 +104,15 @@ export function DrawerContent(props) {
                 props.navigation.navigate("attendance");
               }}
             />
+            {/* <DrawerItem
+              label="Personal Prayer Log"
+              icon={({ color, size }) => (
+                <FontAwesome5 name="praying-hands" size={size} color="color" />
+              )}
+              onPress={() => {
+                props.navigation.navigate("prayerlog");
+              }}
+            /> */}
           </Drawer.Section>
         </View>
       </DrawerContentScrollView>
@@ -141,9 +150,8 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   title: {
-    fontSize: 24,
+    fontSize: 18,
     marginTop: 3,
-    fontWeight: "bold",
   },
   caption: {
     fontSize: 15,

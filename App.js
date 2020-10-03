@@ -5,13 +5,15 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Login } from "./src/screens/Login";
 import Home from "./src/screens/Home";
 import { AuthContext } from "./src/contexts/AuthContext";
-import Profile_full from "./src/screens/Profile_full";
+import Profile from "./src/screens/Profile";
 import Members from "./src/screens/Members";
 import Attendance from "./src/screens/Attendance";
 import QR_code_scanner from "./src/screens/Attendance_Screens/QR_code_scanner";
+import DashboardDetail from "./src/screens/Dashboard/Dashboard-detail";
 import AsyncStorage from "@react-native-community/async-storage";
 import { BASE_URL } from "./src/config/index";
 import { DrawerContent } from "./src/screens/DrawerContent";
+import PrayerLog from "./src/screens/Prayer/PrayerLog";
 
 const MyNavStack = createStackNavigator();
 
@@ -24,9 +26,10 @@ function MainDrawer() {
       drawerContent={(props) => <DrawerContent {...props} />}
     >
       <Drawer.Screen name="home" component={Home}></Drawer.Screen>
-      <Drawer.Screen name="profile" component={Profile_full}></Drawer.Screen>
+      <Drawer.Screen name="profile" component={Profile}></Drawer.Screen>
       <Drawer.Screen name="members" component={Members}></Drawer.Screen>
       <Drawer.Screen name="attendance" component={Attendance}></Drawer.Screen>
+      {/* <Drawer.Screen name="prayerlog" component={PrayerLog}></Drawer.Screen> */}
     </Drawer.Navigator>
   );
 }
@@ -85,6 +88,10 @@ export default function App() {
           <MyNavStack.Screen
             name="qr_code_scanner"
             component={QR_code_scanner}
+          ></MyNavStack.Screen>
+          <MyNavStack.Screen
+            name="dashboard-details"
+            component={DashboardDetail}
           ></MyNavStack.Screen>
         </MyNavStack.Navigator>
       </NavigationContainer>

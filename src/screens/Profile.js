@@ -12,7 +12,7 @@ import Tel from "../components/Profile/Tel";
 import Email from "../components/Profile/Email";
 import CustomProfileField from "../components/Profile/CustomProfileField";
 import AsyncStorage from "@react-native-community/async-storage";
-import BASE_URL from "../config/index";
+import { BASE_URL } from "../config/index";
 
 class Profile extends Component {
   state = {
@@ -25,7 +25,8 @@ class Profile extends Component {
       email: "",
       gender: "",
       home_church: "",
-      home_pastor: "",
+      pastors_name: "",
+      pastors_phone: "",
       educational_level: "",
       marital_status: "",
       occupation: "",
@@ -52,9 +53,9 @@ class Profile extends Component {
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
-          studentInfo: responseJson,
+          student: responseJson,
         });
-        this.state.tabs.routes[0].count = responseJson.memberCount;
+
         this.setState({
           loading: false,
         });
@@ -71,9 +72,10 @@ class Profile extends Component {
       name,
       address: { city, country },
     } = {
-      avatar: "https://i.imgur.com/GfkNpVG.jpg",
+      avatar:
+        "http://anagkazo.firstlovegallery.com/" + this.state.student.photo_url,
       avatarBackground: "https://i.imgur.com/rXVcgTZ.jpg",
-      name: "Darrell Schmeler",
+      name: this.state.student.name,
       address: { city: "Ginatown", country: "Nepal" },
     };
 
@@ -88,16 +90,9 @@ class Profile extends Component {
             <Image style={styles.userImage} source={{ uri: avatar }} />
             <Text style={styles.userNameText}>{name}</Text>
             <View style={styles.userAddressRow}>
-              <View>
-                <Icon
-                  name="place"
-                  underlayColor="transparent"
-                  iconStyle={styles.placeIcon}
-                />
-              </View>
               <View style={styles.userCityRow}>
                 <Text style={styles.userCityText}>
-                  {city}, {country}
+                  {this.state.student.class}
                 </Text>
               </View>
             </View>
@@ -119,26 +114,47 @@ class Profile extends Component {
     return (
       <CustomProfileField
         field={"gender"}
-        value={"male"}
-        gender={"gender-male-female"}
+        value={this.state.student.gender == "m" ? "Male" : "Female"}
+        icon={"gender-male-female"}
         type={"material-community"}
       />
     );
   };
 
   renderHomeChurch = () => {
-    return <CustomProfileField field={"Home Church"} value={"My Church"} />;
+    return (
+      <CustomProfileField
+        field={"Home Church"}
+        value={this.state.student.home_church}
+        icon={"church"}
+        type={"material-community"}
+      />
+    );
   };
 
   renderPastorsName = () => {
     return (
-      <CustomProfileField field={"Pastor's Name"} value={"Ps So so And So"} />
+      <CustomProfileField
+        field={"Pastor's Name"}
+        value={
+          this.state.student.pastors_name == ""
+            ? "Not Set"
+            : this.state.student.pastors_name
+        }
+        icon={"person-outline"}
+        type={"material-icons"}
+      />
     );
   };
 
   renderPastorsPhone = () => {
     return (
-      <CustomProfileField field={"Pastor's Phone"} value={"+233 54 123 1243"} />
+      <CustomProfileField
+        field={"Pastor's Phone"}
+        value={this.state.student.pastors_phone}
+        icon={"phone"}
+        type={"feather"}
+      />
     );
   };
 
@@ -146,7 +162,64 @@ class Profile extends Component {
     return (
       <CustomProfileField
         field={"Educational Level"}
-        value={"University BSc"}
+        value={this.state.student.educational_level}
+        icon={"user-graduate"}
+        type={"font-awesome-5"}
+      />
+    );
+  };
+
+  renderMaritalStatus = () => {
+    return (
+      <CustomProfileField
+        field={"Marital Status"}
+        value={this.state.student.marital_status}
+        icon={"ring"}
+        type={"material-community"}
+      />
+    );
+  };
+
+  renderOccupation = () => {
+    return (
+      <CustomProfileField
+        field={"Occupation"}
+        value={this.state.student.occupation}
+        icon={"md-hammer"}
+        type={"ionicon"}
+      />
+    );
+  };
+
+  renderDateOfBirth = () => {
+    return (
+      <CustomProfileField
+        field={"Date of Birth"}
+        value={this.state.student.date_of_birth}
+        icon={"calendar"}
+        type={"antdesign"}
+      />
+    );
+  };
+
+  renderCountry = () => {
+    return (
+      <CustomProfileField
+        field={"Country"}
+        value={this.state.student.country}
+        icon={"md-globe"}
+        type={"ionicon"}
+      />
+    );
+  };
+
+  renderDenomination = () => {
+    return (
+      <CustomProfileField
+        field={"Denomination"}
+        value={this.state.student.denomination}
+        icon={"streetview"}
+        type={"material-icons"}
       />
     );
   };
@@ -164,6 +237,11 @@ class Profile extends Component {
             {this.renderPastorsName()}
             {this.renderPastorsPhone()}
             {this.renderEducationalLevel()}
+            {this.renderMaritalStatus()}
+            {this.renderOccupation()}
+            {this.renderDateOfBirth()}
+            {this.renderCountry()}
+            {this.renderDenomination()}
           </Card>
         </View>
       </ScrollView>
@@ -240,8 +318,8 @@ const styles = StyleSheet.create({
   },
   userNameText: {
     color: "#FFF",
-    fontSize: 22,
-    fontWeight: "bold",
+    fontSize: 21,
+
     paddingBottom: 8,
     textAlign: "center",
   },

@@ -54,7 +54,7 @@ const CustomProfileField = ({ containerStyle, value, field, icon, type }) => (
     </View>
     <View style={styles.emailRow}>
       <View style={styles.emailColumn}>
-        <Text style={styles.emailText}>{value}</Text>
+        <Text style={styles.emailText}>{value != "" ? value : "Not Set"}</Text>
       </View>
       <View style={styles.emailNameColumn}>
         <Text style={styles.emailNameText}>{field}</Text>

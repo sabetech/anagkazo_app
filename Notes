@@ -12,3 +12,11 @@ x out of total
 Latest Bussing record
 
 nice blue color #03A9F4 for a theme
+
+<View>
+                <Icon
+                  name="place"
+                  underlayColor="transparent"
+                  iconStyle={styles.placeIcon}
+                />
+              </View>

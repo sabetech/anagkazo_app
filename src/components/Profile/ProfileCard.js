@@ -15,7 +15,8 @@ import PropTypes from "prop-types";
 
 import profileStyles from "./ProfileStyle";
 import DashboardCardList from "../HomeDashboard/DashboardCardList";
-import Dashboard_Details from "../HomeDashboard/Dashboard_Details_Screen";
+import { FontAwesome5 } from "@expo/vector-icons";
+
 import { BASE_URL } from "../../config/index";
 
 const styles = StyleSheet.create({ ...profileStyles });

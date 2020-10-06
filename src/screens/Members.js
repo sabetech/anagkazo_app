@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-community/async-storage";
-import BASE_URL from "../config/index";
+import { BASE_URL } from "../config/index";
 import ContactListItem from "../components/Members/ContactListItem";
 
 //get members from here
@@ -53,16 +53,17 @@ export default function Members({ navigation }) {
         </TouchableHighlight>
         <Text style={styles.header}>Members</Text>
       </View>
-      <View>
+      <View style={{ height: "90%" }}>
         <FlatList
           data={studentMembers}
-          renderItem={({ member }) => {
+          renderItem={({ item }) => {
             return (
               <ContactListItem
-                name={member.name}
-                age={member.date_of_birth}
-                phone={member.phone}
-                whatsapp={member.whatsapp_no}
+                name={item.name}
+                age={item.date_of_birth}
+                phone={item.phone}
+                whatsapp={item.whatsapp_no}
+                photo_url={item.photo_url}
               />
             );
           }}

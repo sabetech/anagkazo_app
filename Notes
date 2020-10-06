@@ -20,3 +20,35 @@ nice blue color #03A9F4 for a theme
                   iconStyle={styles.placeIcon}
                 />
               </View>
+
+COORDINATORS
+- Number of students who bussed
+40 
+  ->List of students who bussed (list)
+  ->Date selector up above'
+  ->tabbed screen to show those who bussed and those who didn't
+
+- Number of Students who FLOWed the past week and those who didn't FLOW
+
+- Number of Students present for Sunday FLOW Encounter
+
+{/* <Text
+          style={{
+            fontFamily: "Roboto",
+            fontSize: 21,
+            padding: 10,
+            marginLeft: "15%",
+          }}
+        >
+          {name}
+        </Text>
+      </View>
+      <View>
+        {
+          <Icon
+            name={"logo-whatsapp"}
+            type={"ionicon"}
+            underlayColor="transparent"
+            iconStyle={{ fontSize: 30, color: "green" }}
+          />
+        } */}

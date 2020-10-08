@@ -66,7 +66,7 @@ export default function OtherServices_Screen() {
           keyExtractor={(item) => item.id + ""}
         />
       </View>
-      <MyActionButton />
+      <MyActionButton icon={"md-qr-scanner"} navigateTo={"qr_code_scanner"} />
     </View>
   );
 }

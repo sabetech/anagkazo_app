@@ -14,6 +14,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { BASE_URL } from "./src/config/index";
 import { DrawerContent } from "./src/screens/DrawerContent";
 import PrayerLog from "./src/screens/Prayer/PrayerLog";
+import FormsPage from "./src/screens/Forms/FormsPage";
 
 const MyNavStack = createStackNavigator();
 
@@ -29,7 +30,7 @@ function MainDrawer() {
       <Drawer.Screen name="profile" component={Profile}></Drawer.Screen>
       <Drawer.Screen name="members" component={Members}></Drawer.Screen>
       <Drawer.Screen name="attendance" component={Attendance}></Drawer.Screen>
-      {/* <Drawer.Screen name="prayerlog" component={PrayerLog}></Drawer.Screen> */}
+      <Drawer.Screen name="forms_page" component={FormsPage}></Drawer.Screen>
     </Drawer.Navigator>
   );
 }
@@ -87,6 +88,10 @@ export default function App() {
           ></MyNavStack.Screen>
           <MyNavStack.Screen
             name="qr_code_scanner"
+            component={QR_code_scanner}
+          ></MyNavStack.Screen>
+          <MyNavStack.Screen
+            name="member_add"
             component={QR_code_scanner}
           ></MyNavStack.Screen>
           <MyNavStack.Screen

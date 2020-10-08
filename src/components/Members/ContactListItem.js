@@ -21,30 +21,7 @@ const ContactListItem = ({
           <View style={styles.textColumn}>
             <Text style={styles.contacText}>{name}</Text>
           </View>
-          <View style={{ flexDirection: "row" }}>
-            <View>
-              {
-                <Icon
-                  name={"logo-whatsapp"}
-                  type={"ionicon"}
-                  underlayColor="transparent"
-                  iconStyle={{ fontSize: 30, color: "green" }}
-                  style={styles.callActionStyle}
-                />
-              }
-            </View>
-            <View>
-              {
-                <Icon
-                  name={"phone"}
-                  type={"font-awesome5"}
-                  underlayColor="transparent"
-                  iconStyle={{ fontSize: 30, color: "green" }}
-                  style={styles.callActionStyle}
-                />
-              }
-            </View>
-          </View>
+         
         </View>
       </View>
     </View>

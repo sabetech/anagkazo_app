@@ -43,7 +43,7 @@ export default function FLOWPrayer_Screen() {
   return (
     <View style={styles.container}>
       <View style={styles.topBar}>
-        <Text style={styles.header}>FLOW Prayer Attendance</Text>
+        <Text style={styles.header}>Flow Prayer Attendance</Text>
       </View>
 
       {loading ? (
@@ -69,7 +69,7 @@ export default function FLOWPrayer_Screen() {
           keyExtractor={(item) => item.id + ""}
         />
       </View>
-      <MyActionButton />
+      <MyActionButton icon={"md-qr-scanner"} navigateTo={"qr_code_scanner"} />
     </View>
   );
 }
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   },
   topBar: {
     height: 75,
-    backgroundColor: "black",
+    backgroundColor: "#03A9F4",
     flexDirection: "row",
     justifyContent: "space-between",
     elevation: 20, //this only works in android .. find out iOS version

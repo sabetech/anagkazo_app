@@ -10,6 +10,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-community/async-storage";
 import { BASE_URL } from "../config/index";
 import ContactListItem from "../components/Members/ContactListItem";
+import MyActionButton from "../components/MyActionButton";
 
 //get members from here
 export default function Members({ navigation }) {
@@ -70,6 +71,7 @@ export default function Members({ navigation }) {
           keyExtractor={(item) => item.id + ""}
         />
       </View>
+      <MyActionButton icon="md-add" navigateTo="member_add" />
     </View>
   );
 }

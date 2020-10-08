@@ -1,0 +1,49 @@
+[
+  { "title": "Counselling", 
+    "color": "#4285F4", 
+    "destinationScreen": "", 
+    "icon": "wechat", 
+    "iconType":"font-awesome" },
+  {
+    "title": "Sheep Seeking",
+    "color": "#4285F4",
+    "destinationScreen": "",
+    "icon": "account-search",
+    "iconType":"material-community"
+  },
+  {
+    "title": "Anti Brutish",
+    "color": "#4285F4",
+    "destinationScreen": "",
+    "icon": "praying-hands",
+    "iconType":"font-awesome-5"
+  },
+  {
+    "title": "Multiplication",
+    "color": "#4285F4",
+    "destinationScreen": "",
+    "icon": "addusergroup",
+    "iconType":"antdesign"
+  },
+  { 
+    "title": "Basonta", 
+    "color": "#4285F4", 
+    "destinationScreen": "", 
+    "icon": "caret-square-o-right", 
+    "iconType" : "font-awesome"
+  },
+  {
+    "title": "Servants Armed And Trained",
+    "color": "#4285F4",
+    "destinationScreen": "",
+    "icon": "shield",
+    "iconType":"font-awesome"
+  },
+  {
+    "title": "Understanding Campaign",
+    "color": "#4285F4",
+    "destinationScreen": "",
+    "icon": "chalkboard-teacher",
+    "iconType":"font-awesome-5"
+  },
+];

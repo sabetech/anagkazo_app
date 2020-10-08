@@ -4,13 +4,13 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 
-export default MyActionButton = () => {
+export default MyActionButton = ({ icon, navigateTo }) => {
   const navigation = useNavigation();
   return (
     <View style={styles.fab}>
-      <TouchableOpacity onPress={() => navigation.navigate("qr_code_scanner")}>
+      <TouchableOpacity onPress={() => navigation.navigate(navigateTo)}>
         <Ionicons
-          name="md-qr-scanner"
+          name={icon}
           size={24}
           color="white"
           style={styles.actionButtonIcon}

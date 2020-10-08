@@ -11,15 +11,103 @@ Sunday FLOW Encounter
 x out of total
 Latest Bussing record
 
+Phone and whatsapp icons
+ {/* <View style={{ flexDirection: "row" }}>
+            <View>
+              {
+                <Icon
+                  name={"logo-whatsapp"}
+                  type={"ionicon"}
+                  underlayColor="transparent"
+                  iconStyle={{ fontSize: 30, color: "green" }}
+                  style={styles.callActionStyle}
+                />
+              }
+            </View>
+            <View>
+              {
+                <Icon
+                  name={"phone"}
+                  type={"font-awesome5"}
+                  underlayColor="transparent"
+                  iconStyle={{ fontSize: 30, color: "green" }}
+                  style={styles.callActionStyle}
+                />
+              }
+            </View>
+          </View> */}
+
+  - archived members column
+
+
+Scores
+Anti Brutish
+- 1st 9 months, 1 hour = 270 (80%)
+- 2nd 9 months, 2 hours = 540 (80%) - Junior Clerkship
+- 3rd 
+
+Extra hours don't cross
+-----------------------
+
+
+Fields of the Forms
+Counselling
+Date,
+- Name of Counselee
+- Phone
+- Issue Counseled
+- Podcast? -
+
+Multiplication
+scores = {}
+- Outreach
+- Souls Won
+- Date
+- Name
+- Phone Number
+
+Servants Armed and trained
+- Eugalizo?
+- Makarios?
+- Bosko?
+- Kara?
+- Tablet of other Christian Books?
+- Bible Concordance?
+- Other Version of Bible?
+- etc (Find the others)
+
+Sheep Seeking
+- Date
+- Souls Visited
+- 3 at least
+- Weekly
+- Drop down a list of members 
+Multi Select members for select2
+
+
+Understanding Campaign
+Written and passed Exam for the seven book
+
+
+Basonta
+- name of Basonta
+- present for rehearsal
+- presnet for Prophetic Encounter
+- present for anagkazo live
+
+Side Bar Menu
+Ministry Stills Forms
+
+
+Basonta
+
+
+
+
+
 nice blue color #03A9F4 for a theme
 
-<View>
-                <Icon
-                  name="place"
-                  underlayColor="transparent"
-                  iconStyle={styles.placeIcon}
-                />
-              </View>
+
 
 COORDINATORS
 - Number of students who bussed
@@ -32,23 +120,37 @@ COORDINATORS
 
 - Number of Students present for Sunday FLOW Encounter
 
-{/* <Text
-          style={{
-            fontFamily: "Roboto",
-            fontSize: 21,
-            padding: 10,
-            marginLeft: "15%",
-          }}
-        >
-          {name}
-        </Text>
-      </View>
-      <View>
-        {
-          <Icon
-            name={"logo-whatsapp"}
-            type={"ionicon"}
-            underlayColor="transparent"
-            iconStyle={{ fontSize: 30, color: "green" }}
-          />
-        } */}
+Make the student index context available to every screen
+
+
+16 Community Leaders
+Centers restructuring ...
+Each GSO should have 5 Centers
+
+LP Jess => () { 17 Centers }
+Anita = () { 14 Centers }
+Jude = () { 25 Centers }
+
+SO each community has a GSO
+
+Are classes mixing people from different classes?
+
+Each GSO is taking care of a Community
+
+LP Jess (Class of 2022)
+- Towns (Mampong)
+
+ps Jude
+- Towns (Mamfe, Akropong)
+
+
+LP Rejoice
+
+
+
+LP Anita
+
+
+Ps Aullen
+
+

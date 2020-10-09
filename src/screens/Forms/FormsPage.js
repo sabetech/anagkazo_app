@@ -23,7 +23,7 @@ export default function FormsPage({ navigation }) {
             />
           </View>
         </TouchableHighlight>
-        <Text style={styles.header}>Forms</Text>
+        <Text style={styles.header}>Ministry Skills</Text>
       </View>
       <ScrollView>
         <View style={styles.menuList}>
@@ -32,7 +32,7 @@ export default function FormsPage({ navigation }) {
               key={index}
               title={menuItem.title}
               cardBorderColor={detailColor[index % 4]}
-              destinationScreen={"something"}
+              destinationScreen={menuItem.destinationScreen}
               icon={menuItem.icon}
               iconType={menuItem.iconType}
             />
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   },
   topBar: {
     height: 75,
-    backgroundColor: "#DB4437",
+    backgroundColor: "#F4B400",
     flexDirection: "row",
     elevation: 5, //this only works in android .. find out iOS version
   },

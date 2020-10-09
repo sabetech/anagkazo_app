@@ -1,23 +1,42 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, ImageBackground } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ImageBackground,
+  TouchableOpacity,
+} from "react-native";
 import { Avatar, Icon } from "react-native-elements";
-import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "@react-navigation/native";
+import moment from "moment";
 
-const ContactListItem = ({ name, photo_url }) => {
+const CustomListItem = ({ date, value }) => {
+  const navigation = useNavigation();
+  function showDetails() {
+    navigation.navigate("counselling_detail", {
+      date: date,
+    });
+  }
+
   return (
-    <View style={styles.mainContactItem}>
-      <View style={styles.listItem}>
-        <Image
-          style={styles.image}
-          source={{ uri: `https://anagkazo.firstlovegallery.com/${photo_url}` }}
-        />
-        <View style={styles.textRow}>
-          <View style={styles.textColumn}>
-            <Text style={styles.contacText}>{name}</Text>
+    <TouchableOpacity
+      onPress={() => {
+        showDetails();
+      }}
+    >
+      <View style={styles.mainContactItem}>
+        <View style={styles.listItem}>
+          <View style={styles.textRow}>
+            <View style={styles.textColumn}>
+              <Text style={styles.contacText}>
+                {moment(date).format("dddd, MMM DD YYYY")}: {value}
+              </Text>
+            </View>
           </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -62,4 +81,4 @@ const styles = StyleSheet.create({
   whatsappIcon: {},
 });
 
-export default ContactListItem;
+export default CustomListItem;

@@ -8,27 +8,27 @@ import {
 } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-community/async-storage";
-import { BASE_URL } from "../config/index";
-import ContactListItem from "../components/Members/ContactListItem";
-import MyActionButton from "../components/MyActionButton";
+import { BASE_URL } from "../../config/index";
+import CustomListItem from "../../components/CustomListComponent/CustomListItem";
+import MyActionButton from "../../components/MyActionButton";
 
 //get members from here
-export default function Members({ navigation }) {
-  const [studentMembers, setStudentMembers] = useState([]);
+export default function DetailOfActivity({ navigation }) {
+  const [people, setPeople] = useState([]);
   useEffect(() => {
     AsyncStorage.getItem("student_index").then((res) => {
-      getStudentMembers(res);
+      getCounsellings(res);
     });
   }, []);
 
-  const getStudentMembers = (myStudentIndex) => {
-    fetch(`${BASE_URL}/student/${myStudentIndex}/members`, {
+  const getCounsellings = (myStudentIndex) => {
+    fetch(`${BASE_URL}/student/${myStudentIndex}/counselling`, {
       method: "GET",
     })
       .then((response) => response.json())
       .then((responseJson) => {
         console.log(responseJson);
-        setStudentMembers(responseJson);
+        setCounsellings(responseJson);
       })
       .catch((error) => {
         console.error(error);
@@ -41,28 +41,27 @@ export default function Members({ navigation }) {
         <TouchableHighlight>
           <View style={styles.header}>
             <FontAwesome5
-              name="bars"
+              name="arrow-left"
               size={28}
               color={"#ffffff"}
               onPress={() => {
-                //swap back the dashboard content back
-                navigation.toggleDrawer();
+                navigation.goBack();
               }}
             />
             <Text style={{ fontSize: 32 }}></Text>
           </View>
         </TouchableHighlight>
-        <Text style={styles.header}>Members</Text>
+        <Text style={styles.header}>Counselling</Text>
       </View>
       <View style={{ height: "90%" }}>
         <FlatList
-          data={studentMembers}
-          renderItem={({ item }) => {
+          data={counsellings}
+          renderItem={({ item, index }) => {
             return (
-              <ContactListItem name={item.name} photo_url={item.photo_url} />
+              <CustomListItem key={index} date={item.date} value={item.value} />
             );
           }}
-          keyExtractor={(item) => item.id + ""}
+          keyExtractor={(index) => index + ""}
         />
       </View>
       <MyActionButton icon="md-add" navigateTo="member_add" />
@@ -75,7 +74,7 @@ const styles = StyleSheet.create({
   },
   topBar: {
     height: 75,
-    backgroundColor: "green",
+    backgroundColor: "#4285F4",
     flexDirection: "row",
     elevation: 10,
   },

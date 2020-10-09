@@ -41,7 +41,7 @@ Phone and whatsapp icons
 
 
 Scores
-Anti Brutish
+Anti Brutish [API Done]
 - 1st 9 months, 1 hour = 270 (80%)
 - 2nd 9 months, 2 hours = 540 (80%) - Junior Clerkship
 - 3rd 
@@ -51,42 +51,74 @@ Extra hours don't cross
 
 
 Fields of the Forms
-Counselling
+Counselling [API Done]
 Date,
 - Name of Counselee
 - Phone
 - Issue Counseled
 - Podcast? -
+=====================
+for a 9 month Student 
+start accessment after 3 months
+form the 3rd Month to the 9month = (5 counselling sessions) => 5pt
 
-Multiplication
+for a 18 month Student (2022) -- 
+form the 6th Month to the 18month = (10 counselling sessions) => 10pt
+
+for a 18 - 36 month Student (2021)
+form the 18th Month to the 36th month = (20 counselling sessions) => 10pt
+
+
+
+Multiplication [API Done]
 scores = {}
 - Outreach
 - Souls Won
 - Date
 - Name
 - Phone Number
+=======================
+20 souls for 9 months = 5pt
+
+40 souls for 18 months = 10pt
+
+60 souls for 36 months = 10pt
+=============================
+
 
 Servants Armed and trained
 - Eugalizo?
 - Makarios?
 - Bosko?
 - Kara?
+- Machaneh?
 - Tablet of other Christian Books?
 - Bible Concordance?
 - Other Version of Bible?
 - etc (Find the others)
+=============================
+9 months 5pts, you must have 3 of 5 them
+18 months 10pts, you must have all
+36 months 10pts, you must have all + other require
+==============================================
 
-Sheep Seeking
+
+Sheep Seeking [API done]
 - Date
 - Souls Visited
 - 3 at least
 - Weekly
 - Drop down a list of members 
 Multi Select members for select2
+============================
+3 souls a week
 
 
 Understanding Campaign
 Written and passed Exam for the seven book
+first 9 months 2 books
+first 18 months 5 books
+first 32 
 
 
 Basonta
@@ -94,6 +126,9 @@ Basonta
 - present for rehearsal
 - presnet for Prophetic Encounter
 - present for anagkazo live
+==========================
+3 souls in basontas
+5 souls in bas
 
 Side Bar Menu
 Ministry Stills Forms
@@ -101,6 +136,11 @@ Ministry Stills Forms
 
 Basonta
 
+Add Bacenta Historic data button to the ministry skills
+
+
+Tell Them Rotation**
+- Points uploaded by Excel on the web 
 
 
 

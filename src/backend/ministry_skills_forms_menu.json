@@ -1,13 +1,13 @@
 [
   { "title": "Counselling", 
     "color": "#4285F4", 
-    "destinationScreen": "", 
+    "destinationScreen": "counselling", 
     "icon": "wechat", 
     "iconType":"font-awesome" },
   {
     "title": "Sheep Seeking",
     "color": "#4285F4",
-    "destinationScreen": "",
+    "destinationScreen": "sheepseeking",
     "icon": "account-search",
     "iconType":"material-community"
   },
@@ -21,7 +21,7 @@
   {
     "title": "Multiplication",
     "color": "#4285F4",
-    "destinationScreen": "",
+    "destinationScreen": "multiplication",
     "icon": "addusergroup",
     "iconType":"antdesign"
   },

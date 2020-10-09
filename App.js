@@ -13,8 +13,11 @@ import DashboardDetail from "./src/screens/Dashboard/Dashboard-detail";
 import AsyncStorage from "@react-native-community/async-storage";
 import { BASE_URL } from "./src/config/index";
 import { DrawerContent } from "./src/screens/DrawerContent";
-import PrayerLog from "./src/screens/Prayer/PrayerLog";
+import Counselling from "./src/screens/MinistrySkills/Counselling";
 import FormsPage from "./src/screens/Forms/FormsPage";
+import SheepSeeking from "./src/screens/MinistrySkills/SheepSeeking";
+import Multiplication from "./src/screens/MinistrySkills/Multiplication";
+import CounsellingDetail from "./src/screens/MinistrySkills/CounsellingDetail";
 
 const MyNavStack = createStackNavigator();
 
@@ -97,6 +100,22 @@ export default function App() {
           <MyNavStack.Screen
             name="dashboard-details"
             component={DashboardDetail}
+          ></MyNavStack.Screen>
+          <MyNavStack.Screen
+            name="counselling"
+            component={Counselling}
+          ></MyNavStack.Screen>
+          <MyNavStack.Screen
+            name="counselling_detail"
+            component={CounsellingDetail}
+          ></MyNavStack.Screen>
+          <MyNavStack.Screen
+            name="sheepseeking"
+            component={SheepSeeking}
+          ></MyNavStack.Screen>
+          <MyNavStack.Screen
+            name="multiplication"
+            component={Multiplication}
           ></MyNavStack.Screen>
         </MyNavStack.Navigator>
       </NavigationContainer>

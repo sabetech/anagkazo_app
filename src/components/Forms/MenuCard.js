@@ -17,35 +17,35 @@ const MenuCard = ({
 
   return (
     <View style={styles.mainCard}>
-      {/* // <TouchableHighlight
-    //   onPress={() => {
-    //     navigation.navigate(destinationScreen, {
-    //       titleScreen: title,
-    //       tileColor: cardBorderColor,
-    //     });
-    //   }}
-    // > */}
-      <LinearGradient
-        // Button Linear Gradient
-        start={{ x: 0.0, y: 0.25 }}
-        end={{ x: 1.5, y: -0.6 }}
-        colors={["rgba(255,255,255,0.9)", "rgba(225,225,255,0.4)"]}
-        style={[styles.card, { borderColor: cardBorderColor }]}
+      <TouchableHighlight
+        onPress={() => {
+          navigation.navigate(destinationScreen, {
+            titleScreen: title,
+            tileColor: cardBorderColor,
+          });
+        }}
       >
-        <View>
-          {
-            <Icon
-              name={icon}
-              type={iconType}
-              underlayColor="transparent"
-              size={52}
-              color="grey"
-              style={styles.iconStyle}
-            />
-          }
-        </View>
-      </LinearGradient>
-      {/* </TouchableHighlight> */}
+        <LinearGradient
+          // Button Linear Gradient
+          start={{ x: 0.0, y: 0.25 }}
+          end={{ x: 1.5, y: -0.6 }}
+          colors={["rgba(255,255,255,0.9)", "rgba(225,225,255,0.4)"]}
+          style={[styles.card, { borderColor: cardBorderColor }]}
+        >
+          <View>
+            {
+              <Icon
+                name={icon}
+                type={iconType}
+                underlayColor="transparent"
+                size={52}
+                color="grey"
+                style={styles.iconStyle}
+              />
+            }
+          </View>
+        </LinearGradient>
+      </TouchableHighlight>
       <Text style={{ textAlign: "center" }}>{title}</Text>
     </View>
   );

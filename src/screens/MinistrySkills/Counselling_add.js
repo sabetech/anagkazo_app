@@ -165,6 +165,9 @@ export default function Counselling_add({ navigation }) {
           width={"100%"}
           style={{ backgroundColor: "#d3d3d3" }}
         />
+        <Text style={{ textAlign: "left", marginLeft: 8, paddingTop:20 }}>
+          Issue
+        </Text>
         <TextInput
           multiline={true}
           numberOfLines={10}

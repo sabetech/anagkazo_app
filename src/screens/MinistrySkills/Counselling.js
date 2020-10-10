@@ -17,10 +17,13 @@ import MyActionButton from "../../components/MyActionButton";
 export default function Counselling({ navigation }) {
   const [counsellings, setCounsellings] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const [studentIndex, setStudentIndex] = useState("");
 
   useEffect(() => {
     setLoading(true);
     AsyncStorage.getItem("student_index").then((res) => {
+      setStudentIndex(res);
       getCounsellings(res);
     });
   }, []);
@@ -33,11 +36,17 @@ export default function Counselling({ navigation }) {
       .then((responseJson) => {
         setLoading(false);
         setCounsellings(responseJson);
+        setRefreshing(false);
       })
       .catch((error) => {
         console.error(error);
       });
   };
+
+  const handleRefresh = () => {
+    setRefreshing(true);
+    getCounsellings(studentIndex);
+  }
 
   return (
     <View style={styles.container}>
@@ -71,6 +80,8 @@ export default function Counselling({ navigation }) {
             return <CustomListItem date={item.date} value={item.value} />;
           }}
           keyExtractor={(item) => item.date + ""}
+          refreshing={refreshing}
+          onRefresh={handleRefresh}
         />
       </View>
       <MyActionButton icon="md-add" navigateTo="counselling_add" />

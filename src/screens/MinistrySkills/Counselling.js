@@ -17,6 +17,7 @@ import MyActionButton from "../../components/MyActionButton";
 export default function Counselling({ navigation }) {
   const [counsellings, setCounsellings] = useState([]);
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     setLoading(true);
     AsyncStorage.getItem("student_index").then((res) => {
@@ -67,14 +68,12 @@ export default function Counselling({ navigation }) {
         <FlatList
           data={counsellings}
           renderItem={({ item, index }) => {
-            return (
-              <CustomListItem key={index} date={item.date} value={item.value} />
-            );
+            return <CustomListItem date={item.date} value={item.value} />;
           }}
-          keyExtractor={(index) => index + ""}
+          keyExtractor={(item) => item.date + ""}
         />
       </View>
-      <MyActionButton icon="md-add" navigateTo="member_add" />
+      <MyActionButton icon="md-add" navigateTo="counselling_add" />
     </View>
   );
 }

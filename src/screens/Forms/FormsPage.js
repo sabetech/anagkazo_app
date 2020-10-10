@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   },
   topBar: {
     height: 75,
-    backgroundColor: "#F4B400",
+    backgroundColor: "#2d2d2d",
     flexDirection: "row",
     elevation: 5, //this only works in android .. find out iOS version
   },

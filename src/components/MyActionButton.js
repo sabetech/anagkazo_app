@@ -11,7 +11,7 @@ export default MyActionButton = ({ icon, navigateTo }) => {
       <TouchableOpacity onPress={() => navigation.navigate(navigateTo)}>
         <Ionicons
           name={icon}
-          size={24}
+          size={32}
           color="white"
           style={styles.actionButtonIcon}
         />

@@ -27,7 +27,6 @@ export default function DetailOfActivity({ navigation }) {
     })
       .then((response) => response.json())
       .then((responseJson) => {
-        console.log(responseJson);
         setCounsellings(responseJson);
       })
       .catch((error) => {

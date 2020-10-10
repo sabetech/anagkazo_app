@@ -18,6 +18,7 @@ import FormsPage from "./src/screens/Forms/FormsPage";
 import SheepSeeking from "./src/screens/MinistrySkills/SheepSeeking";
 import Multiplication from "./src/screens/MinistrySkills/Multiplication";
 import CounsellingDetail from "./src/screens/MinistrySkills/CounsellingDetail";
+import Counselling_add from "./src/screens/MinistrySkills/Counselling_add";
 
 const MyNavStack = createStackNavigator();
 
@@ -108,6 +109,10 @@ export default function App() {
           <MyNavStack.Screen
             name="counselling_detail"
             component={CounsellingDetail}
+          ></MyNavStack.Screen>
+          <MyNavStack.Screen
+            name="counselling_add"
+            component={Counselling_add}
           ></MyNavStack.Screen>
           <MyNavStack.Screen
             name="sheepseeking"

@@ -194,3 +194,20 @@ LP Anita
 Ps Aullen
 
 
+Known issues
+------------
+for the flow attendance, on the server side, 
+first show all the weeks that there is, and then for the dates that the student is present, append those too
+For Wacenta service, show which dates there' was no service for the leader
+
+make profile editable by clicking on the property
+show the pastoral point on the right side as tab
+
+attn: change the color of the tabbed background and  header for each tab
+for special services, show the note on the bottom of the card as to which event it was
+
+validate before submit
+
+after fields scroll up and down, submit has to be click on twice
+
+

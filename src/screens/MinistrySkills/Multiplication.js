@@ -9,11 +9,12 @@ import {
 import { FontAwesome5 } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-community/async-storage";
 import { BASE_URL } from "../../config/index";
-import CustomListItem from "../../components/CustomListComponent/CustomListItem";
+import { List } from 'react-native-paper';
 import MyActionButton from "../../components/MyActionButton";
+import moment from "moment";
 
 //get members from here
-export default function Multiplication({ navigation }) {
+export default function Multiplication({ navigation, route }) {
   const [multiplication, setMultiplication] = useState([]);
   useEffect(() => {
     AsyncStorage.getItem("student_index").then((res) => {
@@ -37,7 +38,7 @@ export default function Multiplication({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.topBar}>
+      <View style={[styles.topBar, {backgroundColor: route.params.tileColor,}]}>
         <TouchableHighlight>
           <View style={styles.header}>
             <FontAwesome5
@@ -58,10 +59,18 @@ export default function Multiplication({ navigation }) {
           data={multiplication}
           renderItem={({ item, index }) => {
             return (
-              <CustomListItem key={index} date={item.date} value={item.value} />
+              <List.Item
+                      title={moment(item.date).format("dddd, MMM DD YYYY")}
+                      left={props => <List.Icon {...props} icon="folder" />}
+                      right={props => <Text style={{marginTop:10, fontSize:18, paddingRight:10}}>{item.value}</Text>}
+                      onPress={(()=> navigation.navigate("multiplication_detail", {
+                        topBarColor:route.params.tileColor,
+                        date:item.date
+                      }))}
+                    />
             );
           }}
-          keyExtractor={(index) => index + ""}
+          keyExtractor={(item) => item.date + ""}
         />
       </View>
       <MyActionButton icon="md-add" navigateTo="member_add" />

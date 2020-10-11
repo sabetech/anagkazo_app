@@ -5,14 +5,17 @@ import {
   StyleSheet,
   FlatList,
   ActivityIndicator,
+  TouchableHighlight
 } from "react-native";
 
 import MyActionButton from "../../components/MyActionButton";
 import { BASE_URL } from "../../config/index";
 import AsyncStorage from "@react-native-community/async-storage";
-import CardInfo from "../../components/HomeDashboard/CardInfo";
+import { Icon } from "react-native-elements";
+import { List } from 'react-native-paper';
+import moment from "moment";
 
-export default function AnagkazoLive_Screen() {
+export default function AnagkazoLive_Screen({navigation}) {
   const [studentAttendance, setStudentAttn] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -41,6 +44,19 @@ export default function AnagkazoLive_Screen() {
   return (
     <View style={styles.container}>
       <View style={styles.topBar}>
+      <TouchableHighlight>
+          <View style={styles.header}>
+            <Icon
+              name="menu"
+              size={28}
+              type="feather"
+              color={"#ffffff"}
+              onPress={() => {
+                navigation.toggleDrawer();
+              }}
+            />
+          </View>
+        </TouchableHighlight>
         <Text style={styles.header}>Anagkazo Live</Text>
       </View>
       {loading ? (
@@ -55,11 +71,12 @@ export default function AnagkazoLive_Screen() {
           data={studentAttendance}
           renderItem={({ item }) => {
             return (
-              <CardInfo
-                id={item.id}
-                title={item.title}
-                value={item.value}
-                extra_details={item.extra_details}
+              <List.Item
+                id={item.id}  
+                title={moment(item.title).format("dddd, MMM DD YYYY")}
+                description="Anagkazo Live"
+                left={props => <Icon name={"access-point"} type={"material-community"} iconStyle={{color:"grey", marginTop:10}}/>}
+                right={props => <Text style={{marginTop: "8%", color:"grey"}}>{item.value}</Text>}
               />
             );
           }}
@@ -77,13 +94,12 @@ const styles = StyleSheet.create({
   },
   topBar: {
     height: 75,
-    backgroundColor: "black",
+    backgroundColor: "#067E6B",
     flexDirection: "row",
-    justifyContent: "space-between",
     elevation: 20, //this only works in android .. find out iOS version
   },
   header: {
-    fontSize: 24,
+    fontSize: 21,
     marginTop: 32,
     marginLeft: 15,
     color: "white",

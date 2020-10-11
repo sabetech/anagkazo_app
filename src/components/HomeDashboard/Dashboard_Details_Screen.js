@@ -11,6 +11,9 @@ import { BASE_URL } from "../../config";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import ListItem from "../ListItem";
 import { TouchableHighlight } from "react-native-gesture-handler";
+import { List } from 'react-native-paper';
+import { Icon } from "react-native-elements";
+import moment from "moment";
 
 const Dashboard_Details = ({ navigation, route }) => {
   const [dashboardDetails, setDashboardDetails] = useState([]);
@@ -74,7 +77,13 @@ const Dashboard_Details = ({ navigation, route }) => {
         <FlatList
           data={dashboardDetails}
           renderItem={({ item }) => {
-            return <ListItem title={item.title} value={item.value} />;
+            return <List.Item
+            id={item.id}  
+            title={moment(item.title).format("dddd, MMM DD YYYY")}
+            description={route.params.titleScreen}
+            left={props => <Icon name={route.params.icon} type={route.params.type} iconStyle={{color:"grey", marginTop:10}}/>}
+            right={props => <Text style={{marginTop: "8%", color:"grey"}}>{item.value}</Text>}
+          />
           }}
           keyExtractor={(item) => item.id + ""}
         />

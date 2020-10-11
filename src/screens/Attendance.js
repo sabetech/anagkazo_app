@@ -1,7 +1,7 @@
 import React from "react";
 
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 
 import FLOWPrayer_Screen from "./Attendance_Screens/FLOWPrayer_Screen";
 import PropheticEncounter_Screen from "./Attendance_Screens/PropheticEncounter_Screen";
@@ -19,12 +19,13 @@ export default function AttendanceTabs() {
         options={{
           tabBarLabel: "FLOW Prayer",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="alpha-p-box"
+            <FontAwesome5
+              name="praying-hands"
               color={color}
-              size={26}
+              size={20}
             />
           ),
+          tabBarColor:"#4285F4"
         }}
       />
       <Tab.Screen
@@ -35,6 +36,7 @@ export default function AttendanceTabs() {
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="church" color={color} size={26} />
           ),
+          tabBarColor:"#4F0F97"
         }}
       />
       <Tab.Screen
@@ -49,6 +51,7 @@ export default function AttendanceTabs() {
               size={26}
             />
           ),
+          tabBarColor: "#067E6B"
         }}
       />
       <Tab.Screen
@@ -63,6 +66,7 @@ export default function AttendanceTabs() {
               size={26}
             />
           ),
+          tabBarColor: "#DB4437"
         }}
       />
     </Tab.Navigator>

@@ -11,9 +11,11 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { BASE_URL } from "../../config/index";
 import CustomListItem from "../../components/CustomListComponent/CustomListItem";
 import MyActionButton from "../../components/MyActionButton";
+import { List } from 'react-native-paper';
+import moment from "moment";
 
 //get members from here
-export default function SheepSeeking({ navigation }) {
+export default function SheepSeeking({ navigation, route }) {
   const [sheepseeking, setSheepSeeking] = useState([]);
   useEffect(() => {
     AsyncStorage.getItem("student_index").then((res) => {
@@ -37,7 +39,7 @@ export default function SheepSeeking({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.topBar}>
+      <View style={[styles.topBar,{backgroundColor: route.params.tileColor,}]}>
         <TouchableHighlight>
           <View style={styles.header}>
             <FontAwesome5
@@ -58,13 +60,22 @@ export default function SheepSeeking({ navigation }) {
           data={sheepseeking}
           renderItem={({ item, index }) => {
             return (
-              <CustomListItem key={index} date={item.date} value={item.value} />
+              // <CustomListItem key={index} date={item.date} value={item.value} navigateTo={"sheepseeking_detail"} topBarColor={route.params.tileColor} />
+              <List.Item
+                      title={moment(item.date).format("dddd, MMM DD YYYY")}
+                      left={props => <List.Icon {...props} icon="folder" />}
+                      right={props => <Text style={{marginTop:10, fontSize:18, paddingRight:10}}>{item.value}</Text>}
+                      onPress={(()=> navigation.navigate("sheepseeking_detail", {
+                        topBarColor:route.params.tileColor,
+                        date:item.date
+                      }))}
+                    />
             );
           }}
-          keyExtractor={(index) => index + ""}
+          keyExtractor={(item) => item.date + ""}
         />
       </View>
-      <MyActionButton icon="md-add" navigateTo="member_add" />
+      <MyActionButton icon="md-add" navigateTo="sheepseeking_add" topBarColor={route.params.tileColor} />
     </View>
   );
 }
@@ -74,7 +85,6 @@ const styles = StyleSheet.create({
   },
   topBar: {
     height: 75,
-    backgroundColor: "#4285F4",
     flexDirection: "row",
     elevation: 10,
   },

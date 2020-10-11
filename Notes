@@ -211,3 +211,10 @@ validate before submit
 after fields scroll up and down, submit has to be click on twice
 
 
+
+<CardInfo
+                id={item.id}
+                title={item.title}
+                value={item.value}
+                extra_details={item.extra_details}
+              />

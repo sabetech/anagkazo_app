@@ -10,11 +10,12 @@ import {
 import { FontAwesome5 } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-community/async-storage";
 import { BASE_URL } from "../../config/index";
-import CustomListItem from "../../components/CustomListComponent/CustomListItem";
+import { List } from 'react-native-paper';
 import MyActionButton from "../../components/MyActionButton";
+import moment from "moment";
 
 //get members from here
-export default function Counselling({ navigation }) {
+export default function Counselling({ navigation, route }) {
   const [counsellings, setCounsellings] = useState([]);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -50,7 +51,7 @@ export default function Counselling({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.topBar}>
+      <View style={[styles.topBar,{backgroundColor:route.params.tileColor}]}>
         <TouchableHighlight>
           <View style={styles.header}>
             <FontAwesome5
@@ -77,7 +78,15 @@ export default function Counselling({ navigation }) {
         <FlatList
           data={counsellings}
           renderItem={({ item, index }) => {
-            return <CustomListItem date={item.date} value={item.value} />;
+            return <List.Item
+                      title={moment(item.date).format("dddd, MMM DD YYYY")}
+                      left={props => <List.Icon {...props} icon="folder" />}
+                      right={props => <Text style={{marginTop:10, fontSize:18, paddingRight:10}}>{item.value}</Text>}
+                      onPress={(()=> navigation.navigate("counselling_detail", {
+                        topBarColor:route.params.tileColor,
+                        date:item.date
+                      }))}
+                    />
           }}
           keyExtractor={(item) => item.date + ""}
           refreshing={refreshing}
@@ -94,7 +103,6 @@ const styles = StyleSheet.create({
   },
   topBar: {
     height: 75,
-    backgroundColor: "#4285F4",
     flexDirection: "row",
     elevation: 10,
   },

@@ -16,9 +16,12 @@ import { DrawerContent } from "./src/screens/DrawerContent";
 import Counselling from "./src/screens/MinistrySkills/Counselling";
 import FormsPage from "./src/screens/Forms/FormsPage";
 import SheepSeeking from "./src/screens/MinistrySkills/SheepSeeking";
+import SheepSeeking_add from "./src/screens/MinistrySkills/SheepSeeking_add";
+import SheepSeekingDetail from "./src/screens/MinistrySkills/SheepSeekingDetail";
 import Multiplication from "./src/screens/MinistrySkills/Multiplication";
 import CounsellingDetail from "./src/screens/MinistrySkills/CounsellingDetail";
 import Counselling_add from "./src/screens/MinistrySkills/Counselling_add";
+
 
 const MyNavStack = createStackNavigator();
 
@@ -118,6 +121,17 @@ export default function App() {
             name="sheepseeking"
             component={SheepSeeking}
           ></MyNavStack.Screen>
+
+          <MyNavStack.Screen
+            name="sheepseeking_detail"
+            component={SheepSeekingDetail}
+          ></MyNavStack.Screen>
+
+
+          <MyNavStack.Screen
+            name="sheepseeking_add"
+            component={SheepSeeking_add}
+          ></MyNavStack.Screen>
           <MyNavStack.Screen
             name="multiplication"
             component={Multiplication}
@@ -127,3 +141,4 @@ export default function App() {
     </AuthContext.Provider>
   );
 }
+SheepSeeking_add

@@ -5,14 +5,16 @@ import {
   StyleSheet,
   FlatList,
   ActivityIndicator,
+  TouchableHighlight
 } from "react-native";
 import MyActionButton from "../../components/MyActionButton";
-
-import CardInfo from "../../components/HomeDashboard/CardInfo";
 import { BASE_URL } from "../../config/index";
 import AsyncStorage from "@react-native-community/async-storage";
+import { List } from 'react-native-paper';
+import { Icon } from "react-native-elements";
+import moment from "moment";
 
-export default function FLOWPrayer_Screen() {
+export default function FLOWPrayer_Screen({navigation}) {
   const [studentAttendance, setStudentAttn] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -32,7 +34,6 @@ export default function FLOWPrayer_Screen() {
       .then((response) => response.json())
       .then((responseJson) => {
         setStudentAttn(responseJson);
-        console.log("here ");
         setLoading(false);
       })
       .catch((error) => {
@@ -42,7 +43,20 @@ export default function FLOWPrayer_Screen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.topBar}>
+      <View style={styles.topBar}> 
+      <TouchableHighlight>
+          <View style={styles.header}>
+            <Icon
+              name="menu"
+              size={28}
+              type="feather"
+              color={"#ffffff"}
+              onPress={() => {
+                navigation.toggleDrawer();
+              }}
+            />
+          </View>
+        </TouchableHighlight>
         <Text style={styles.header}>Flow Prayer Attendance</Text>
       </View>
 
@@ -58,12 +72,15 @@ export default function FLOWPrayer_Screen() {
           data={studentAttendance}
           renderItem={({ item }) => {
             return (
-              <CardInfo
-                id={item.id}
-                title={item.title}
-                value={item.value}
-                extra_details={item.extra_details}
+              <List.Item
+                id={item.id}  
+                title={moment(item.title).format("dddd, MMM DD YYYY")}
+                description="Flow Prayer"
+                left={props => <Icon name={"praying-hands"} type={"font-awesome-5"} iconStyle={{color:"grey", marginTop:10}}/>}
+                right={props => <Text style={{marginTop: "8%", color:"grey"}}>{item.value}</Text>}
               />
+
+              
             );
           }}
           keyExtractor={(item) => item.id + ""}
@@ -79,13 +96,12 @@ const styles = StyleSheet.create({
   },
   topBar: {
     height: 75,
-    backgroundColor: "#03A9F4",
+    backgroundColor: "#4285F4",
     flexDirection: "row",
-    justifyContent: "space-between",
     elevation: 20, //this only works in android .. find out iOS version
   },
   header: {
-    fontSize: 24,
+    fontSize: 21,
     marginTop: 32,
     marginLeft: 15,
     color: "white",

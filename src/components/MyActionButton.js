@@ -4,11 +4,11 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 
-export default MyActionButton = ({ icon, navigateTo }) => {
+export default MyActionButton = ({ icon, navigateTo, topBarColor }) => {
   const navigation = useNavigation();
   return (
     <View style={styles.fab}>
-      <TouchableOpacity onPress={() => navigation.navigate(navigateTo)}>
+      <TouchableOpacity onPress={() => navigation.navigate(navigateTo, {topBarColor: topBarColor})}>
         <Ionicons
           name={icon}
           size={32}

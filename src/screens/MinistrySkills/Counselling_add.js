@@ -115,7 +115,7 @@ export default function Counselling_add({ navigation }) {
         </TouchableOpacity>
         <Text style={styles.header}>Add Counselling Session</Text>
       </View>
-      <KeyboardAwareScrollView style={{ height: "90%" }}>
+      <KeyboardAwareScrollView style={{ height: "90%", marginHorizontal:10 }}>
         <InfoCard
           infoText="This is where you can add a counselling session you have had with your member. Select the date of the Counselling and a summary of the issue presented by the member"
           colorDetail={"#4285F4"}
@@ -262,4 +262,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     color: "#ffffff",
   },
+  myForm: {
+    marginHorizontal: 10
+  }
 });

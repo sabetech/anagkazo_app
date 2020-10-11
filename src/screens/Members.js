@@ -6,7 +6,7 @@ import {
   TouchableHighlight,
   FlatList,
 } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { Icon } from "react-native-elements";
 import AsyncStorage from "@react-native-community/async-storage";
 import { BASE_URL } from "../config/index";
 import ContactListItem from "../components/Members/ContactListItem";
@@ -38,18 +38,17 @@ export default function Members({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.topBar}>
-        <TouchableHighlight>
+      <TouchableHighlight>
           <View style={styles.header}>
-            <FontAwesome5
-              name="bars"
+            <Icon
+              name="menu"
               size={28}
+              type="feather"
               color={"#ffffff"}
               onPress={() => {
-                //swap back the dashboard content back
                 navigation.toggleDrawer();
               }}
             />
-            <Text style={{ fontSize: 32 }}></Text>
           </View>
         </TouchableHighlight>
         <Text style={styles.header}>Members</Text>
@@ -75,7 +74,7 @@ const styles = StyleSheet.create({
   },
   topBar: {
     height: 75,
-    backgroundColor: "green",
+    backgroundColor: "#0F9D58",
     flexDirection: "row",
     elevation: 10,
   },

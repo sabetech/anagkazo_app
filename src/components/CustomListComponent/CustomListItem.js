@@ -11,11 +11,12 @@ import { Avatar, Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import moment from "moment";
 
-const CustomListItem = ({ date, value }) => {
+const CustomListItem = ({ date, value, navigateTo,topBarColor }) => {
   const navigation = useNavigation();
   function showDetails() {
-    navigation.navigate("counselling_detail", {
+    navigation.navigate(navigateTo, {
       date: date,
+      topBarColor:topBarColor
     });
   }
 

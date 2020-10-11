@@ -6,7 +6,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 
 //NEEDLESS TO SAY, I HATE THE STRUCTURE OF MY CODE ... ANYWAYS .. BABY REACT NATIVE STEPS SO YEAH
-const CardInfo = ({ id, title, value, studentIndex, colorDetail }) => {
+const CardInfo = ({ id, title, value, studentIndex, colorDetail, icon, type }) => {
   const navigation = useNavigation();
 
   return (
@@ -17,6 +17,8 @@ const CardInfo = ({ id, title, value, studentIndex, colorDetail }) => {
           studentIndex: studentIndex,
           titleScreen: title,
           colorDetail: colorDetail,
+          icon:icon,
+          type:type
         });
       }}
     >

@@ -10,8 +10,9 @@ import {
 import { FontAwesome5 } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-community/async-storage";
 import { BASE_URL } from "../../config/index";
-import ContactListItem from "../../components/Members/ContactListItem";
-import MyActionButton from "../../components/MyActionButton";
+import ContactCounsellingItem from "../../components/Members/ContactCounsellingItem";
+import moment from "moment";
+
 
 //get members from here
 export default function CounsellingDetail({ navigation, route }) {
@@ -43,7 +44,7 @@ export default function CounsellingDetail({ navigation, route }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.topBar}>
+      <View style={[styles.topBar,{backgroundColor:route.params.topBarColor}]}>
         <TouchableHighlight>
           <View style={styles.header}>
             <FontAwesome5
@@ -57,7 +58,7 @@ export default function CounsellingDetail({ navigation, route }) {
             <Text style={{ fontSize: 32 }}></Text>
           </View>
         </TouchableHighlight>
-        <Text style={styles.header}>List of Members Counselled</Text>
+            <Text style={styles.header}>Counselled on {moment(route.params.date).format("ddd, MMM DD YYYY")}</Text>
       </View>
       <View style={{ height: "90%" }}>
         {loading ? (
@@ -71,7 +72,7 @@ export default function CounsellingDetail({ navigation, route }) {
           data={counsellings}
           renderItem={({ item }) => {
             return (
-              <ContactListItem name={item.name} photo_url={item.photo_url} />
+              <ContactCounsellingItem name={item.name} description={item.issue_counselled} photo_url={item.photo_url} />
             );
           }}
           keyExtractor={(item) => item.id + ""}
@@ -86,7 +87,6 @@ const styles = StyleSheet.create({
   },
   topBar: {
     height: 75,
-    backgroundColor: "#4285F4",
     flexDirection: "row",
     elevation: 10,
   },

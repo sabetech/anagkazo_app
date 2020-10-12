@@ -35,7 +35,7 @@
   {
     "title": "Servants Armed And Trained",
     "color": "#4285F4",
-    "destinationScreen": "",
+    "destinationScreen": "servants_armed_trained",
     "icon": "shield",
     "iconType":"font-awesome"
   },

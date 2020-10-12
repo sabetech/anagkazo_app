@@ -25,7 +25,7 @@ import CounsellingDetail from "./src/screens/MinistrySkills/CounsellingDetail";
 import Counselling_add from "./src/screens/MinistrySkills/Counselling_add";
 import PrayerLog from "./src/screens/MinistrySkills/PrayerLog";
 import PrayerLog_add from "./src/screens/MinistrySkills/PrayerLog_add";
-
+import ServantsArmedTrained from "./src/screens/MinistrySkills/ServantsArmedTrained";
 
 const MyNavStack = createStackNavigator();
 
@@ -158,6 +158,12 @@ export default function App() {
             name="prayer_log_add"
             component={PrayerLog_add}
           ></MyNavStack.Screen>
+          
+          <MyNavStack.Screen
+            name="servants_armed_trained"
+            component={ServantsArmedTrained}
+          ></MyNavStack.Screen>
+
         </MyNavStack.Navigator>
       </NavigationContainer>
     </AuthContext.Provider>

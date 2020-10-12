@@ -17,8 +17,12 @@ import moment from "moment";
 //get members from here
 export default function SheepSeeking({ navigation, route }) {
   const [sheepseeking, setSheepSeeking] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
+  const [studentIndex, setStudentIndex] = useState("");
+
   useEffect(() => {
     AsyncStorage.getItem("student_index").then((res) => {
+      setStudentIndex(res);
       getSheepSeeking(res);
     });
   }, []);
@@ -29,13 +33,20 @@ export default function SheepSeeking({ navigation, route }) {
     })
       .then((response) => response.json())
       .then((responseJson) => {
-        console.log(responseJson);
+        
+        setRefreshing(false);
         setSheepSeeking(responseJson);
+
       })
       .catch((error) => {
         console.error(error);
       });
   };
+
+  const handleRefresh = () => {
+    setRefreshing(true);
+    getSheepSeeking(studentIndex);
+  }
 
   return (
     <View style={styles.container}>
@@ -73,6 +84,8 @@ export default function SheepSeeking({ navigation, route }) {
             );
           }}
           keyExtractor={(item) => item.date + ""}
+          refreshing={refreshing}
+          onRefresh={handleRefresh}
         />
       </View>
       <MyActionButton icon="md-add" navigateTo="sheepseeking_add" topBarColor={route.params.tileColor} />

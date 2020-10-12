@@ -16,8 +16,12 @@ import moment from "moment";
 //get members from here
 export default function Multiplication({ navigation, route }) {
   const [multiplication, setMultiplication] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
+  const [studentIndex, setStudentIndex] = useState("");
+
   useEffect(() => {
     AsyncStorage.getItem("student_index").then((res) => {
+      setStudentIndex(res);
       getMultiplication(res);
     });
   }, []);
@@ -28,13 +32,18 @@ export default function Multiplication({ navigation, route }) {
     })
       .then((response) => response.json())
       .then((responseJson) => {
-        console.log(responseJson);
         setMultiplication(responseJson);
+        setRefreshing(false);
       })
       .catch((error) => {
-        console.error(error);
+        alert("An error occured. Check for internet connection")
       });
   };
+
+  const handleRefresh = () => {
+    setRefreshing(true);
+    getMultiplication(studentIndex);
+  }
 
   return (
     <View style={styles.container}>
@@ -71,9 +80,11 @@ export default function Multiplication({ navigation, route }) {
             );
           }}
           keyExtractor={(item) => item.date + ""}
+          refreshing={refreshing}
+          onRefresh={handleRefresh}
         />
       </View>
-      <MyActionButton icon="md-add" navigateTo="member_add" />
+      <MyActionButton icon="md-add" navigateTo="multiplication_add" topBarColor={route.params.tileColor} />
     </View>
   );
 }

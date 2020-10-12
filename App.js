@@ -20,10 +20,12 @@ import SheepSeeking_add from "./src/screens/MinistrySkills/SheepSeeking_add";
 import SheepSeekingDetail from "./src/screens/MinistrySkills/SheepSeekingDetail";
 import Multiplication from "./src/screens/MinistrySkills/Multiplication";
 import MultiplicationDetail from "./src/screens/MinistrySkills/MultiplicationDetail"
+import Multiplication_add from "./src/screens/MinistrySkills/Multiplication_add";
 import CounsellingDetail from "./src/screens/MinistrySkills/CounsellingDetail";
 import Counselling_add from "./src/screens/MinistrySkills/Counselling_add";
 import PrayerLog from "./src/screens/MinistrySkills/PrayerLog";
 import PrayerLog_add from "./src/screens/MinistrySkills/PrayerLog_add";
+
 
 const MyNavStack = createStackNavigator();
 
@@ -139,10 +141,13 @@ export default function App() {
             name="multiplication"
             component={Multiplication}
           ></MyNavStack.Screen>
-
           <MyNavStack.Screen
             name="multiplication_detail"
             component={MultiplicationDetail}
+          ></MyNavStack.Screen>
+          <MyNavStack.Screen
+            name="multiplication_add"
+            component={Multiplication_add}
           ></MyNavStack.Screen>
 
           <MyNavStack.Screen

@@ -75,7 +75,7 @@ export default function AnagkazoLive_Screen({navigation}) {
                 id={item.id}  
                 title={moment(item.title).format("dddd, MMM DD YYYY")}
                 description="Anagkazo Live"
-                left={props => <Icon name={"access-point"} type={"material-community"} iconStyle={{color:"grey", marginTop:10}}/>}
+                left={props => <Icon name={"access-point"} type={"material-community"} iconStyle={{color:"grey", marginTop:10,paddingRight:20}}/>}
                 right={props => <Text style={{marginTop: "8%", color:"grey"}}>{item.value}</Text>}
               />
             );

@@ -155,7 +155,7 @@ export default function Counselling_add({ navigation }) {
         >
           {
             pickeroptions.map((member) => (
-              <Picker.Item label={member.name} value={member.id}/>
+              <Picker.Item key={member.id} label={member.name} value={member.id}/>
             ))
           }
 

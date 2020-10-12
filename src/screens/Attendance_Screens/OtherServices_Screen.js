@@ -75,7 +75,7 @@ export default function OtherServices_Screen({navigation}) {
                 id={item.id}  
                 title={moment(item.title).format("dddd, MMM DD YYYY")}
                 description={item.extra_details}
-                left={props => <Icon name={"stars"} type={"material"} iconStyle={{color:"grey", marginTop:10}}/>}
+                left={props => <Icon name={"stars"} type={"material"} iconStyle={{color:"grey", marginTop:10,paddingRight:20}}/>}
                 right={props => <Text style={{marginTop: "8%", color:"grey"}}>{item.value}</Text>}
               />
             );

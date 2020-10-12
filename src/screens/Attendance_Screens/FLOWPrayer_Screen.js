@@ -76,7 +76,7 @@ export default function FLOWPrayer_Screen({navigation}) {
                 id={item.id}  
                 title={moment(item.title).format("dddd, MMM DD YYYY")}
                 description="Flow Prayer"
-                left={props => <Icon name={"praying-hands"} type={"font-awesome-5"} iconStyle={{color:"grey", marginTop:10}}/>}
+                left={props => <Icon name={"praying-hands"} type={"font-awesome-5"} iconStyle={{color:"grey", marginTop:10,paddingRight:20}}/>}
                 right={props => <Text style={{marginTop: "8%", color:"grey"}}>{item.value}</Text>}
               />
 

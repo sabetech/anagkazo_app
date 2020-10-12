@@ -14,7 +14,7 @@
   {
     "title": "Anti Brutish",
     "color": "#4285F4",
-    "destinationScreen": "",
+    "destinationScreen": "prayer_log",
     "icon": "praying-hands",
     "iconType":"font-awesome-5"
   },

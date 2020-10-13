@@ -42,7 +42,7 @@
   {
     "title": "Understanding Campaign",
     "color": "#4285F4",
-    "destinationScreen": "",
+    "destinationScreen": "understanding_campaign",
     "icon": "chalkboard-teacher",
     "iconType":"font-awesome-5"
   },

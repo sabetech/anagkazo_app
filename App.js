@@ -26,6 +26,7 @@ import Counselling_add from "./src/screens/MinistrySkills/Counselling_add";
 import PrayerLog from "./src/screens/MinistrySkills/PrayerLog";
 import PrayerLog_add from "./src/screens/MinistrySkills/PrayerLog_add";
 import ServantsArmedTrained from "./src/screens/MinistrySkills/ServantsArmedTrained";
+import UnderstandingCampaign from "./src/screens/MinistrySkills/UnderstandingCampaign";
 
 const MyNavStack = createStackNavigator();
 
@@ -163,6 +164,12 @@ export default function App() {
             name="servants_armed_trained"
             component={ServantsArmedTrained}
           ></MyNavStack.Screen>
+
+          <MyNavStack.Screen
+            name="understanding_campaign"
+            component={UnderstandingCampaign}
+          ></MyNavStack.Screen>
+
 
         </MyNavStack.Navigator>
       </NavigationContainer>

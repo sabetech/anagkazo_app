@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 import {
   View,
   FlatList,
@@ -8,8 +7,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { BASE_URL } from "../../config";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import ListItem from "../ListItem";
+import { Ionicons } from "@expo/vector-icons";
 import { TouchableHighlight } from "react-native-gesture-handler";
 import { List } from 'react-native-paper';
 import { Icon } from "react-native-elements";
@@ -97,7 +95,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   topBar: {
-    //this only works in android .. find out iOS version
+
   },
   header: {
     fontSize: 21,

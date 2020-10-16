@@ -27,6 +27,7 @@ import PrayerLog from "./src/screens/MinistrySkills/PrayerLog";
 import PrayerLog_add from "./src/screens/MinistrySkills/PrayerLog_add";
 import ServantsArmedTrained from "./src/screens/MinistrySkills/ServantsArmedTrained";
 import UnderstandingCampaign from "./src/screens/MinistrySkills/UnderstandingCampaign";
+import Bussing from "./src/screens/MinistrySkills/Bussing";
 
 const MyNavStack = createStackNavigator();
 
@@ -54,8 +55,9 @@ export default function App() {
       .then(() => {
         setInitialRoute("home");
       })
-      .catch(() => {
+      .catch((e) => {
         setInitialRoute("login");
+        console.log(e);
       });
   }, []);
 
@@ -170,7 +172,10 @@ export default function App() {
             component={UnderstandingCampaign}
           ></MyNavStack.Screen>
 
-
+          <MyNavStack.Screen
+            name="bussing"
+            component={Bussing}
+          ></MyNavStack.Screen>
         </MyNavStack.Navigator>
       </NavigationContainer>
     </AuthContext.Provider>

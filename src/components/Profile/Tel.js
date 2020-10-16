@@ -1,11 +1,53 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, TextInput } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native-gesture-handler";
+
+const submitTelChange = (event) => {
+  console.log(event.nativeEvent.text);
+}
+
+const Tel = ({ containerStyle, name, number }) => {
+
+  const [editing, setEditing] = useState(false);
+  const [number_val, setPhoneNumber ] = useState(number);
+  
+
+  return (
+    <View style={[styles.container, containerStyle]}>
+      <View style={styles.iconRow}>
+        <Ionicons name="ios-call" size={24} color="gray" />
+      </View>
+      <View style={styles.telRow}>
+        <TouchableOpacity onPress={(() => {
+          setEditing(!editing);
+        })}>
+          <View style={styles.telNumberColumn}>
+            {
+            (editing && <TextInput 
+              style={styles.telNumberText} 
+              value={number_val}
+              onBlur={event => setEditing(false)}
+              blurOnSubmit={true}
+              onChangeText={text => setPhoneNumber(text)}
+              onSubmitEditing={event => {
+                submitTelChange(event);
+              }} />)||
+            <Text style={styles.telNumberText}>{number_val}</Text>
+            }
+          </View>
+        </TouchableOpacity>
+        <View style={styles.telNameColumn}>
+          <Text style={styles.telNameText}>{name}</Text>
+        </View>
+      </View>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    //justifyContent: "flex-start",
     marginBottom: 25,
   },
   iconRow: {
@@ -47,23 +89,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-
-const Tel = ({ containerStyle, name, number }) => {
-  return (
-    <View style={[styles.container, containerStyle]}>
-      <View style={styles.iconRow}>
-        <Ionicons name="ios-call" size={24} color="gray" />
-      </View>
-      <View style={styles.telRow}>
-        <View style={styles.telNumberColumn}>
-          <Text style={styles.telNumberText}>{number}</Text>
-        </View>
-        <View style={styles.telNameColumn}>
-          <Text style={styles.telNameText}>{name}</Text>
-        </View>
-      </View>
-    </View>
-  );
-};
 
 export default Tel;

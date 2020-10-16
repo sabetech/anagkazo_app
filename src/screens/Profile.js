@@ -6,6 +6,7 @@ import {
   ImageBackground,
   Image,
   Text,
+  ActivityIndicator
 } from "react-native";
 import { Card, Icon } from "react-native-elements";
 import Tel from "../components/Profile/Tel";
@@ -55,7 +56,7 @@ class Profile extends Component {
         this.setState({
           student: responseJson,
         });
-
+        
         this.setState({
           loading: false,
         });
@@ -103,11 +104,26 @@ class Profile extends Component {
   };
 
   renderTel = () => {
-    return <Tel name={"Phone Number"} number={"029 3892983"} />;
+    let phone = this.state.student.phone; 
+    console.log("before component "+phone);
+    return <CustomProfileField 
+      field={"phone"} 
+      value={phone} 
+      icon={"phone"} 
+      type={"feather"} 
+      studentIndex={this.state.student.index_number} 
+    />;
   };
 
   renderEmail = () => {
-    return <Email name={"Email"} email={"kwakeuajo@mail.com"} />;
+    return <CustomProfileField 
+      field={"email_address"} 
+      value={this.state.student.email_address} 
+      icon={"email"}
+      type={"entypo"}
+      studentIndex={this.state.student.index_number}
+      
+      />;
   };
 
   renderGender = () => {
@@ -117,6 +133,7 @@ class Profile extends Component {
         value={this.state.student.gender == "m" ? "Male" : "Female"}
         icon={"gender-male-female"}
         type={"material-community"}
+        
       />
     );
   };
@@ -124,10 +141,12 @@ class Profile extends Component {
   renderHomeChurch = () => {
     return (
       <CustomProfileField
-        field={"Home Church"}
+        field={"home_church"}
         value={this.state.student.home_church}
         icon={"church"}
         type={"material-community"}
+        studentIndex={this.state.student.index_number}
+        
       />
     );
   };
@@ -135,7 +154,7 @@ class Profile extends Component {
   renderPastorsName = () => {
     return (
       <CustomProfileField
-        field={"Pastor's Name"}
+        field={"pastors_name"}
         value={
           this.state.student.pastors_name == ""
             ? "Not Set"
@@ -143,6 +162,7 @@ class Profile extends Component {
         }
         icon={"person-outline"}
         type={"material-icons"}
+        studentIndex={this.state.student.index_number}        
       />
     );
   };
@@ -150,10 +170,12 @@ class Profile extends Component {
   renderPastorsPhone = () => {
     return (
       <CustomProfileField
-        field={"Pastor's Phone"}
+        field={"pastors_phone"}
         value={this.state.student.pastors_phone}
         icon={"phone"}
         type={"feather"}
+        studentIndex={this.state.student.index_number}
+        
       />
     );
   };
@@ -161,10 +183,12 @@ class Profile extends Component {
   renderEducationalLevel = () => {
     return (
       <CustomProfileField
-        field={"Educational Level"}
+        field={"educational_level"}
         value={this.state.student.educational_level}
         icon={"user-graduate"}
         type={"font-awesome-5"}
+        studentIndex={this.state.student.index_number}
+        
       />
     );
   };
@@ -172,10 +196,12 @@ class Profile extends Component {
   renderMaritalStatus = () => {
     return (
       <CustomProfileField
-        field={"Marital Status"}
+        field={"marital_status"}
         value={this.state.student.marital_status}
         icon={"ring"}
         type={"material-community"}
+        studentIndex={this.state.student.index_number}
+        
       />
     );
   };
@@ -183,10 +209,12 @@ class Profile extends Component {
   renderOccupation = () => {
     return (
       <CustomProfileField
-        field={"Occupation"}
+        field={"occupation"}
         value={this.state.student.occupation}
         icon={"md-hammer"}
         type={"ionicon"}
+        studentIndex={this.state.student.index_number}
+        
       />
     );
   };
@@ -194,10 +222,12 @@ class Profile extends Component {
   renderDateOfBirth = () => {
     return (
       <CustomProfileField
-        field={"Date of Birth"}
+        field={"date_of_birth"}
         value={this.state.student.date_of_birth}
         icon={"calendar"}
         type={"antdesign"}
+        studentIndex={this.state.student.index_number}
+        
       />
     );
   };
@@ -205,10 +235,12 @@ class Profile extends Component {
   renderCountry = () => {
     return (
       <CustomProfileField
-        field={"Country"}
+        field={"country"}
         value={this.state.student.country}
         icon={"md-globe"}
         type={"ionicon"}
+        studentIndex={this.state.student.index_number}
+        
       />
     );
   };
@@ -216,19 +248,23 @@ class Profile extends Component {
   renderDenomination = () => {
     return (
       <CustomProfileField
-        field={"Denomination"}
+        field={"denomination"}
         value={this.state.student.denomination}
         icon={"streetview"}
         type={"material-icons"}
+        studentIndex={this.state.student.index_number}
+        
       />
     );
   };
 
   render() {
+    
     return (
       <ScrollView style={styles.scroll}>
         <View style={styles.container}>
           <Card containerStyle={styles.cardContainer}>
+            
             {this.renderHeader()}
             {this.renderTel()}
             {this.renderEmail()}
@@ -242,6 +278,7 @@ class Profile extends Component {
             {this.renderDateOfBirth()}
             {this.renderCountry()}
             {this.renderDenomination()}
+          
           </Card>
         </View>
       </ScrollView>

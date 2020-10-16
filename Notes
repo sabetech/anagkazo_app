@@ -203,10 +203,17 @@ For Wacenta service, show which dates there' was no service for the leader
 make profile editable by clicking on the property
 show the pastoral point on the right side as tab
 
-attn: change the color of the tabbed background and  header for each tab
-for special services, show the note on the bottom of the card as to which event it was
+attn: change the color of the tabbed background and  header for each tab - DONE
+for special services, show the note on the bottom of the card as to which event it was - DONE
 
 validate before submit
+
+Editing Students
+Editing Members profile
+
+Adding Members to a basonta
+Showing Basonta Attendance
+
 
 after fields scroll up and down, submit has to be click on twice
 

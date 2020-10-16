@@ -1,17 +1,21 @@
 {
   "expo": {
-    "name": "anagkazo-pastoral-app",
+    "name": "Anagkazo Pastoral Point",
     "slug": "anagkazo-pastoral-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/test_splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
+    },
+    "android": {
+      "package": "com.sabetech.anagkazo_pastoral_point",
+      "versionCode": 1
     },
     "assetBundlePatterns": [
       "**/*"

@@ -1,7 +1,52 @@
-import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, {useState} from "react";
+import { StyleSheet, Text, TouchableOpacity, View, TextInput } from "react-native";
 import { Icon } from "react-native-elements";
-import PropTypes from "prop-types";
+
+
+const submitEmailChange = (event) => {
+  console.log(event.nativeEvent.text);
+}
+
+const Email = ({ containerStyle, oldemail }) => {
+  const [editing, setEditing] = useState(false);
+  const [email, setEmail] = useState(oldemail);
+  return (
+  <View style={[styles.container, containerStyle]}>
+    <View style={styles.iconRow}>
+      {
+        <Icon
+          name="email"
+          underlayColor="transparent"
+          iconStyle={styles.emailIcon}
+        />
+      }
+    </View>
+    <View style={styles.emailRow}>
+    <TouchableOpacity onPress={(() => {
+          setEditing(!editing);
+        })}>
+      <View style={styles.emailColumn}>
+        {
+      (editing && <TextInput 
+              style={styles.emailText} 
+              value={email}
+              onBlur={event => setEditing(false)}
+              blurOnSubmit={true}
+              onChangeText={text => setEmail(text)}
+              onSubmitEditing={event => {
+                submitEmailChange(event);
+              }} />)||
+        <Text style={styles.emailText}>{email}</Text>
+            }
+      </View>
+      </TouchableOpacity>
+      <View style={styles.emailNameColumn}>
+        <Text style={styles.emailNameText}>{"Email"}</Text>
+      </View>
+    </View>
+  </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -41,26 +86,5 @@ const styles = StyleSheet.create({
   },
 });
 
-const Email = ({ containerStyle, email }) => (
-  <View style={[styles.container, containerStyle]}>
-    <View style={styles.iconRow}>
-      {
-        <Icon
-          name="email"
-          underlayColor="transparent"
-          iconStyle={styles.emailIcon}
-        />
-      }
-    </View>
-    <View style={styles.emailRow}>
-      <View style={styles.emailColumn}>
-        <Text style={styles.emailText}>{email}</Text>
-      </View>
-      <View style={styles.emailNameColumn}>
-        <Text style={styles.emailNameText}>{"Email"}</Text>
-      </View>
-    </View>
-  </View>
-);
 
 export default Email;

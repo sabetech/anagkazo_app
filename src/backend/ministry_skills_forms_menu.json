@@ -46,4 +46,11 @@
     "icon": "chalkboard-teacher",
     "iconType":"font-awesome-5"
   },
+  {
+    "title": "Bussing",
+    "color": "#4285F4",
+    "destinationScreen": "bussing",
+    "icon": "bus-multiple",
+    "iconType":"material-community"
+  }
 ];

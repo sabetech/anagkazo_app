@@ -5,8 +5,8 @@ import { ActivityIndicator } from "react-native-paper";
 import {BASE_URL} from "../../config/index";
 
 
-const submitValChange = (event, studentIndex, field) => {
-
+const submitValChange = (event, studentIndex, field, setEdited) => {
+  
   fetch(`${BASE_URL}/student/${studentIndex}/edit`, {
     method: "POST",
     headers: {
@@ -23,6 +23,7 @@ const submitValChange = (event, studentIndex, field) => {
     .then((response) =>
       response.json().then((json) => {
         handleSuccessfulSubmission(json);
+        setEdited(true);
       })
     )
     .catch((e) => {
@@ -37,6 +38,8 @@ const handleSuccessfulSubmission= (json) =>{
 
 const CustomProfileField = ({ containerStyle, value, field, icon, type,studentIndex }) => {
   const [editing, setEditing] = useState(false);
+  const [edited, setEdited] = useState(false);
+  const [submitting, setSubmitted] = useState(false);
   const [curValue, setCurValue] = useState("");
 
   useEffect(()=>{
@@ -57,7 +60,7 @@ const CustomProfileField = ({ containerStyle, value, field, icon, type,studentIn
     </View>
     <View style={styles.emailRow}>
       <TouchableOpacity onPress={(() => {
-          setEditing(!editing);
+          setEditing(true);
         })}>
       <View style={[styles.emailColumn,{justifyContent: "space-between"}]}>
       {
@@ -68,7 +71,7 @@ const CustomProfileField = ({ containerStyle, value, field, icon, type,studentIn
               blurOnSubmit={true}
               onChangeText={text => setCurValue(text)}
               onSubmitEditing={event => {
-                submitValChange(event, studentIndex, field);
+                submitValChange(event, studentIndex, field, setEdited);
               }} />)||
         <Text style={styles.emailText}>{curValue != "" ? curValue : "Not Set"}</Text>
         }
@@ -78,16 +81,15 @@ const CustomProfileField = ({ containerStyle, value, field, icon, type,studentIn
           size={"small"}
           color={"green"}
         />) ||
-        <Icon
+        (edited ? <Icon
           name={"check"}
           type={"antdesign"}
           underlayColor="transparent"
           iconStyle={styles.editStatusIcon}
-        />
+        /> : null)
       }
     </View>
       </View>
-      
       <View style={styles.emailNameColumn}>
         <Text style={styles.emailNameText}>{field}</Text>
       </View>

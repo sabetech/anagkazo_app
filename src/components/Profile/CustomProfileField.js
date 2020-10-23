@@ -44,7 +44,7 @@ const CustomProfileField = ({ containerStyle, value, field, icon, type,studentIn
 
   useEffect(()=>{
     setCurValue(value);
-  },[]);
+  },[value]);
 
   return (
   <View style={[styles.container, containerStyle]}>

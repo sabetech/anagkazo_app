@@ -6,7 +6,8 @@ import { Login } from "./src/screens/Login";
 import Home from "./src/screens/Home";
 import { AuthContext } from "./src/contexts/AuthContext";
 import Profile from "./src/screens/Profile";
-import Members from "./src/screens/Members";
+import Members from "./src/screens/Members/Members";
+import MembersAdd from "./src/screens/Members/MembersAdd";
 import Attendance from "./src/screens/Attendance";
 import QR_code_scanner from "./src/screens/Attendance_Screens/QR_code_scanner";
 import DashboardDetail from "./src/screens/Dashboard/Dashboard-detail";
@@ -28,6 +29,7 @@ import PrayerLog_add from "./src/screens/MinistrySkills/PrayerLog_add";
 import ServantsArmedTrained from "./src/screens/MinistrySkills/ServantsArmedTrained";
 import UnderstandingCampaign from "./src/screens/MinistrySkills/UnderstandingCampaign";
 import Bussing from "./src/screens/MinistrySkills/Bussing";
+
 
 const MyNavStack = createStackNavigator();
 
@@ -176,6 +178,13 @@ export default function App() {
             name="bussing"
             component={Bussing}
           ></MyNavStack.Screen>
+
+          <MyNavStack.Screen
+            name="members_add"
+            component={MembersAdd}
+          ></MyNavStack.Screen>
+
+          
         </MyNavStack.Navigator>
       </NavigationContainer>
     </AuthContext.Provider>

@@ -1,23 +1,21 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, ImageBackground } from "react-native";
-import { Avatar, Icon } from "react-native-elements";
-import { LinearGradient } from "expo-linear-gradient";
+import { StyleSheet } from "react-native";
+import { Avatar, Icon, ListItem } from "react-native-elements";
 
-const ContactListItem = ({ name, photo_url }) => {
+
+const ContactListItem = ({ index, name, phone, photo_url }) => {
   return (
-    <View style={styles.mainContactItem}>
-      <View style={styles.listItem}>
-        <Image
-          style={styles.image}
-          source={{ uri: `https://anagkazo.firstlovegallery.com/${photo_url}` }}
-        />
-        <View style={styles.textRow}>
-          <View style={styles.textColumn}>
-            <Text style={styles.contacText}>{name}</Text>
-          </View>
-        </View>
-      </View>
-    </View>
+    <ListItem key={index} bottomDivider onPress={(()=>{
+      console.log("working yet");
+    })}>
+        <Avatar rounded size="medium" source={{uri: `https://anagkazo.firstlovegallery.com/${photo_url}`}} />
+        <ListItem.Content>
+          <ListItem.Title>{name}</ListItem.Title>
+          <ListItem.Subtitle>{phone}</ListItem.Subtitle>
+        </ListItem.Content>
+        <ListItem.Chevron />
+      </ListItem>
+    
   );
 };
 

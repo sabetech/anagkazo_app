@@ -214,9 +214,11 @@ Editing Members profile
 Adding Members to a basonta
 Showing Basonta Attendance
 
+select country with flag
+https://stackoverflow.com/questions/53807993/react-native-using-picker-to-select-country-flag
 
-after fields scroll up and down, submit has to be click on twice
 
+after fields scroll up and down, submit has to be click on twice - not a problem
 
 
 <CardInfo

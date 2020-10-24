@@ -1,0 +1,5 @@
+//MEMBER ACTIONS
+export const ADD_MEMBER = 'ADD_MEMBER';
+export const DELETE_MEMBER = 'DELETE_MEMBER';
+export const EDIT_MEMBER = 'EDIT_MEMBER';
+export const LOAD_MEMBERS = 'LOAD_MEMBERS';

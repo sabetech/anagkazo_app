@@ -13,18 +13,38 @@ import { BASE_URL } from "../../config/index";
 import ContactListItem from "../../components/Members/ContactListItem";
 import MyActionButton from "../../components/MyActionButton";
 
+//REDUX code is here
+import { useSelector, useDispatch } from  'react-redux';
+import { bindActionCreators } from "redux";
+import {actionCreators as actions} from "../../backend/redux/actions";
+
+//REDUX code is here
+
+
 //get members from here
 export default function Members({ navigation }) {
+  const members = useSelector(state => state.studentMembers);
+  const dispatch = useDispatch();
+
+
   const [studentMembers, setStudentMembers] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const [studentIndex, setStudentIndex] = useState('');
 
   useEffect(() => {
     AsyncStorage.getItem("student_index").then((res) => {
-      getStudentMembers(res);
-      setStudentIndex(res);
+      //getStudentMembers(res);
+      //setStudentIndex(res);
+
+      loadStudentMembers(res);
+
+
     });
   }, []);
+
+  const loadStudentMembers = (studentIndex) => {
+    dispatch(loadMembers(studentIndex));
+  }
 
   const getStudentMembers = (myStudentIndex) => {
     fetch(`${BASE_URL}/student/${myStudentIndex}/members`, {
@@ -80,6 +100,7 @@ export default function Members({ navigation }) {
       </View>
       <View style={{ height: "90%" }}>
         <SwipeListView
+          disableRightSwipe={true}
           data={studentMembers}
           renderItem={({ item }) => {
             return (
@@ -101,7 +122,6 @@ export default function Members({ navigation }) {
         )}
         
         rightOpenValue={-75}
-        leftOpenValue={0}
         previewOpenValue={-40}
         previewOpenDelay={3000}
         />
@@ -110,6 +130,13 @@ export default function Members({ navigation }) {
     </View>
   );
 }
+
+
+
+
+
+
+
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -162,3 +189,5 @@ export default function Members({ navigation }) {
       right: 0,
   },
   });
+
+

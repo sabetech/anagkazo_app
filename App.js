@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
+
+import {createStore } from 'redux';
+import {Provider} from 'react-redux';
+import reducer from './src/backend/redux/Reducers/reducers';
+
+import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Login } from "./src/screens/Login";
@@ -34,6 +39,8 @@ import Bussing from "./src/screens/MinistrySkills/Bussing";
 const MyNavStack = createStackNavigator();
 
 const Drawer = createDrawerNavigator();
+
+const store = createStore(reducer);
 
 function MainDrawer() {
   return (
@@ -91,103 +98,105 @@ export default function App() {
   }));
 
   return (
-    <AuthContext.Provider value={auth}>
-      <NavigationContainer>
-        <MyNavStack.Navigator
-          initialRouteName={initialRoute}
-          screenOptions={{ headerShown: false }}
-        >
-          <MyNavStack.Screen name="login" component={Login}></MyNavStack.Screen>
-          <MyNavStack.Screen
-            name="home"
-            component={MainDrawer}
-          ></MyNavStack.Screen>
-          <MyNavStack.Screen
-            name="qr_code_scanner"
-            component={QR_code_scanner}
-          ></MyNavStack.Screen>
-          <MyNavStack.Screen
-            name="member_add"
-            component={QR_code_scanner}
-          ></MyNavStack.Screen>
-          <MyNavStack.Screen
-            name="dashboard-details"
-            component={DashboardDetail}
-          ></MyNavStack.Screen>
-          <MyNavStack.Screen
-            name="counselling"
-            component={Counselling}
-          ></MyNavStack.Screen>
-          <MyNavStack.Screen
-            name="counselling_detail"
-            component={CounsellingDetail}
-          ></MyNavStack.Screen>
-          <MyNavStack.Screen
-            name="counselling_add"
-            component={Counselling_add}
-          ></MyNavStack.Screen>
-          <MyNavStack.Screen
-            name="sheepseeking"
-            component={SheepSeeking}
-          ></MyNavStack.Screen>
+    <Provider store={reducer}>
+      <AuthContext.Provider value={auth}>
+        <NavigationContainer>
+          <MyNavStack.Navigator
+            initialRouteName={initialRoute}
+            screenOptions={{ headerShown: false }}
+          >
+            <MyNavStack.Screen name="login" component={Login}></MyNavStack.Screen>
+            <MyNavStack.Screen
+              name="home"
+              component={MainDrawer}
+            ></MyNavStack.Screen>
+            <MyNavStack.Screen
+              name="qr_code_scanner"
+              component={QR_code_scanner}
+            ></MyNavStack.Screen>
+            <MyNavStack.Screen
+              name="member_add"
+              component={QR_code_scanner}
+            ></MyNavStack.Screen>
+            <MyNavStack.Screen
+              name="dashboard-details"
+              component={DashboardDetail}
+            ></MyNavStack.Screen>
+            <MyNavStack.Screen
+              name="counselling"
+              component={Counselling}
+            ></MyNavStack.Screen>
+            <MyNavStack.Screen
+              name="counselling_detail"
+              component={CounsellingDetail}
+            ></MyNavStack.Screen>
+            <MyNavStack.Screen
+              name="counselling_add"
+              component={Counselling_add}
+            ></MyNavStack.Screen>
+            <MyNavStack.Screen
+              name="sheepseeking"
+              component={SheepSeeking}
+            ></MyNavStack.Screen>
 
-          <MyNavStack.Screen
-            name="sheepseeking_detail"
-            component={SheepSeekingDetail}
-          ></MyNavStack.Screen>
+            <MyNavStack.Screen
+              name="sheepseeking_detail"
+              component={SheepSeekingDetail}
+            ></MyNavStack.Screen>
 
 
-          <MyNavStack.Screen
-            name="sheepseeking_add"
-            component={SheepSeeking_add}
-          ></MyNavStack.Screen>
+            <MyNavStack.Screen
+              name="sheepseeking_add"
+              component={SheepSeeking_add}
+            ></MyNavStack.Screen>
 
-          <MyNavStack.Screen
-            name="multiplication"
-            component={Multiplication}
-          ></MyNavStack.Screen>
-          <MyNavStack.Screen
-            name="multiplication_detail"
-            component={MultiplicationDetail}
-          ></MyNavStack.Screen>
-          <MyNavStack.Screen
-            name="multiplication_add"
-            component={Multiplication_add}
-          ></MyNavStack.Screen>
+            <MyNavStack.Screen
+              name="multiplication"
+              component={Multiplication}
+            ></MyNavStack.Screen>
+            <MyNavStack.Screen
+              name="multiplication_detail"
+              component={MultiplicationDetail}
+            ></MyNavStack.Screen>
+            <MyNavStack.Screen
+              name="multiplication_add"
+              component={Multiplication_add}
+            ></MyNavStack.Screen>
 
-          <MyNavStack.Screen
-            name="prayer_log"
-            component={PrayerLog}
-          ></MyNavStack.Screen>
-          <MyNavStack.Screen
-            name="prayer_log_add"
-            component={PrayerLog_add}
-          ></MyNavStack.Screen>
-          
-          <MyNavStack.Screen
-            name="servants_armed_trained"
-            component={ServantsArmedTrained}
-          ></MyNavStack.Screen>
+            <MyNavStack.Screen
+              name="prayer_log"
+              component={PrayerLog}
+            ></MyNavStack.Screen>
+            <MyNavStack.Screen
+              name="prayer_log_add"
+              component={PrayerLog_add}
+            ></MyNavStack.Screen>
+            
+            <MyNavStack.Screen
+              name="servants_armed_trained"
+              component={ServantsArmedTrained}
+            ></MyNavStack.Screen>
 
-          <MyNavStack.Screen
-            name="understanding_campaign"
-            component={UnderstandingCampaign}
-          ></MyNavStack.Screen>
+            <MyNavStack.Screen
+              name="understanding_campaign"
+              component={UnderstandingCampaign}
+            ></MyNavStack.Screen>
 
-          <MyNavStack.Screen
-            name="bussing"
-            component={Bussing}
-          ></MyNavStack.Screen>
+            <MyNavStack.Screen
+              name="bussing"
+              component={Bussing}
+            ></MyNavStack.Screen>
 
-          <MyNavStack.Screen
-            name="members_add"
-            component={MembersAdd}
-          ></MyNavStack.Screen>
+            <MyNavStack.Screen
+              name="members_add"
+              component={MembersAdd}
+            ></MyNavStack.Screen>
 
-          
-        </MyNavStack.Navigator>
-      </NavigationContainer>
-    </AuthContext.Provider>
+            
+          </MyNavStack.Navigator>
+        </NavigationContainer>
+      </AuthContext.Provider>
+    </Provider>
   );
 }
-SheepSeeking_add
+

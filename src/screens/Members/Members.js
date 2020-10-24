@@ -7,6 +7,7 @@ import {
   TouchableHighlight,
   FlatList,
 } from "react-native";
+import { Snackbar } from 'react-native-paper';
 import { Icon } from "react-native-elements";
 import AsyncStorage from "@react-native-community/async-storage";
 import { BASE_URL } from "../../config/index";
@@ -18,6 +19,11 @@ export default function Members({ navigation }) {
   const [studentMembers, setStudentMembers] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const [studentIndex, setStudentIndex] = useState('');
+  const [visible, setVisible] = React.useState(false);
+
+  const onDismissSnackBar = () => {
+    setVisible(false);
+  }
 
   useEffect(() => {
     AsyncStorage.getItem("student_index").then((res) => {
@@ -36,7 +42,7 @@ export default function Members({ navigation }) {
         setRefreshing(false);
       })
       .catch((error) => {
-        console.error(error);
+        alert("check your internet connection.");
       });
   };
 
@@ -54,11 +60,25 @@ export default function Members({ navigation }) {
   const deleteRow = (rowMap, rowKey) => {
     closeRow(rowMap, rowKey);
     console.log("you get here? " + rowKey);
-    //const newData = [...listData];
-    //const prevIndex = listData.findIndex(item => item.key === rowKey);
-    //newData.splice(prevIndex, 1);
-    //setListData(newData);
+    deleteMember(rowKey)
+    const newData = [...studentMembers];
+    const prevIndex = studentMembers.findIndex(item => item.key === rowKey);
+    newData.splice(prevIndex, 1);
+    setListData(newData);
   };
+
+  const deleteMember = (member_id) => {
+    fetch(`${BASE_URL}/student/${studentIndex}/members/${member_id}/delete`, {
+      method: "POST",
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        onToggleSnackBar();
+      })
+      .catch((error) => {
+        alert("Check your internet connection!");
+      });
+  }
 
   return (
     <View style={styles.container}>
@@ -93,7 +113,7 @@ export default function Members({ navigation }) {
             <View style={styles.rowBack}>
                 <TouchableHighlight
                 style={[styles.backRightBtn, styles.backRightBtnRight]}
-                onPress={() => deleteRow(rowMap, data.item.key)}
+                onPress={() => deleteRow(rowMap, data.item.id)}
             >
                 <Text style={styles.backTextWhite}>Delete</Text>
             </TouchableHighlight>
@@ -107,6 +127,22 @@ export default function Members({ navigation }) {
         />
       </View>
       <MyActionButton icon="md-add" navigateTo="members_add" />
+
+      <Snackbar
+        visible={visible}
+        onDismiss={onDismissSnackBar}
+        duration={1000}
+        action={{
+            label: 'close',
+            onPress: () => {
+                setVisible(false);
+                navigation.navigate('members');
+            },
+        }}
+        >
+        Success: Your member has been stored!
+      </Snackbar>
+
     </View>
   );
 }

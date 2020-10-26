@@ -220,6 +220,7 @@ https://stackoverflow.com/questions/53807993/react-native-using-picker-to-select
 
 after fields scroll up and down, submit has to be click on twice - not a problem
 
+use numbers to specify A-church and F-church
 
 <CardInfo
                 id={item.id}

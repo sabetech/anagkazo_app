@@ -106,7 +106,7 @@ export default function Members({ navigation }) {
           data={studentMembers}
           renderItem={({ item }) => {
             return (
-              <ContactListItem index ={item.id} name={item.name} phone={item.phone} photo_url={item.photo_url} />
+              <ContactListItem index ={item.id} name={item.name} phone={item.phone} photo_url={item.photo_url} navigateTo={"member_detail"} />
             );
           }}
           keyExtractor={(item) => item.id + ""}

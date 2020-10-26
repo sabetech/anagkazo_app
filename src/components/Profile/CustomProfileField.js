@@ -5,9 +5,12 @@ import { ActivityIndicator } from "react-native-paper";
 import {BASE_URL} from "../../config/index";
 
 
-const submitValChange = (event, studentIndex, field, setEdited) => {
+const submitValChange = (event, index, field, setEdited, url_part) => {
   
-  fetch(`${BASE_URL}/student/${studentIndex}/edit`, {
+  //url_part = "edit"
+  //url_part = "member/edit"
+
+  fetch(`${BASE_URL}/student/${index}/${url_part}`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -16,13 +19,13 @@ const submitValChange = (event, studentIndex, field, setEdited) => {
     body: JSON.stringify(
       {
         field: field,
-        value: event.nativeEvent.text
+        value: event.nativeEvent.text,
+        member_id: index
     }
     ),
   })
     .then((response) =>
       response.json().then((json) => {
-        handleSuccessfulSubmission(json);
         setEdited(true);
       })
     )
@@ -32,14 +35,9 @@ const submitValChange = (event, studentIndex, field, setEdited) => {
     });
 }
 
-const handleSuccessfulSubmission= (json) =>{
-  console.log(json);
-}
-
-const CustomProfileField = ({ containerStyle, value, field, icon, type,studentIndex }) => {
+const CustomProfileField = ({ containerStyle, value, field, icon, type, index, url_part }) => {
   const [editing, setEditing] = useState(false);
   const [edited, setEdited] = useState(false);
-  const [submitting, setSubmitted] = useState(false);
   const [curValue, setCurValue] = useState("");
 
   useEffect(()=>{
@@ -71,7 +69,7 @@ const CustomProfileField = ({ containerStyle, value, field, icon, type,studentIn
               blurOnSubmit={true}
               onChangeText={text => setCurValue(text)}
               onSubmitEditing={event => {
-                submitValChange(event, studentIndex, field, setEdited);
+                submitValChange(event, index, field, setEdited, url_part);
               }} />)||
         <Text style={styles.emailText}>{curValue != "" ? curValue : "Not Set"}</Text>
         }

@@ -8,6 +8,7 @@ import { AuthContext } from "./src/contexts/AuthContext";
 import Profile from "./src/screens/Profile";
 import Members from "./src/screens/Members/Members";
 import MembersAdd from "./src/screens/Members/MembersAdd";
+import MemberDetail from "./src/screens/Members/Member_Detail";
 import Attendance from "./src/screens/Attendance";
 import QR_code_scanner from "./src/screens/Attendance_Screens/QR_code_scanner";
 import DashboardDetail from "./src/screens/Dashboard/Dashboard-detail";
@@ -182,6 +183,11 @@ export default function App() {
           <MyNavStack.Screen
             name="members_add"
             component={MembersAdd}
+          ></MyNavStack.Screen>
+
+          <MyNavStack.Screen 
+          name="member_detail"
+          component={MemberDetail}
           ></MyNavStack.Screen>
 
           

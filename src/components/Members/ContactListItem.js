@@ -1,12 +1,15 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Avatar, Icon, ListItem } from "react-native-elements";
+import { useNavigation } from "@react-navigation/native";
 
 
-const ContactListItem = ({ index, name, phone, photo_url }) => {
+const ContactListItem = ({ index, name, phone, photo_url, navigateTo }) => {
+  const navigation = useNavigation();
+
   return (
     <ListItem key={index} bottomDivider onPress={(()=>{
-      console.log("working yet");
+      navigation.navigate(navigateTo, {index:index});
     })}>
         <Avatar rounded size="medium" source={{uri: `https://anagkazo.firstlovegallery.com/${photo_url}`}} />
         <ListItem.Content>

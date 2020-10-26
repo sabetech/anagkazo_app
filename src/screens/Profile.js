@@ -105,13 +105,14 @@ class Profile extends Component {
 
   renderTel = () => {
     let phone = this.state.student.phone; 
-    console.log("before component "+phone);
+    
     return <CustomProfileField 
       field={"phone"} 
       value={phone} 
       icon={"phone"} 
       type={"feather"} 
-      studentIndex={this.state.student.index_number} 
+      index={this.state.student.index_number} 
+      url_part={"edit"}
     />;
   };
 
@@ -121,7 +122,8 @@ class Profile extends Component {
       value={this.state.student.email_address} 
       icon={"email"}
       type={"entypo"}
-      studentIndex={this.state.student.index_number}
+      index={this.state.student.index_number}
+      url_part={"edit"}
       
       />;
   };
@@ -145,7 +147,8 @@ class Profile extends Component {
         value={this.state.student.home_church}
         icon={"church"}
         type={"material-community"}
-        studentIndex={this.state.student.index_number}
+        index={this.state.student.index_number}
+        url_part={"edit"}
         
       />
     );
@@ -162,7 +165,8 @@ class Profile extends Component {
         }
         icon={"person-outline"}
         type={"material-icons"}
-        studentIndex={this.state.student.index_number}        
+        index={this.state.student.index_number}
+        url_part={"edit"}
       />
     );
   };
@@ -174,7 +178,8 @@ class Profile extends Component {
         value={this.state.student.pastors_phone}
         icon={"phone"}
         type={"feather"}
-        studentIndex={this.state.student.index_number}
+        index={this.state.student.index_number}
+        url_part={"edit"}
         
       />
     );
@@ -187,7 +192,8 @@ class Profile extends Component {
         value={this.state.student.educational_level}
         icon={"user-graduate"}
         type={"font-awesome-5"}
-        studentIndex={this.state.student.index_number}
+        index={this.state.student.index_number}
+        url_part={"edit"}
         
       />
     );
@@ -200,7 +206,8 @@ class Profile extends Component {
         value={this.state.student.marital_status}
         icon={"ring"}
         type={"material-community"}
-        studentIndex={this.state.student.index_number}
+        index={this.state.student.index_number}
+        url_part={"edit"}
         
       />
     );
@@ -213,7 +220,8 @@ class Profile extends Component {
         value={this.state.student.occupation}
         icon={"md-hammer"}
         type={"ionicon"}
-        studentIndex={this.state.student.index_number}
+        index={this.state.student.index_number}
+        url_part={"edit"}
         
       />
     );
@@ -226,7 +234,8 @@ class Profile extends Component {
         value={this.state.student.date_of_birth}
         icon={"calendar"}
         type={"antdesign"}
-        studentIndex={this.state.student.index_number}
+        index={this.state.student.index_number}
+        url_part={"edit"}
         
       />
     );
@@ -239,7 +248,8 @@ class Profile extends Component {
         value={this.state.student.country}
         icon={"md-globe"}
         type={"ionicon"}
-        studentIndex={this.state.student.index_number}
+        index={this.state.student.index_number}
+        url_part={"edit"}
         
       />
     );
@@ -252,7 +262,8 @@ class Profile extends Component {
         value={this.state.student.denomination}
         icon={"streetview"}
         type={"material-icons"}
-        studentIndex={this.state.student.index_number}
+        index={this.state.student.index_number}
+        url_part={"edit"}
         
       />
     );

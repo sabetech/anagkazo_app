@@ -21,6 +21,7 @@ export default function Members({ navigation }) {
   const [studentIndex, setStudentIndex] = useState('');
   const [visible, setVisible] = React.useState(false);
 
+  const onToggleSnackBar = () => setVisible(!visible);
   const onDismissSnackBar = () => {
     setVisible(false);
   }
@@ -64,7 +65,7 @@ export default function Members({ navigation }) {
     const newData = [...studentMembers];
     const prevIndex = studentMembers.findIndex(item => item.key === rowKey);
     newData.splice(prevIndex, 1);
-    setListData(newData);
+    setStudentMembers(newData);
   };
 
   const deleteMember = (member_id) => {
@@ -77,6 +78,7 @@ export default function Members({ navigation }) {
       })
       .catch((error) => {
         alert("Check your internet connection!");
+        console.log(error);
       });
   }
 
@@ -100,6 +102,7 @@ export default function Members({ navigation }) {
       </View>
       <View style={{ height: "90%" }}>
         <SwipeListView
+          disableRightSwipe={true}
           data={studentMembers}
           renderItem={({ item }) => {
             return (
@@ -140,7 +143,7 @@ export default function Members({ navigation }) {
             },
         }}
         >
-        Success: Your member has been stored!
+        Success: Your member has been Deleted!
       </Snackbar>
 
     </View>

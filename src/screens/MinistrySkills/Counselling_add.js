@@ -149,7 +149,7 @@ export default function Counselling_add({ navigation }) {
             setPickerVal(itemValue);
             setFormVal({...formVals, member_id: itemValue});
           }}
-          mode={"dialog"}
+          mode={"dropdown"}
           selectedValue={pickerVal}
           style={{ width: "100%" }}
         >

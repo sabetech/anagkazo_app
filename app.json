@@ -2,11 +2,11 @@
   "expo": {
     "name": "Anagkazo Pastoral Point",
     "slug": "anagkazo-pastoral-app",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/imgs/rsz_logo_anagkazo_icon.png",
     "splash": {
-      "image": "./assets/test_splash.png",
+      "image": "./assets/imgs/logo_anagkazo_copy.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

@@ -28,7 +28,7 @@
   { 
     "title": "Basonta", 
     "color": "#4285F4", 
-    "destinationScreen": "", 
+    "destinationScreen": "member_basonta", 
     "icon": "caret-square-o-right", 
     "iconType" : "font-awesome"
   },

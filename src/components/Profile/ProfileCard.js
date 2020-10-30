@@ -69,6 +69,7 @@ class ProfileCard extends Component {
     });
 
     AsyncStorage.getItem("student_index").then((res) => {
+      
       this.getStudentDashboardData(res);
     });
   }

@@ -12,7 +12,6 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { BASE_URL } from "../../config/index";
 import { List } from 'react-native-paper';
 import { Icon } from "react-native-elements";
-import MyActionButton from "../../components/MyActionButton";
 import moment from "moment";
 
 //get members from here
@@ -96,7 +95,7 @@ export default function Bussing({ navigation, route }) {
           onRefresh={handleRefresh}
         />
       </View>
-      <MyActionButton icon="md-add" navigateTo="counselling_add" />
+      
     </View>
   );
 }

@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image, ImageBackground } from "react-native";
 import { Avatar, Icon } from "react-native-elements";
 import { List } from 'react-native-paper';
 
-const ContactCounsellingItem = ({ name, description, photo_url }) => {
+const ContactCounsellingItem = ({ name, description, photo_url, onPress = null }) => {
   return (
     <List.Item
     title={name}
@@ -14,6 +14,7 @@ const ContactCounsellingItem = ({ name, description, photo_url }) => {
                             size="large"
                         />
                     </View>}
+    onPress={onPress}
       
   />
   );

@@ -4,7 +4,7 @@ import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import { Avatar, Title, Caption, Drawer } from "react-native-paper";
 import AsyncStorage from "@react-native-community/async-storage";
 import { BASE_URL } from "../config/index";
-import { MaterialCommunityIcons, FontAwesome } from "@expo/vector-icons";
+import { MaterialCommunityIcons, FontAwesome, FontAwesome5 } from "@expo/vector-icons";
 
 export function DrawerContent(props) {
   //
@@ -94,6 +94,15 @@ export function DrawerContent(props) {
               )}
               onPress={() => {
                 props.navigation.navigate("attendance");
+              }}
+            />
+            <DrawerItem
+              label="Pastoral Points"
+              icon={({ color, size }) => (
+                <FontAwesome5 name="check-double" size={size} color={color} />
+              )}
+              onPress={() => {
+                props.navigation.navigate("pastoral_point_summary");
               }}
             />
             <DrawerItem

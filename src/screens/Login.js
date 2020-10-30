@@ -8,12 +8,14 @@ import {
   ImageBackground,
   ActivityIndicator,
 } from "react-native";
+import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
 import { FilledButton } from "../components/FilledButton";
 import { Input } from "../components/Input";
 import { AuthContext } from "../contexts/AuthContext";
 
 export function Login({ navigation }) {
   const [index_number, setIndexNumber] = React.useState("");
+  const [passcode, setPassCode] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const { login } = React.useContext(AuthContext);
 
@@ -23,12 +25,7 @@ export function Login({ navigation }) {
         source={require("../res/imgs/login_background.jpg")}
         style={styles.image}
       >
-        {/* <LinearGradient
-          // Button Linear Gradient
-          start={{ x: 0.0, y: 0.0 }}
-          end={{ x: 1, y: 1 }}
-          colors={["rgba(255,110,196,0.2)", "rgba(120,115,245,0.8)"]}
-        > */}
+        
         <View style={styles.anagkazoLogo}>
           <Image
             source={require("../../assets/imgs/logo_anagkazo.png")}
@@ -36,7 +33,7 @@ export function Login({ navigation }) {
           />
         </View>
         <View style={styles.form}>
-          <Text style={{ fontSize: 24 }}>Login with your Student ID</Text>
+          <Text style={{ fontSize: 18 }}>Login with your Student ID</Text>
           <Input
             style={styles.input}
             placeholder={"Index Number eg: 700100"}
@@ -44,6 +41,16 @@ export function Login({ navigation }) {
             value={index_number}
             onChangeText={setIndexNumber}
           />
+          <Text style={{ fontSize: 18, marginTop: 10 }}>Passcode</Text>
+          <Input
+            style={styles.input}
+            placeholder={"passcode eg: 5023"}
+            keyboardType={"numeric"}
+            secureTextEntry={true}
+            value={passcode}
+            onChangeText={setPassCode}
+          />
+
           {loading ? (
             <ActivityIndicator
               style={{ marginTop: 10 }}
@@ -56,15 +63,32 @@ export function Login({ navigation }) {
               style={styles.loginButton}
               onPress={() => {
                 setLoading(true);
-                login(index_number).then((res) => {
-                  setLoading(false);
-                  if (res) {
-                    navigation.navigate("home");
-                  } else console.log("Wrong Info");
-                });
+                login(index_number, passcode).then(result => 
+                {
+                  if (result){
+                    setLoading(false);
+                    navigation.navigate('home');
+                  }else{
+                    setLoading(false);
+                    alert("Wrong Credentials! Try again!");
+                  }
+                  
+                } 
+              );
+                
+                
               }}
+              colors={["rgba(32,150,255,0.9)", "rgba(5,255,163,0.4)"]}
             />
+            
           )}
+          <TouchableOpacity
+            onPress={(()=> {
+              navigation.navigate('signup');
+            })}
+          >
+            <Text style={styles.link}>I don't have a Passcode! Sign Up</Text>
+          </TouchableOpacity>
         </View>
         {/* </LinearGradient> */}
       </ImageBackground>
@@ -76,23 +100,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-
     justifyContent: "center",
   },
   form: {
     marginHorizontal: 20,
-    marginTop: 100,
+    marginTop: 50,
   },
   loginButton: {
     marginVertical: 32,
   },
   anagkazoLogo: {
     alignItems: "center",
-    marginTop: 1,
+    marginTop: 50,
   },
   logo_img: {
-    width: 150,
-    height: 150,
+    width: 100,
+    height: 100,
   },
   image: {
     flex: 1,
@@ -100,4 +123,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   input: { fontSize: 21 },
+  link:{
+    textAlign: 'center',
+    color: 'blue',
+    textDecorationLine: 'underline',
+    fontSize: 18
+
+  }
 });

@@ -9,6 +9,9 @@ import Profile from "./src/screens/Profile";
 import Members from "./src/screens/Members/Members";
 import MembersAdd from "./src/screens/Members/MembersAdd";
 import MemberDetail from "./src/screens/Members/Member_Detail";
+
+import Basonta from "./src/screens/MinistrySkills/Basonta";
+
 import Attendance from "./src/screens/Attendance";
 import QR_code_scanner from "./src/screens/Attendance_Screens/QR_code_scanner";
 import DashboardDetail from "./src/screens/Dashboard/Dashboard-detail";
@@ -30,6 +33,9 @@ import PrayerLog_add from "./src/screens/MinistrySkills/PrayerLog_add";
 import ServantsArmedTrained from "./src/screens/MinistrySkills/ServantsArmedTrained";
 import UnderstandingCampaign from "./src/screens/MinistrySkills/UnderstandingCampaign";
 import Bussing from "./src/screens/MinistrySkills/Bussing";
+import { SignUp } from "./src/screens/SignUp";
+import PastoralPointSummary from "./src/screens/PastoralPoints/PastoralPointSummary";
+import PastoralPoint_Detail from "./src/screens/PastoralPoints/PastoralPoint_Detail";
 
 
 const MyNavStack = createStackNavigator();
@@ -46,6 +52,7 @@ function MainDrawer() {
       <Drawer.Screen name="profile" component={Profile}></Drawer.Screen>
       <Drawer.Screen name="members" component={Members}></Drawer.Screen>
       <Drawer.Screen name="attendance" component={Attendance}></Drawer.Screen>
+      <Drawer.Screen name="pastoral_point_summary" component={PastoralPointSummary}></Drawer.Screen>
       <Drawer.Screen name="forms_page" component={FormsPage}></Drawer.Screen>
     </Drawer.Navigator>
   );
@@ -65,25 +72,70 @@ export default function App() {
   }, []);
 
   const auth = React.useMemo(() => ({
-    login: async (index_number) => {
+    login: async (index_number, passcode) => {
       try {
-        const response = await fetch(`${BASE_URL}/student/${index_number}`, {
-          method: "GET",
+        const response = await fetch(`${BASE_URL}/student/login`, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(
+            {
+              index_number:index_number,
+              passcode:passcode
+          })
         });
 
-        const studentJson = await response.json();
+        const responseJSON = await response.json();
+        
+        if (responseJSON[0] == "failed") {
+          return false;
+        }
+        
+        await AsyncStorage.setItem(
+          "student_index",
+          responseJSON.index_number.toString()
+        );
+        
+        return true;
 
-        if (studentJson[0] == "failed") {
+
+      } catch (error) {
+        console.log(error);
+        alert("Check your internet Connection");
+
+      }
+    },
+    signUp: async (index_number, email) => {
+      try {
+        const response = await fetch(`${BASE_URL}/student/signup`, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(
+            {
+              index_number:index_number,
+              email:email
+          })
+        });
+
+        const responseJSON = await response.json();
+        
+        console.log(responseJSON);
+        
+        if (responseJSON[0] == "failed") {
           return false;
         }
 
-        await AsyncStorage.setItem(
-          "student_index",
-          studentJson.index_number.toString()
-        );
         return true;
+
       } catch (error) {
-        console.log(error);
+
+        alert("Check your internet Connection");
+
       }
     },
     detailsShown: {
@@ -99,6 +151,7 @@ export default function App() {
           screenOptions={{ headerShown: false }}
         >
           <MyNavStack.Screen name="login" component={Login}></MyNavStack.Screen>
+          <MyNavStack.Screen name="signup" component={SignUp}></MyNavStack.Screen>
           <MyNavStack.Screen
             name="home"
             component={MainDrawer}
@@ -190,6 +243,15 @@ export default function App() {
           component={MemberDetail}
           ></MyNavStack.Screen>
 
+          <MyNavStack.Screen
+          name="member_basonta"
+          component={Basonta}
+          ></MyNavStack.Screen>
+
+          <MyNavStack.Screen
+          name="pastoralpoint_detail"
+          component={PastoralPoint_Detail}
+          ></MyNavStack.Screen>
           
         </MyNavStack.Navigator>
       </NavigationContainer>

@@ -80,10 +80,12 @@ class ProfileCard extends Component {
     })
       .then((response) => response.json())
       .then((responseJson) => {
+        console.log(responseJson);
         this.setState({
           studentInfo: responseJson,
         });
         this.state.tabs.routes[0].count = responseJson.memberCount;
+        this.state.tabs.routes[1].count = responseJson.pastoralPoint;
         this.setState({
           loading: false,
         });
@@ -127,7 +129,7 @@ class ProfileCard extends Component {
 
     return (
       <View style={styles.tabRow}>
-        <Animated.Text style={[styles.tabLabelNumber, { color }]}>
+        <Animated.Text style={[styles.tabLabelNumber, { color }]} >
           {route.count}
         </Animated.Text>
         <Animated.Text style={[styles.tabLabelText, { color }]}>

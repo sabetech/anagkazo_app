@@ -7,13 +7,15 @@ import FLOWPrayer_Screen from "./Attendance_Screens/FLOWPrayer_Screen";
 import PropheticEncounter_Screen from "./Attendance_Screens/PropheticEncounter_Screen";
 import AnagkazoLive_Screen from "./Attendance_Screens/AnagkazoLive_Screen";
 import OtherServices_Screen from "./Attendance_Screens/OtherServices_Screen";
+import CenterService_Screen from "./Attendance_Screens/CenterService_Screen";
 
 const Tab = createMaterialBottomTabNavigator();
 
 export default function AttendanceTabs() {
   return (
-    <Tab.Navigator initialRouteName="FLOWPrayer_Screen" activeColor="white">
+    <Tab.Navigator initialRouteName="FLOWPrayer_Screen" activeColor="white" labeled={true} >
       <Tab.Screen
+      
         name="FLOWPrayer_Screen"
         component={FLOWPrayer_Screen}
         options={{
@@ -54,6 +56,25 @@ export default function AttendanceTabs() {
           tabBarColor: "#067E6B"
         }}
       />
+
+      <Tab.Screen
+        name="CenterSerivice_Screen"
+        component={CenterService_Screen}
+        options={{
+          tabBarLabel: "Center Service",
+          tabBarIcon: ({ color }) => (
+            <FontAwesome5
+              name="church"
+              color={color}
+              size={26}
+            />
+          ),
+          tabBarColor: "#12BDA7"
+        }}
+      />
+
+
+
       <Tab.Screen
         name="OtherServices_Screen"
         component={OtherServices_Screen}

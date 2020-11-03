@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from "react";
-import { StyleSheet, Text, View, TouchableOpacity, TextInput } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Linking } from "react-native";
 import { Icon } from "react-native-elements";
 import { ActivityIndicator } from "react-native-paper";
 import {BASE_URL} from "../../config/index";
+
+
 
 
 const submitValChange = (event, index, field, setEdited, url_part) => {
@@ -35,7 +37,7 @@ const submitValChange = (event, index, field, setEdited, url_part) => {
     });
 }
 
-const CustomProfileField = ({ containerStyle, value, field, icon, type, index, url_part }) => {
+const CustomProfileField = ({ containerStyle, value, field, icon, type, index, url_part, overrideColor='gray', raised=false, onPress=null }) => {
   const [editing, setEditing] = useState(false);
   const [edited, setEdited] = useState(false);
   const [curValue, setCurValue] = useState("");
@@ -49,10 +51,15 @@ const CustomProfileField = ({ containerStyle, value, field, icon, type, index, u
     <View style={styles.iconRow}>
       {
         <Icon
+          raised={raised}
+          reverseColor={"white"}
           name={icon}
           type={type}
           underlayColor="transparent"
-          iconStyle={styles.emailIcon}
+          iconStyle={[styles.emailIcon,{color:overrideColor}]}
+
+          onPress={onPress}
+
         />
       }
     </View>

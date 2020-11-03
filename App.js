@@ -14,6 +14,7 @@ import Basonta from "./src/screens/MinistrySkills/Basonta";
 
 import Attendance from "./src/screens/Attendance";
 import QR_code_scanner from "./src/screens/Attendance_Screens/QR_code_scanner";
+import CenterService_AttnAdd from "./src/screens/Attendance_Screens/CenterService_AttnAdd";
 import DashboardDetail from "./src/screens/Dashboard/Dashboard-detail";
 import AsyncStorage from "@react-native-community/async-storage";
 import { BASE_URL } from "./src/config/index";
@@ -160,6 +161,12 @@ export default function App() {
             name="qr_code_scanner"
             component={QR_code_scanner}
           ></MyNavStack.Screen>
+
+          <MyNavStack.Screen
+            name="center_service_add"
+            component={CenterService_AttnAdd}
+          ></MyNavStack.Screen>
+
           <MyNavStack.Screen
             name="member_add"
             component={QR_code_scanner}

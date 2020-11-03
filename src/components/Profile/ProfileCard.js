@@ -15,7 +15,6 @@ import PropTypes from "prop-types";
 
 import profileStyles from "./ProfileStyle";
 import DashboardCardList from "../HomeDashboard/DashboardCardList";
-import { FontAwesome5 } from "@expo/vector-icons";
 
 import { BASE_URL } from "../../config/index";
 
@@ -80,7 +79,6 @@ class ProfileCard extends Component {
     })
       .then((response) => response.json())
       .then((responseJson) => {
-        console.log(responseJson);
         this.setState({
           studentInfo: responseJson,
         });

@@ -6,7 +6,8 @@ import {
   ImageBackground,
   Image,
   Text,
-  ActivityIndicator
+  ActivityIndicator,
+  Linking
 } from "react-native";
 import { Card, Icon } from "react-native-elements";
 import CustomProfileField from "../../components/Profile/CustomProfileField";
@@ -106,10 +107,13 @@ class MemberDetail extends Component {
     return <CustomProfileField 
       field={"phone"} 
       value={this.state.member.phone} 
-      icon={"phone"} 
-      type={"feather"} 
+      icon={"call"} 
+      type={"ionicons"} 
+      raised={true}
       index={this.state.member.id}
       url_part={"member/edit"}
+      overrideColor={"blue"}
+      onPress={()=>{Linking.openURL(`tel:${this.state.member.phone}`)}}
     />;
   };
 
@@ -119,9 +123,14 @@ class MemberDetail extends Component {
       value={this.state.member.whatsapp_no} 
       icon={"logo-whatsapp"}
       type={"ionicon"}
+      raised={true}
       index={this.state.member.id}
       url_part={"member/edit"}
-      
+      overrideColor={"green"}
+      onPress={()=>{Linking.openURL(
+        'http://api.whatsapp.com/send?phone=233' + this.state.member.whatsapp_no
+            );
+          }}
       />;
   };
 

@@ -13,19 +13,25 @@ import { BASE_URL } from "../../config/index";
 import { Icon } from "react-native-elements";
 import { List } from 'react-native-paper';
 import moment from "moment";
+import { useIsFocused } from '@react-navigation/native';
 
 export default function CenterService_Screen({navigation}) {
   const [studentAttendance, setStudentAttn] = useState([]);
   const [loading, setLoading] = useState(false);
   const [, setUpdateVal] = useState();
+  const [refreshing, setRefreshing] = useState(false);
+  const [studentIndex, setStudentIndex] = useState('');
+
+  const isFocused = useIsFocused();
 
   //use effect load student attendace info from here
   useEffect(() => {
     setUpdateVal();
     AsyncStorage.getItem("student_index").then((res) => {
       getCenterServiceData(res);
+      setStudentIndex(res);
     });
-  }, []);
+  }, [isFocused]);
 
   const getCenterServiceData = (studentIndex) => {
     setLoading(true);
@@ -36,13 +42,18 @@ export default function CenterService_Screen({navigation}) {
       .then((response) => response.json())
       .then((responseJson) => {
         setStudentAttn(responseJson);
-
+        setRefreshing(false);
         setLoading(false);
       })
       .catch((error) => {
         console.error(error);
       });
   };
+
+  const handleRefresh = () => {
+    setRefreshing(true);
+    getCenterServiceData(studentIndex);
+  }
 
   return (
     <View style={styles.container}>
@@ -77,17 +88,19 @@ export default function CenterService_Screen({navigation}) {
             return (
               <List.Item
                 id={item.id}  
-                title={moment(item.title).format("dddd, MMM DD YYYY")}
-                description="Center Service"
+                title={moment(item.date_of_service).format("dddd, MMM DD YYYY")}
+                description="Number of Souls"
                 left={props => <Icon name={"church"} type={"font-awesome-5"} iconStyle={{color:"grey", marginTop:10, paddingRight:20}}/>}
-                right={props => <Text style={{marginTop: "8%", color:"grey"}}>Souls: {item.number_of_souls}</Text>}
+                right={props => <Text style={{marginTop: "8%", color:"grey"}}>{item.number_of_souls}</Text>}
               />
             );
           }}
           keyExtractor={(item) => item.id + ""}
+          refreshing={refreshing}
+          onRefresh={handleRefresh}
         />
       </View>
-      <MyActionButton icon={"md-add"} navigateTo={"center_service_add"} topBarColor={"#12BDA7"}/>
+      
     </View>
   );
 }

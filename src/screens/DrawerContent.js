@@ -11,6 +11,7 @@ export function DrawerContent(props) {
   const [myIndexNumber, setIndexNumber] = useState();
   const [myStudentName, setStudentName] = useState();
   const [myClass, setStudentClass] = useState();
+  const [student, setStudent] = useState({});
 
   useEffect(() => {
     AsyncStorage.getItem("student_index").then((index_number) => {
@@ -22,6 +23,7 @@ export function DrawerContent(props) {
           setIndexNumber(responseJson.index_number);
           setStudentName(responseJson.name);
           setStudentClass(responseJson.class);
+          setStudent(responseJson);
         })
         .catch((error) => {
           console.error(error);
@@ -37,7 +39,7 @@ export function DrawerContent(props) {
             <View>
               <Avatar.Image
                 source={{
-                  uri: `http://anagkazo.firstlovegallery.com/storage/student_photo/${myIndexNumber}.JPG`,
+                  uri: `http://anagkazo.firstlovegallery.com/${student.photo_url}`,
                 }}
                 size={75}
               />

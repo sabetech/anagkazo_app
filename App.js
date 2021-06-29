@@ -46,7 +46,7 @@ const Drawer = createDrawerNavigator();
 function MainDrawer() {
   return (
     <Drawer.Navigator
-      initialRouteName="home"
+      initialRouteName="login"
       drawerContent={(props) => <DrawerContent {...props} />}
     >
       <Drawer.Screen name="home" component={Home}></Drawer.Screen>
@@ -60,17 +60,8 @@ function MainDrawer() {
 }
 
 export default function App() {
-  const [initialRoute, setInitialRoute] = useState("login");
-  useEffect(() => {
-    AsyncStorage.getItem("student_index")
-      .then(() => {
-        setInitialRoute("home");
-      })
-      .catch((e) => {
-        setInitialRoute("login");
-        console.log(e);
-      });
-  }, []);
+  const [initialRoute, setInitialRoute] = useState("login");  
+
 
   const auth = React.useMemo(() => ({
     login: async (index_number, passcode) => {
@@ -89,7 +80,7 @@ export default function App() {
         });
 
         const responseJSON = await response.json();
-        
+
         if (responseJSON[0] == "failed") {
           return false;
         }
@@ -103,7 +94,6 @@ export default function App() {
 
 
       } catch (error) {
-        console.log(error);
         alert("Check your internet Connection");
 
       }
@@ -124,8 +114,6 @@ export default function App() {
         });
 
         const responseJSON = await response.json();
-        
-        console.log(responseJSON);
         
         if (responseJSON[0] == "failed") {
           return false;

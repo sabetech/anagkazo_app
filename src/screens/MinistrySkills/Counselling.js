@@ -13,6 +13,7 @@ import { BASE_URL } from "../../config/index";
 import { List } from 'react-native-paper';
 import MyActionButton from "../../components/MyActionButton";
 import moment from "moment";
+import { useIsFocused } from '@react-navigation/native';
 
 //get members from here
 export default function Counselling({ navigation, route }) {
@@ -21,13 +22,15 @@ export default function Counselling({ navigation, route }) {
   const [refreshing, setRefreshing] = useState(false);
   const [studentIndex, setStudentIndex] = useState("");
 
+  const isFocused = useIsFocused();
+
   useEffect(() => {
     setLoading(true);
     AsyncStorage.getItem("student_index").then((res) => {
       setStudentIndex(res);
       getCounsellings(res);
     });
-  }, []);
+  }, [isFocused]);
 
   const getCounsellings = (myStudentIndex) => {
     fetch(`${BASE_URL}/student/${myStudentIndex}/counselling`, {

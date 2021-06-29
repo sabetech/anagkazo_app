@@ -4,9 +4,15 @@ import CardInfo from "./CardInfo";
 
 const DashboardCardList = ({ studentInfo }) => {
   const detailColor = ["#4285F4", "#DB4437", "#0F9D58", "#F4B400"];
+  const descriptions = [
+    "Number of Souls Brought to Service",
+    "Status",
+    "Status",
+    "Number of Souls Bussed On Sunday"
+  ];
   const icons = [
     {
-      icon:"slack-hash", 
+      icon:"church", 
       type:"font-awesome-5"
     }, 
     {
@@ -30,6 +36,7 @@ const DashboardCardList = ({ studentInfo }) => {
             <CardInfo
               id={item.id}
               title={item.title}
+              description={item.extra_details}
               value={item.value}
               studentIndex={studentInfo.index_number}
               colorDetail={detailColor[index]}

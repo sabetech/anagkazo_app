@@ -13,33 +13,45 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { List } from 'react-native-paper';
 import { Icon } from "react-native-elements";
 import moment from "moment";
+import { useIsFocused } from '@react-navigation/native';
 
 export default function FLOWPrayer_Screen({navigation}) {
   const [studentAttendance, setStudentAttn] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const [studentIndex, setStudentIndex] = useState('');
+
+  const isFocused = useIsFocused();
 
   //use effect load student attendace info from here
   useEffect(() => {
     AsyncStorage.getItem("student_index").then((res) => {
       getFLOWAttenData(res);
+      setStudentIndex(res);
     });
-  }, []);
+  }, [isFocused]);
 
   const getFLOWAttenData = (studentIndex) => {
     setLoading(true);
 
-    fetch(`${BASE_URL}/student/${studentIndex}/2`, {
+    fetch(`${BASE_URL}/student/${studentIndex}/vision_lectures_attn`, {
       method: "GET",
     })
       .then((response) => response.json())
       .then((responseJson) => {
         setStudentAttn(responseJson);
         setLoading(false);
+        setRefreshing(false);
       })
       .catch((error) => {
         console.error(error);
       });
   };
+
+  const handleRefresh = () => {
+    setRefreshing(true);
+    getFLOWAttenData(studentIndex);
+  }
 
   return (
     <View style={styles.container}>
@@ -57,7 +69,7 @@ export default function FLOWPrayer_Screen({navigation}) {
             />
           </View>
         </TouchableHighlight>
-        <Text style={styles.header}>Flow Prayer Attendance</Text>
+        <Text style={styles.header}>Vision Lectures Attendance</Text>
       </View>
 
       {loading ? (
@@ -75,15 +87,15 @@ export default function FLOWPrayer_Screen({navigation}) {
               <List.Item
                 id={item.id}  
                 title={moment(item.title).format("dddd, MMM DD YYYY")}
-                description="Flow Prayer"
-                left={props => <Icon name={"praying-hands"} type={"font-awesome-5"} iconStyle={{color:"grey", marginTop:10,paddingRight:20}}/>}
-                right={props => <Text style={{marginTop: "8%", color:"grey"}}>{item.value}</Text>}
-              />
-
-              
+                description="Status"
+                left={props => <Icon name={"eye"} type={"font-awesome-5"} iconStyle={{color:"grey", marginTop:10,paddingRight:20}}/>}
+                right={props => <Text style={{marginTop: "8%", color:"grey"}}>{item.status}</Text>}
+              />              
             );
           }}
           keyExtractor={(item) => item.id + ""}
+          refreshing={refreshing}
+          onRefresh={handleRefresh}
         />
       </View>
       <MyActionButton icon={"md-qr-scanner"} navigateTo={"qr_code_scanner"} />

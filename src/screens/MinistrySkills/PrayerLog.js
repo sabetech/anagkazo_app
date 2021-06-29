@@ -5,7 +5,8 @@ import {
   StyleSheet,
   TouchableHighlight,
   FlatList,
-  ActivityIndicator,
+  ActivityIndicator, 
+  Alert
 } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -14,6 +15,7 @@ import { List, Headline } from 'react-native-paper';
 import { Icon } from "react-native-elements";
 import MyActionButton from "../../components/MyActionButton";
 import moment from "moment";
+import { useIsFocused } from '@react-navigation/native';
 
 //get members from here
 export default function PrayerLog({ navigation, route }) {
@@ -22,13 +24,15 @@ export default function PrayerLog({ navigation, route }) {
   const [refreshing, setRefreshing] = useState(false);
   const [studentIndex, setStudentIndex] = useState("");
 
+  const isFocused = useIsFocused();
+
   useEffect(() => {
     setLoading(true);
     AsyncStorage.getItem("student_index").then((res) => {
       setStudentIndex(res);
       getPrayers(res);
     });
-  }, []);
+  }, [isFocused]);
 
   const getPrayers = (myStudentIndex) => {
     fetch(`${BASE_URL}/student/${myStudentIndex}/prayer`, {
@@ -36,14 +40,27 @@ export default function PrayerLog({ navigation, route }) {
     })
       .then((response) => response.json())
       .then((responseJson) => {
+
         setLoading(false);
         setPrayers(responseJson);
         setRefreshing(false);
       })
       .catch((error) => {
-        alert("An error occured. Check for internet connection")
+        handleNoInternetError(error)
       });
   };
+
+  const handleNoInternetError = (e) => {
+    Alert.alert(
+      "Failure",
+      "There is no internet connection " + e.message(),
+      [
+        { text: "OK" }
+      ],
+      { cancelable: false }
+    );
+  }
+
 
   const handleRefresh = () => {
     setRefreshing(true);

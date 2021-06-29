@@ -2,7 +2,7 @@
   "expo": {
     "name": "Anagkazo Pastoral Point",
     "slug": "anagkazo-pastoral-app",
-    "version": "1.0.1",
+    "version": "1.5",
     "orientation": "portrait",
     "icon": "./assets/imgs/rsz_logo_anagkazo_icon.png",
     "splash": {
@@ -15,7 +15,10 @@
     },
     "android": {
       "package": "com.sabetech.anagkazo_pastoral_point",
-      "versionCode": 1
+      "versionCode": 5,
+      "permissions": [
+        "CAMERA", "VIBRATE", "READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE"
+      ]
     },
     "assetBundlePatterns": [
       "**/*"

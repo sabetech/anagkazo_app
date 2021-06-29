@@ -4,7 +4,7 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  TextInput,
+  Alert
 } from "react-native";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -29,6 +29,7 @@ export default function SheepSeeking_add({ navigation, route }) {
   const [studentIndex, setStudentIndex] = useState("");
   const [visible, setVisible] = React.useState(false);
   const [submitLoading, setSubmitLoading] = React.useState(false);
+  const [serverResponseString, setServerResponse] = useState("");
   
   const onToggleSnackBar = () => setVisible(!visible);
   const onDismissSnackBar = () => {
@@ -85,16 +86,48 @@ export default function SheepSeeking_add({ navigation, route }) {
         response.json().then((json) => {
             //TODO: check the json if returns an evil response, give feedback
             setSubmitLoading(false);
-            handleSuccessfulSubmission();
+            handleSuccessfulSubmission(json);
         })
       )
       .catch((e) => {
-        alert("An error Occured. Be sure to have internet connection to continue!");
+        handleNoInternetError(e);
       });
   };
 
-  const handleSuccessfulSubmission = () => {
-    onToggleSnackBar();
+
+
+  const handleSuccessfulSubmission = (json) => {
+    setServerResponse(json.payload.msg);
+    if (json.response === "failed") {
+      handleServerError(json);
+    }
+
+    if (json.response === "success") {
+      onToggleSnackBar();
+    }
+    
+  }
+
+  const handleServerError = (json) => {
+    Alert.alert(
+      "Failure",
+      json.payload.msg,
+      [
+        { text: "OK" }
+      ],
+      { cancelable: false }
+    );
+  }
+
+  const handleNoInternetError = (e) => {
+    Alert.alert(
+      "Failure",
+      "There is no internet connection " + e.message(),
+      [
+        { text: "OK" }
+      ],
+      { cancelable: false }
+    );
   }
 
   return (
@@ -139,7 +172,7 @@ export default function SheepSeeking_add({ navigation, route }) {
           style={{ backgroundColor: "#d3d3d3",  }}
         />
         <Text style={{ textAlign: "left", marginLeft: 8, paddingTop:20 }}>
-          Choose The Member you Counselled
+          Choose The Member you Visited
         </Text>
 
         <Picker
@@ -209,7 +242,7 @@ export default function SheepSeeking_add({ navigation, route }) {
             },
         }}
         >
-        Success: Your visitation record has been Saved!
+        {serverResponseString}
       </Snackbar>
       </KeyboardAwareScrollView>
       

@@ -12,17 +12,21 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { BASE_URL } from "../../config/index";
 import ContactInitialsLabelItem from "../../components/Members/ContactInitialsLabelItem";
 import moment from "moment";
+import { useIsFocused } from '@react-navigation/native';
 
 //get members from here
 export default function MultiplicationDetail({ navigation, route }) {
   const [soulsWon, setSoulsWon] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const isFocused = useIsFocused();
+
   useEffect(() => {
     setLoading(true);
     AsyncStorage.getItem("student_index").then((res) => {
         getSoulsWon(res);
     });
-  }, []);
+  }, [isFocused]);
 
   const getSoulsWon = (myStudentIndex) => {
     fetch(

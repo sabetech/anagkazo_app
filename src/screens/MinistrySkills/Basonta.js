@@ -30,6 +30,7 @@ export default function Basonta({ navigation, route }) {
   
   const toggleOverlay = () => {
     setOverlayVisible(!overlayVisible);
+    count = 0;
   };
   const onToggleSnackBar = () => setVisible(!visible);
   const onDismissSnackBar = () => {
@@ -100,6 +101,8 @@ export default function Basonta({ navigation, route }) {
       });
   }
 
+  let count = 0;
+
   return (
     <View style={styles.container}>
       <View style={[styles.topBar,{backgroundColor:route.params.tileColor}]}>
@@ -132,14 +135,15 @@ export default function Basonta({ navigation, route }) {
             return (
               <ContactCounsellingItem name={item.name} 
               description={(item.basonta == null) ? "No Basonta (Tap To Change)" : item.basonta} 
-              photo_url={item.photo_url} 
+              photo_url={item.photo_url}
+              key={item.id} 
               onPress={(()=>{
                 toggleOverlay()
-                setMemberID(item.member_id)
+                setMemberID(item.id)
               })}/>
             );
           }}
-          keyExtractor={(item) => item.member_id + ""}
+          keyExtractor={(item) => item.id + ""}
         />
       </View>
       <Overlay isVisible={overlayVisible} onBackdropPress={toggleOverlay} >
@@ -149,10 +153,13 @@ export default function Basonta({ navigation, route }) {
                 prompt={"Basonta"}
                 style={{ height: 50, width: 100 }}
                 onValueChange={(itemValue) => {
+                  count++;
+                  if (count == 1) return;
+                  if (itemValue == null) return;
+                  if (member_id == null) return;
+
                   setPickerBasonta(itemValue);
-                  //save basonta for member
                   setBasonta(member_id, itemValue);
-                  
 
                 }}
                 mode={"dropdown"}
@@ -161,7 +168,7 @@ export default function Basonta({ navigation, route }) {
               >
                 {
                   basontas.map((basonta) => (
-                    <Picker.Item key={basonta.id} label={basonta.basonta} value={basonta.id}/>
+                    <Picker.Item id={basonta.id} label={basonta.basonta} value={basonta.id}/>
                   ))
                 }   
               </Picker>

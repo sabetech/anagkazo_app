@@ -106,7 +106,8 @@ class MemberDetail extends Component {
     
     return <CustomProfileField 
       field={"phone"} 
-      value={this.state.member.phone} 
+      value={this.state.member.phone}
+      userReadableField={"Phone"} 
       icon={"call"} 
       type={"ionicons"} 
       raised={true}
@@ -121,6 +122,7 @@ class MemberDetail extends Component {
     return <CustomProfileField 
       field={"whatsapp_no"} 
       value={this.state.member.whatsapp_no} 
+      userReadableField={"WhatsApp Number"} 
       icon={"logo-whatsapp"}
       type={"ionicon"}
       raised={true}
@@ -139,22 +141,9 @@ class MemberDetail extends Component {
       <CustomProfileField
         field={"gender"}
         value={this.state.member.gender == "m" ? "Male" : "Female"}
+        userReadableField={"Gender"} 
         icon={"gender-male-female"}
         type={"material-community"}
-        
-      />
-    );
-  };
-
-  renderBasonta = () => {
-    return (
-      <CustomProfileField
-        field={"basonta_id"}
-        value={this.state.member.basonta_id}
-        icon={"caret-square-o-right"}
-        type={"font-awesome"}
-        index={this.state.member.id}
-        url_part={"member/edit"}
         
       />
     );
@@ -165,6 +154,7 @@ class MemberDetail extends Component {
       <CustomProfileField
         field={"marital_status"}
         value={this.state.member.marital_status}
+        userReadableField={"Marital Status"} 
         icon={"ring"}
         type={"material-community"}
         index={this.state.member.id}
@@ -179,6 +169,7 @@ class MemberDetail extends Component {
       <CustomProfileField
         field={"occupation"}
         value={this.state.member.occupation}
+        userReadableField={"Occupation"} 
         icon={"md-hammer"}
         type={"ionicon"}
         index={this.state.member.id}
@@ -193,6 +184,7 @@ class MemberDetail extends Component {
       <CustomProfileField
         field={"date_of_birth"}
         value={this.state.member.date_of_birth}
+        userReadableField={"Date of Birth"} 
         icon={"calendar"}
         type={"antdesign"}
         index={this.state.member.id}
@@ -206,6 +198,7 @@ class MemberDetail extends Component {
       <CustomProfileField
         field={"city"}
         value={this.state.member.city}
+        userReadableField={"City"} 
         icon={"city"}
         type={"font-awesome-5"}
         index={this.state.member.id}
@@ -220,6 +213,7 @@ class MemberDetail extends Component {
       <CustomProfileField
         field={"country"}
         value={this.state.member.country}
+        userReadableField={"Country"} 
         icon={"md-globe"}
         type={"ionicon"}
         index={this.state.member.id}

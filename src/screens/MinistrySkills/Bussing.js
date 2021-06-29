@@ -85,7 +85,7 @@ export default function Bussing({ navigation, route }) {
             return <List.Item
             id={item.id}  
             title={moment(item.title).format("dddd, MMM DD YYYY")}
-            description={route.params.titleScreen}
+            description={"Number of People Bussed on Sunday"}
             left={props => <Icon name={route.params.icon} type={route.params.type} iconStyle={{color:"grey", marginTop:10}}/>}
             right={props => <Text style={{marginTop: "8%", color:"grey"}}>{item.value}</Text>}
           />

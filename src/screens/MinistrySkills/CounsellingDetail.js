@@ -12,18 +12,21 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { BASE_URL } from "../../config/index";
 import ContactCounsellingItem from "../../components/Members/ContactCounsellingItem";
 import moment from "moment";
+import { useIsFocused } from '@react-navigation/native';
 
 
 //get members from here
 export default function CounsellingDetail({ navigation, route }) {
   const [counsellings, setCounsellingsPeople] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const isFocused = useIsFocused();
   useEffect(() => {
     setLoading(true);
     AsyncStorage.getItem("student_index").then((res) => {
       getCounsellings(res);
     });
-  }, []);
+  }, [isFocused]);
 
   const getCounsellings = (myStudentIndex) => {
     fetch(

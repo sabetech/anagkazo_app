@@ -20,6 +20,8 @@ export default function PastoralPointSummary({ navigation }) {
     const [overallTotal, setOverallTotal] = useState(0);
     const [pastoralPoints, setPastoralPoints] = useState([]);
 
+    const colorArray = ["#4285F4", "#DB4437", "#0F9D58", "#F4B400"];
+
     useEffect(()=>{
         
         AsyncStorage.getItem("student_index").then((res) => {   
@@ -115,9 +117,9 @@ export default function PastoralPointSummary({ navigation }) {
                                             )
                                         }
                                         >
-                                        <Card>
+                                        <Card style={{borderWidth: 1, borderColor: colorArray[index % 4]}}>
                                             <Card.Content>
-                                                <Title style={styles.pointStyle}>{element.value}</Title>
+                                                <Title style={[styles.pointStyle, {color:"black"}]}>{element.value}</Title>
                                             </Card.Content>
                                         </Card>
                                         <Text style={styles.pointStyle}>{element.parameter}</Text>

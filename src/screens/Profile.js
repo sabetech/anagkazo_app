@@ -6,11 +6,8 @@ import {
   ImageBackground,
   Image,
   Text,
-  ActivityIndicator
 } from "react-native";
 import { Card, Icon } from "react-native-elements";
-import Tel from "../components/Profile/Tel";
-import Email from "../components/Profile/Email";
 import CustomProfileField from "../components/Profile/CustomProfileField";
 import AsyncStorage from "@react-native-community/async-storage";
 import { BASE_URL } from "../config/index";
@@ -108,7 +105,8 @@ class Profile extends Component {
     
     return <CustomProfileField 
       field={"phone"} 
-      value={phone} 
+      value={phone}
+      userReadableField={"Phone"} 
       icon={"phone"} 
       type={"feather"} 
       index={this.state.student.index_number} 
@@ -119,7 +117,8 @@ class Profile extends Component {
   renderEmail = () => {
     return <CustomProfileField 
       field={"email_address"} 
-      value={this.state.student.email_address} 
+      value={this.state.student.email_address}
+      userReadableField={"Email Address"}  
       icon={"email"}
       type={"entypo"}
       index={this.state.student.index_number}
@@ -133,6 +132,7 @@ class Profile extends Component {
       <CustomProfileField
         field={"gender"}
         value={this.state.student.gender == "m" ? "Male" : "Female"}
+        userReadableField={"Gender"}
         icon={"gender-male-female"}
         type={"material-community"}
         
@@ -145,6 +145,7 @@ class Profile extends Component {
       <CustomProfileField
         field={"home_church"}
         value={this.state.student.home_church}
+        userReadableField={"Home Church"}
         icon={"church"}
         type={"material-community"}
         index={this.state.student.index_number}
@@ -164,6 +165,7 @@ class Profile extends Component {
             : this.state.student.pastors_name
         }
         icon={"person-outline"}
+        userReadableField={"Pastor's Name"}
         type={"material-icons"}
         index={this.state.student.index_number}
         url_part={"edit"}
@@ -176,6 +178,7 @@ class Profile extends Component {
       <CustomProfileField
         field={"pastors_phone"}
         value={this.state.student.pastors_phone}
+        userReadableField={"Pastor's Phone"}
         icon={"phone"}
         type={"feather"}
         index={this.state.student.index_number}
@@ -190,6 +193,7 @@ class Profile extends Component {
       <CustomProfileField
         field={"educational_level"}
         value={this.state.student.educational_level}
+        userReadableField={"Educational Level"}
         icon={"user-graduate"}
         type={"font-awesome-5"}
         index={this.state.student.index_number}
@@ -204,6 +208,7 @@ class Profile extends Component {
       <CustomProfileField
         field={"marital_status"}
         value={this.state.student.marital_status}
+        userReadableField={"Martial Status"}
         icon={"ring"}
         type={"material-community"}
         index={this.state.student.index_number}
@@ -218,6 +223,7 @@ class Profile extends Component {
       <CustomProfileField
         field={"occupation"}
         value={this.state.student.occupation}
+        userReadableField={"Occupation"}
         icon={"md-hammer"}
         type={"ionicon"}
         index={this.state.student.index_number}
@@ -232,6 +238,7 @@ class Profile extends Component {
       <CustomProfileField
         field={"date_of_birth"}
         value={this.state.student.date_of_birth}
+        userReadableField={"Date of Birth"}
         icon={"calendar"}
         type={"antdesign"}
         index={this.state.student.index_number}
@@ -246,6 +253,7 @@ class Profile extends Component {
       <CustomProfileField
         field={"country"}
         value={this.state.student.country}
+        userReadableField={"Country"}
         icon={"md-globe"}
         type={"ionicon"}
         index={this.state.student.index_number}
@@ -260,6 +268,7 @@ class Profile extends Component {
       <CustomProfileField
         field={"denomination"}
         value={this.state.student.denomination}
+        userReadableField={"Denomination"}
         icon={"streetview"}
         type={"material-icons"}
         index={this.state.student.index_number}

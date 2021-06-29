@@ -71,21 +71,26 @@ const Dashboard_Details = ({ navigation, route }) => {
             color="darkblue"
           />
         ) : null}
-
+        
         <FlatList
           data={dashboardDetails}
           renderItem={({ item }) => {
             return <List.Item
             id={item.id}  
-            title={moment(item.title).format("dddd, MMM DD YYYY")}
-            description={route.params.titleScreen}
-            left={props => <Icon name={route.params.icon} type={route.params.type} iconStyle={{color:"grey", marginTop:10}}/>}
-            right={props => <Text style={{marginTop: "8%", color:"grey"}}>{item.value}</Text>}
+            title={<Text style={{fontSize: 20}}> {moment(item.title).format("dddd, MMM DD YYYY")}</Text>}
+            left={props => <Icon name={route.params.icon} type={route.params.type} iconStyle={{color:"grey", marginTop:8}}/>}
+            right={props => <Text style={{fontSize: 20, color:"grey", marginTop: 6}}>{item.value}</Text>}
           />
           }}
           keyExtractor={(item) => item.id + ""}
         />
+        
       </View>
+        {  
+          route.params.id === 2 ?
+          (<MyActionButton icon="md-add" navigateTo={"prayer_log_add"} topBarColor={"#DB4437"}/>) : null
+
+        }
     </View>
   );
 };

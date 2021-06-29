@@ -12,6 +12,7 @@ import { BASE_URL } from "../../config/index";
 import { List } from 'react-native-paper';
 import MyActionButton from "../../components/MyActionButton";
 import moment from "moment";
+import { useIsFocused } from '@react-navigation/native';
 
 //get members from here
 export default function Multiplication({ navigation, route }) {
@@ -19,12 +20,14 @@ export default function Multiplication({ navigation, route }) {
   const [refreshing, setRefreshing] = useState(false);
   const [studentIndex, setStudentIndex] = useState("");
 
+  const isFocused = useIsFocused();
+
   useEffect(() => {
     AsyncStorage.getItem("student_index").then((res) => {
       setStudentIndex(res);
       getMultiplication(res);
     });
-  }, []);
+  }, [isFocused]);
 
   const getMultiplication = (myStudentIndex) => {
     fetch(`${BASE_URL}/student/${myStudentIndex}/multiplication`, {

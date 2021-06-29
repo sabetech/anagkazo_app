@@ -13,6 +13,7 @@ import CustomListItem from "../../components/CustomListComponent/CustomListItem"
 import MyActionButton from "../../components/MyActionButton";
 import { List } from 'react-native-paper';
 import moment from "moment";
+import { useIsFocused } from '@react-navigation/native';
 
 //get members from here
 export default function SheepSeeking({ navigation, route }) {
@@ -20,12 +21,14 @@ export default function SheepSeeking({ navigation, route }) {
   const [refreshing, setRefreshing] = useState(false);
   const [studentIndex, setStudentIndex] = useState("");
 
+  const isFocused = useIsFocused();
+
   useEffect(() => {
     AsyncStorage.getItem("student_index").then((res) => {
       setStudentIndex(res);
       getSheepSeeking(res);
     });
-  }, []);
+  }, [isFocused]);
 
   const getSheepSeeking = (myStudentIndex) => {
     fetch(`${BASE_URL}/student/${myStudentIndex}/sheepseeking`, {

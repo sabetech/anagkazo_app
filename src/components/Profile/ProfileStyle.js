@@ -8,7 +8,7 @@ export default {
     flex: 1,
   },
   coverBio: {
-    color: "#595959",
+    color: "#FFF",
     fontSize: 15,
     textAlign: "right",
     marginRight: 10,
@@ -28,25 +28,25 @@ export default {
     paddingLeft: 135,
   },
   coverName: {
-    color: "#595959",
-    fontSize: 21,
+    color: "#FFFFFF",
+    fontSize: 16,
     textAlign: "right",
     marginRight: 10,
   },
   coverTitle: {
     color: "#FFF",
-    fontSize: 24,
+    fontSize: 21,
     fontWeight: "bold",
     textAlign: "right",
+    marginRight: 10
   },
   coverTitleContainer: {
     backgroundColor: "transparent",
     flex: 1,
-    justifyContent: "space-between",
-    paddingTop: 45,
+    paddingTop: 5,
   },
   headerContainer: {
-    alignItems: "center",
+    
     backgroundColor: "#FFF",
   },
   indicatorTab: {

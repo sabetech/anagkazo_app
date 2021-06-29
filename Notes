@@ -99,11 +99,11 @@ Servants Armed and trained
 - Bible Concordance?
 - Other Version of Bible?
 - etc (Find the others)
-=============================
+===================================================
 9 months 5pts, you must have 3 of 5 them
 18 months 10pts, you must have all
 36 months 10pts, you must have all + other require
-==============================================
+===================================================
 
 
 Sheep Seeking [API done]
@@ -114,14 +114,14 @@ Sheep Seeking [API done]
 - Drop down a list of members 
 Multi Select members for select2
 ============================
-3 souls a week
+3 souls a week - 9 months - 86 5pt | 172 after 18 months 80% 10pt
 
 
 Understanding Campaign
 Written and passed Exam for the seven book
 first 9 months 2 books
 first 18 months 5 books
-first 32 
+first 32 all books 7
 
 
 Basonta
@@ -199,35 +199,52 @@ Ps Aullen
 
 Known issues
 ------------
-for the flow attendance, on the server side, 
+- for the flow attendance, on the server side, 
 first show all the weeks that there is, and then for the dates that the student is present, append those too
-For Wacenta service, show which dates there' was no service for the leader
 
-make profile editable by clicking on the property
-show the pastoral point on the right side as tab
+- For Wacenta service, show which dates there' was no service for the leader
 
-attn: change the color of the tabbed background and  header for each tab - DONE
-for special services, show the note on the bottom of the card as to which event it was - DONE
+- make profile editable by clicking on the property
+- show the pastoral point on the right side as tab (half way done)
 
-validate before submit
+- attn: change the color of the tabbed background and  header for each tab - DONE
+- for special services, show the note on the bottom of the card as to which event it was - DONE
 
-Editing Students - DONE - slighly buggy
-Editing Members profile - Done Buggy
+- validate before submit
 
-Adding Members to a basonta
-Showing Basonta Attendance
+- Editing Students - DONE - slighly buggy
+- Editing Members profile - Done Buggy
+- Member Profile: Navigate back easily from member profile page
+- Member profile: change date of birth
+- Set member Basonta to no Basonta. (Remove member basonta record)
+
+Adding Members to a basonta - Very BUGGY!!!
+Showing Basonta Student and Media Attendance - WHERE?
 
 select country with flag
 https://stackoverflow.com/questions/53807993/react-native-using-picker-to-select-country-flag
 
 
 after fields scroll up and down, submit has to be click on twice - not a problem
+USE State a Management System like REDUX for Offline First User Interaction
 
 use numbers to specify A-church and F-church
 
-<CardInfo
-                id={item.id}
-                title={item.title}
-                value={item.value}
-                extra_details={item.extra_details}
-              />
+
+charts
+
+comparazon with student params
+countries
+ud and non ud
+continents
+
+income and attendance
+conmpared community wise
+
+map of eastern region
+map the Centers location
+
+check ghana web
+
+color code the map
+

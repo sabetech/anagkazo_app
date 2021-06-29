@@ -19,10 +19,10 @@ export default function AttendanceTabs() {
         name="FLOWPrayer_Screen"
         component={FLOWPrayer_Screen}
         options={{
-          tabBarLabel: "FLOW Prayer",
+          tabBarLabel: "Vision Lectures",
           tabBarIcon: ({ color }) => (
             <FontAwesome5
-              name="praying-hands"
+              name="eye"
               color={color}
               size={20}
             />
@@ -34,9 +34,9 @@ export default function AttendanceTabs() {
         name="PropheticEncounter_Screen"
         component={PropheticEncounter_Screen}
         options={{
-          tabBarLabel: "Prophetic Encounter",
+          tabBarLabel: "Pillar Lectures",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="church" color={color} size={26} />
+            <MaterialCommunityIcons name="pillar" color={color} size={26} />
           ),
           tabBarColor:"#4F0F97"
         }}

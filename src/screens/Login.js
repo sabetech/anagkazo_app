@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, {useEffect} from "react";
 import {
   StyleSheet,
   Text,
@@ -12,12 +12,34 @@ import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handl
 import { FilledButton } from "../components/FilledButton";
 import { Input } from "../components/Input";
 import { AuthContext } from "../contexts/AuthContext";
+import AsyncStorage from "@react-native-community/async-storage";
 
 export function Login({ navigation }) {
   const [index_number, setIndexNumber] = React.useState("");
   const [passcode, setPassCode] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const { login } = React.useContext(AuthContext);
+  
+
+  useEffect(() => {
+    //check if user has already logged before ... if not don't go anywhere
+    AsyncStorage.getItem('student_index').then((studentIndex_Value) => {
+      
+      if (studentIndex_Value != null) {
+          navigation.navigate('home',{
+            screen: 'home',
+            params: {
+              studentIndex: studentIndex_Value
+            }
+          });
+      }
+  }).catch((e) => {
+      console.log("bad async storage");
+  })
+
+  },[]);
+
+
 
   return (
     <View style={styles.container}>
@@ -67,12 +89,16 @@ export function Login({ navigation }) {
                 {
                   if (result){
                     setLoading(false);
-                    navigation.navigate('home');
+                    navigation.navigate('home',{
+                      screen: 'home',
+                      params: {
+                        studentIndex: index_number
+                      }
+                    });
                   }else{
                     setLoading(false);
                     alert("Wrong Credentials! Try again!");
                   }
-                  
                 } 
               );
                 

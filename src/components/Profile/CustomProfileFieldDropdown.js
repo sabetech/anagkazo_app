@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Linking } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, TextInput } from "react-native";
 import { Icon } from "react-native-elements";
 import { ActivityIndicator } from "react-native-paper";
 import {BASE_URL} from "../../config/index";
@@ -37,7 +37,7 @@ const submitValChange = (event, index, field, setEdited, url_part) => {
     });
 }
 
-const CustomProfileField = ({ containerStyle, value, field,userReadableField, icon, type, index, url_part, overrideColor='gray', raised=false, onPress=null }) => {
+const CustomProfileFieldDropDown = ({ containerStyle, value, field,userReadableField, icon, type, index, url_part, overrideColor='gray', raised=false, onPress=null }) => {
   const [editing, setEditing] = useState(false);
   const [edited, setEdited] = useState(false);
   const [curValue, setCurValue] = useState("Type Here...");
@@ -149,4 +149,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CustomProfileField;
+export default CustomProfileFieldDropDown;

@@ -3,7 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity,
+  TouchableOpacity,Alert
 } from "react-native";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -27,6 +27,7 @@ export default function PrayerLog_add({ navigation, route }) {
   const [visible, setVisible] = React.useState(false);
   const [text, setText] = React.useState('');
   const [submitLoading, setSubmitLoading] = React.useState(false);
+  const [serverResponseString, setServerResponse] = useState("");
   
   const onToggleSnackBar = () => setVisible(!visible);
   const onDismissSnackBar = () => {
@@ -75,19 +76,44 @@ export default function PrayerLog_add({ navigation, route }) {
     })
       .then((response) =>
         response.json().then((json) => {
-            //TODO: check the json if returns an evil response, give feedback
+          
         setSubmitLoading(false);
-        handleSuccessfulSubmission();
+        handleSuccessfulSubmission(json);
         })
       )
       .catch((e) => {
         setSubmitLoading(false);
-        alert("An error Occured in your submission. Your submission was not successful. Make Sure you have internet connection")
+        handleNoInternetError(e)
       });
   };
 
-  const handleSuccessfulSubmission = () => {
-    onToggleSnackBar();
+  const handleSuccessfulSubmission = (json) => {
+    setServerResponse(json.payload.msg);
+    if (json.response === "success") onToggleSnackBar();
+
+    if (json.response === "failure") handleServerError(json);
+  }
+
+  const handleServerError = (json) => {
+    Alert.alert(
+      "Failure",
+      json.payload.msg,
+      [
+        { text: "OK" }
+      ],
+      { cancelable: false }
+    );
+  }
+
+  const handleNoInternetError = (e) => {
+    Alert.alert(
+      "Failure",
+      "There is not internet " + e.message(),
+      [
+        { text: "OK" }
+      ],
+      { cancelable: false }
+    );
   }
 
   return (
@@ -186,7 +212,7 @@ export default function PrayerLog_add({ navigation, route }) {
                 navigation.navigate('prayer_log');
             },
         }}>
-        Success: Your Prayer Log has been Updated!
+        {serverResponseString}
       </Snackbar>
       </KeyboardAwareScrollView>
     </View>

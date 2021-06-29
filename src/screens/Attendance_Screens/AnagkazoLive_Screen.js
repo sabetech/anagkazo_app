@@ -14,16 +14,23 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { Icon } from "react-native-elements";
 import { List } from 'react-native-paper';
 import moment from "moment";
+import { useIsFocused } from '@react-navigation/native';
+
 
 export default function AnagkazoLive_Screen({navigation}) {
   const [studentAttendance, setStudentAttn] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const [studentIndex, setStudentIndex] = useState('');
+
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     AsyncStorage.getItem("student_index").then((res) => {
       getAnagkazoLiveAttn(res);
+      setStudentIndex(res);
     });
-  }, []);
+  }, [isFocused]);
 
   const getAnagkazoLiveAttn = (studentIndex) => {
     setLoading(true);
@@ -35,11 +42,17 @@ export default function AnagkazoLive_Screen({navigation}) {
       .then((responseJson) => {
         setStudentAttn(responseJson);
         setLoading(false);
+        setRefreshing(false);
       })
       .catch((error) => {
         console.error(error);
       });
   };
+
+  const handleRefresh = () => {
+    setRefreshing(true);
+    getAnagkazoLiveAttn(studentIndex);
+  }
 
   return (
     <View style={styles.container}>
@@ -74,13 +87,15 @@ export default function AnagkazoLive_Screen({navigation}) {
               <List.Item
                 id={item.id}  
                 title={moment(item.title).format("dddd, MMM DD YYYY")}
-                description="Anagkazo Live"
+                description="Status"
                 left={props => <Icon name={"access-point"} type={"material-community"} iconStyle={{color:"grey", marginTop:10,paddingRight:20}}/>}
                 right={props => <Text style={{marginTop: "8%", color:"grey"}}>{item.value}</Text>}
               />
             );
           }}
           keyExtractor={(item) => item.id + ""}
+          onRefresh={handleRefresh}
+          refreshing={refreshing}
         />
       </View>
       <MyActionButton icon={"md-qr-scanner"} navigateTo={"qr_code_scanner"} />

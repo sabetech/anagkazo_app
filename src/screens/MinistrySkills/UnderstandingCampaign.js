@@ -122,7 +122,7 @@ export default function UnderstandingCampaign({ navigation, route }) {
                 <Text style={{ fontSize: 32 }}></Text>
               </View>
             </TouchableHighlight>
-            <Text style={styles.header}>Servants Armed And Trained</Text>
+            <Text style={styles.header}>Understanding Campaign</Text>
           </View>
           <View style={{ height: "90%" }}>
           <InfoCard

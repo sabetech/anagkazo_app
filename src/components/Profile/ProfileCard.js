@@ -17,19 +17,20 @@ import profileStyles from "./ProfileStyle";
 import DashboardCardList from "../HomeDashboard/DashboardCardList";
 
 import { BASE_URL } from "../../config/index";
+import MyActionButton from "../../components/MyActionButton";
 
 const styles = StyleSheet.create({ ...profileStyles });
 
 class ProfileCard extends Component {
-  static propTypes = {
-    avatar: PropTypes.string.isRequired,
-    avatarBackground: PropTypes.string.isRequired,
-    bio: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    containerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
-    tabContainerStyle: PropTypes.oneOfType([PropTypes.number, PropTypes.object])
-      .isRequired,
-  };
+  // static propTypes = {
+  //   avatar: PropTypes.string.isRequired,
+  //   avatarBackground: PropTypes.string.isRequired,
+  //   bio: PropTypes.string.isRequired,
+  //   name: PropTypes.string.isRequired,
+  //   containerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+  //   tabContainerStyle: PropTypes.oneOfType([PropTypes.number, PropTypes.object])
+  //     .isRequired,
+  // };
 
   constructor(props) {
     super(props);
@@ -66,30 +67,23 @@ class ProfileCard extends Component {
     this.setState({
       loading: true,
     });
-
-    AsyncStorage.getItem("student_index").then((res) => {
-      
-      this.getStudentDashboardData(res);
-    });
+    console.log(this.props.studentInfo);
+    this.getStudentDashboardData();
+    
   }
 
-  getStudentDashboardData = (myStudentIndex) => {
-    fetch(`${BASE_URL}/student/${myStudentIndex}/get_dashboard_values`, {
-      method: "GET",
-    })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
-          studentInfo: responseJson,
-        });
-        this.state.tabs.routes[0].count = responseJson.memberCount;
-        this.state.tabs.routes[1].count = responseJson.pastoralPoint;
-        this.setState({
-          loading: false,
-        });
-      })
-      .catch((error) => {
-        console.error(error);
+
+
+  getStudentDashboardData = () => {
+    
+        
+      this.setState({
+        studentInfo: this.props.studentInfo
+      });
+      this.state.tabs.routes[0].count = this.props.studentInfo.memberCount;
+      this.state.tabs.routes[1].count = this.props.studentInfo.pastoralPoint;
+      this.setState({
+        loading: false,
       });
   };
 
@@ -215,6 +209,7 @@ class ProfileCard extends Component {
           />
         ) : null}
         <DashboardCardList studentInfo={this.state.studentInfo} />
+        <MyActionButton icon={"md-qr-scanner"} navigateTo={"qr_code_scanner"} />
       </View>
     );
   }

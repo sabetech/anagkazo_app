@@ -12,17 +12,21 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { BASE_URL } from "../../config/index";
 import ContactCounsellingItem from "../../components/Members/ContactCounsellingItem";
 import moment from "moment";
+import { useIsFocused } from '@react-navigation/native';
 
 //get members from here
 export default function SheepSeekingDetail({ navigation, route }) {
   const [visitedPeople, setVisitedPeople] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const isFocused = useIsFocused();
+
   useEffect(() => {
     setLoading(true);
     AsyncStorage.getItem("student_index").then((res) => {
         getVisitedPeople(res);
     });
-  }, []);
+  }, [isFocused]);
 
   const getVisitedPeople = (myStudentIndex) => {
     fetch(

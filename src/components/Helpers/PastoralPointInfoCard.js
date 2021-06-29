@@ -32,7 +32,7 @@ const PastoralPointInfoCard = ({ title, infoText, colorDetail }) => {
           // Button Linear Gradient
           start={{ x: 0.0, y: 0.25 }}
           end={{ x: 1.5, y: -0.6 }}
-          colors={["rgba(255,255,255,0.9)", "rgba(255,255,255,0.4)"]}
+          colors={["rgba(255,255,255,1)", "rgba(255,255,255,0.9)"]}
           style={{
             padding: 15,
             borderRadius: 5,

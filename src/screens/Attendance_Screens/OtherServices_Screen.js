@@ -13,17 +13,19 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { List } from 'react-native-paper';
 import { Icon } from "react-native-elements";
 import moment from "moment";
+import { useIsFocused } from '@react-navigation/native';
 
 export default function OtherServices_Screen({navigation}) {
   const [studentAttendance, setStudentAttn] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const isFocused = useIsFocused();
   //use effect load student attendace info from here
   useEffect(() => {
     AsyncStorage.getItem("student_index").then((res) => {
       getSpecialServices(res);
     });
-  }, []);
+  }, [isFocused]);
 
   const getSpecialServices = (studentIndex) => {
     setLoading(true);

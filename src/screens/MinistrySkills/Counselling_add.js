@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
+  Alert
 } from "react-native";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -20,6 +21,7 @@ import { Picker } from "@react-native-community/picker";
 import AwesomeAlert from "react-native-awesome-alerts";
 
 
+
 ///add a counselling session here ...
 export default function Counselling_add({ navigation }) {
   const [dateVal, setMyDate] = useState("");
@@ -30,6 +32,7 @@ export default function Counselling_add({ navigation }) {
   const [show, setShow] = useState(false);
   const [studentIndex, setStudentIndex] = useState("");
   const [showAlert, setShowAlert] = useState(false);
+  const [serverResponseString, setServerResponse] = useState("");
 
   useEffect(() => {
     
@@ -89,13 +92,41 @@ export default function Counselling_add({ navigation }) {
         })
       )
       .catch((e) => {
-        console.log(e);
+        counsellingSaveError(e);
+        navigation.navigate('counselling');
       });
   };
 
   const handleSuccessfulSubmission = (json) => {
-    setShowAlert(true);
+    setServerResponse(json.payload.msg);
+    
+    if (json.response === "success"){
+      setShowAlert(true);
+    }
+
+    if (json.response === "failed") {
+      counsellingServerLogicError(json);
+    }
   }
+
+  const counsellingServerLogicError = (json) => Alert.alert(
+    json.response,
+    json.payload.msg,
+    [
+      { text: "OK" }
+    ],
+    { cancelable: false }
+  );
+
+  const counsellingSaveError = (e) =>
+    Alert.alert(
+      "Failure",
+      "An Error Occured! Make sure you have internet access!" + e.message(),
+      [
+        { text: "OK", onPress: () => navigation.navigate('counselling') }
+      ],
+      { cancelable: false }
+    );
 
   return (
     <View style={styles.container}>
@@ -231,7 +262,7 @@ export default function Counselling_add({ navigation }) {
         show={showAlert}
         showProgress={false}
         title="Success"
-        message="Your Counselling Record Has been Saved Successfully"
+        message={serverResponseString}
         closeOnTouchOutside={true}
         closeOnHardwareBackPress={false}
         showCancelButton={true}

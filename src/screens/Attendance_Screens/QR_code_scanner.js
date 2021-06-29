@@ -1,22 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, Button, Alert } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { BASE_URL } from "../../config/index";
 import AwesomeAlert from "react-native-awesome-alerts";
 import * as Haptics from "expo-haptics";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-community/async-storage";
 
 export default function QR_code_scanner() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const navigation = useNavigation();
+  const [studentIndex, setStudentIndex] = useState();
 
   useEffect(() => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === "granted");
     })();
+
+    AsyncStorage.getItem("student_index").then((res) => {
+      setStudentIndex(res);
+    });
+
+
   }, []);
 
   const handleBarCodeScanned = ({ data }) => {
@@ -27,9 +35,8 @@ export default function QR_code_scanner() {
   };
 
   const postAttendanceSubmission = (data) => {
-    console.log(data.date);
 
-    fetch(`${BASE_URL}/student/700446/attendance_post`, {
+    fetch(`${BASE_URL}/student/${studentIndex}/attendance_post`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -43,17 +50,23 @@ export default function QR_code_scanner() {
     })
       .then((response) =>
         response.json().then((json) => {
+          console.log(json);
           handleAfterAttendanceSubmitted(json);
         })
       )
       .catch((e) => {
-        console.log(e);
+        createScanFailureAlert({payload:{msg: e.message}});
       });
   };
 
   const handleAfterAttendanceSubmitted = (json) => {
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-    setShowAlert(true);
+    if (json.response == "success"){
+      createScanSuccessAlert(json);
+    }else{
+      createScanFailureAlert(json);
+    }
+    
   };
 
   if (hasPermission === null) {
@@ -61,6 +74,29 @@ export default function QR_code_scanner() {
   }
   if (hasPermission === false) {
     return <Text>No access to camera</Text>;
+  }
+
+  const createScanSuccessAlert = (json) => {
+    Alert.alert(
+      'Scan Successful!',
+      json.payload.msg,
+      [
+        { text: 'OK', onPress: () => navigation.goBack() }
+      ],
+      { cancelable: false }
+    );
+  }
+
+  const createScanFailureAlert = (failure) => {
+    console.log(failure);
+    Alert.alert(
+      'Scan Failed!',
+      failure.payload.msg,
+      [
+        { text: 'OK', onPress: () => navigation.goBack() }
+      ],
+      { cancelable: false }
+    );
   }
 
   return (
@@ -71,11 +107,21 @@ export default function QR_code_scanner() {
         justifyContent: "flex-end",
       }}
     >
+      
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={StyleSheet.absoluteFillObject}
-      />
-
+        style={[StyleSheet.absoluteFillObject, styles.container]}
+      > 
+      
+      <View style={styles.layerTop} />
+        <View style={styles.layerCenter}>
+          <View style={styles.layerLeft} />
+          <View style={styles.focused} />
+          <View style={styles.layerRight} />
+        </View>
+        <View style={styles.layerBottom} />
+        </BarCodeScanner>
+      
       {scanned && (
         <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
       )}
@@ -94,6 +140,39 @@ export default function QR_code_scanner() {
           navigation.goBack();
         }}
       />
+
+      
     </View>
   );
 }
+
+const opacity = 'rgba(0, 0, 0, .6)';
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column'
+  },
+  layerTop: {
+    flex: 1,
+    backgroundColor: opacity
+  },
+  layerCenter: {
+    flex: 1,
+    flexDirection: 'row'
+  },
+  layerLeft: {
+    flex: 1,
+    backgroundColor: opacity
+  },
+  focused: {
+    flex: 10
+  },
+  layerRight: {
+    flex: 1,
+    backgroundColor: opacity
+  },
+  layerBottom: {
+    flex: 1,
+    backgroundColor: opacity
+  },
+});

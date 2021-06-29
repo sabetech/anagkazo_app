@@ -13,22 +13,27 @@ import { BASE_URL } from "../../config/index";
 import { Icon } from "react-native-elements";
 import { List } from 'react-native-paper';
 import moment from "moment";
+import { useIsFocused } from '@react-navigation/native';
 
 export default function PropheticEncounter_Screen({navigation}) {
   const [studentAttendance, setStudentAttn] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const [studentIndex, setStudentIndex] = useState('');
+
+  const isFocused = useIsFocused();
 
   //use effect load student attendace info from here
   useEffect(() => {
     AsyncStorage.getItem("student_index").then((res) => {
-      getSundayFLOWData(res);
+      getPillarLectures(res);
     });
-  }, []);
+  }, [isFocused]);
 
-  const getSundayFLOWData = (studentIndex) => {
+  const getPillarLectures = (studentIndex) => {
     setLoading(true);
 
-    fetch(`${BASE_URL}/student/${studentIndex}/3`, {
+    fetch(`${BASE_URL}/student/${studentIndex}/pillar_lectures_attn`, {
       method: "GET",
     })
       .then((response) => response.json())
@@ -42,6 +47,11 @@ export default function PropheticEncounter_Screen({navigation}) {
       });
   };
 
+  const handleRefresh = () => {
+    setRefreshing(true);
+    getPillarLectures(studentIndex);
+  }
+  
   return (
     <View style={styles.container}>
       <View style={styles.topBar}>
@@ -58,7 +68,7 @@ export default function PropheticEncounter_Screen({navigation}) {
             />
           </View>
         </TouchableHighlight>
-        <Text style={styles.header}>Flow Encounter</Text>
+        <Text style={styles.header}>Pillar Lectures</Text>
       </View>
 
       {loading ? (
@@ -76,13 +86,15 @@ export default function PropheticEncounter_Screen({navigation}) {
               <List.Item
                 id={item.id}  
                 title={moment(item.title).format("dddd, MMM DD YYYY")}
-                description="Prophetic Encounter"
-                left={props => <Icon name={"church"} type={"material-community"} iconStyle={{color:"grey", marginTop:10, paddingRight:20}}/>}
-                right={props => <Text style={{marginTop: "8%", color:"grey"}}>{item.value}</Text>}
+                description="Status"
+                left={props => <Icon name={"pillar"} type={"material-community"} iconStyle={{color:"grey", marginTop:10, paddingRight:20}}/>}
+                right={props => <Text style={{marginTop: "8%", color:"grey"}}>{item.status}</Text>}
               />
             );
           }}
           keyExtractor={(item) => item.id + ""}
+          refreshing={refreshing}
+          onRefresh={handleRefresh}
         />
       </View>
       <MyActionButton icon={"md-qr-scanner"} navigateTo={"qr_code_scanner"} />

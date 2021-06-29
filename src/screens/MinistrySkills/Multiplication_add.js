@@ -4,6 +4,7 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
+  Alert
 } from "react-native";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -27,7 +28,8 @@ export default function Multiplication_add({ navigation, route }) {
   const [visible, setVisible] = React.useState(false);
   const [submitLoading, setSubmitLoading] = React.useState(false);
   const [soulWon, setSoulWon] = React.useState("");
-  const [soulPhone, setSoulPhone] = React.useState("")
+  const [soulPhone, setSoulPhone] = React.useState("");
+  const [serverResponseString, setServerResponse] = useState("");
   
   const onToggleSnackBar = () => setVisible(!visible);
   const onDismissSnackBar = () => {
@@ -80,17 +82,41 @@ export default function Multiplication_add({ navigation, route }) {
         response.json().then((json) => {
             //TODO: check the json if returns an evil response, give feedback
         setSubmitLoading(false);
-        handleSuccessfulSubmission();
+        handleSuccessfulSubmission(json);
         })
       )
       .catch((e) => {
         setSubmitLoading(false);
-        alert("An error Occured in your submission. Your submission was not successful. Make Sure you have internet connection")
+        handleNoInternetError(e);
       });
   };
 
-  const handleSuccessfulSubmission = () => {
-    onToggleSnackBar();
+  const handleSuccessfulSubmission = (json) => {
+    setServerResponse(json.payload.msg);
+    if (json.response === "failed") handleServerError(json);
+    if (json.response === "success") onToggleSnackBar();
+  }
+
+  const handleServerError = (json) => {
+    Alert.alert(
+      "Failure",
+      json.payload.msg,
+      [
+        { text: "OK" }
+      ],
+      { cancelable: false }
+    );
+  }
+
+  const handleNoInternetError = (e) => {
+    Alert.alert(
+      "Failure",
+      "There is no internet connection" + e.message(),
+      [
+        { text: "OK" }
+      ],
+      { cancelable: false }
+    );
   }
 
   return (

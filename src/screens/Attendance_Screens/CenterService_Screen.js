@@ -8,7 +8,7 @@ import {
   TouchableHighlight
 } from "react-native";
 import MyActionButton from "../../components/MyActionButton";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BASE_URL } from "../../config/index";
 import { Icon } from "react-native-elements";
 import { List } from 'react-native-paper';

@@ -9,7 +9,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { TabView, TabBar } from "react-native-tab-view";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import PropTypes from "prop-types";
 
@@ -209,7 +209,7 @@ class ProfileCard extends Component {
           />
         ) : null}
         <DashboardCardList studentInfo={this.state.studentInfo} />
-        <MyActionButton icon={"md-qr-scanner"} navigateTo={"qr_code_scanner"} />
+        <MyActionButton icon={"scan"} navigateTo={"qr_code_scanner"} />
       </View>
     );
   }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {StyleSheet, View, Text, TouchableHighlight, FlatList, TextInput, Dimensions} from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { List, Checkbox, Snackbar } from 'react-native-paper';
 import { BASE_URL } from "../../config/index";
 import InfoCard from "../../components/Helpers/InfoCard";

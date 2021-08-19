@@ -8,7 +8,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BASE_URL } from "../../config/index";
 import ContactInitialsLabelItem from "../../components/Members/ContactInitialsLabelItem";
 import moment from "moment";

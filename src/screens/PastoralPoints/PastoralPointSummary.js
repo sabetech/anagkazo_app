@@ -12,7 +12,7 @@ import {
 import { FontAwesome5 } from "@expo/vector-icons";
 import {Card, Title} from 'react-native-paper';
 import {BASE_URL} from '../../config/index';
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export default function PastoralPointSummary({ navigation }) {

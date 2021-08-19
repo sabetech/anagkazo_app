@@ -10,7 +10,7 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import InfoCard from "../../components/Helpers/InfoCard";
 import { FontAwesome5 } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Input, Icon, Divider, Button } from "react-native-elements";
 import { TextInput } from 'react-native-paper';
 import DateTimePicker from "@react-native-community/datetimepicker";

@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import MyActionButton from "../../components/MyActionButton";
 import { BASE_URL } from "../../config/index";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { List } from 'react-native-paper';
 import { Icon } from "react-native-elements";
 import moment from "moment";
@@ -85,7 +85,7 @@ export default function OtherServices_Screen({navigation}) {
           keyExtractor={(item) => item.id + ""}
         />
       </View>
-      <MyActionButton icon={"md-qr-scanner"} navigateTo={"qr_code_scanner"} />
+      <MyActionButton icon={"scan"} navigateTo={"qr_code_scanner"} />
     </View>
   );
 }

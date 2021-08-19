@@ -12,7 +12,7 @@ import {
 import { Card, Icon } from "react-native-elements";
 import CustomProfileField from "../../components/Profile/CustomProfileField";
 import { BASE_URL } from "../../config/index";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class MemberDetail extends Component {
   state = {

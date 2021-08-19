@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { Card, Icon } from "react-native-elements";
 import CustomProfileField from "../components/Profile/CustomProfileField";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BASE_URL } from "../config/index";
 
 class Profile extends Component {

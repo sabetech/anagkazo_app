@@ -12,7 +12,7 @@ import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handl
 import { FilledButton } from "../components/FilledButton";
 import { Input } from "../components/Input";
 import { AuthContext } from "../contexts/AuthContext";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function Login({ navigation }) {
   const [index_number, setIndexNumber] = React.useState("");

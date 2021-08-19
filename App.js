@@ -16,7 +16,7 @@ import Attendance from "./src/screens/Attendance";
 import QR_code_scanner from "./src/screens/Attendance_Screens/QR_code_scanner";
 import CenterService_AttnAdd from "./src/screens/Attendance_Screens/CenterService_AttnAdd";
 import DashboardDetail from "./src/screens/Dashboard/Dashboard-detail";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BASE_URL } from "./src/config/index";
 import { DrawerContent } from "./src/screens/DrawerContent";
 import Counselling from "./src/screens/MinistrySkills/Counselling";

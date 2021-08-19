@@ -17,14 +17,14 @@ export default function AttnActionButton(props) {
         renderIcon={(active) =>
           active ? (
             <Ionicons
-              name="md-qr-scanner"
+              name="scan"
               size={24}
               color="black"
               style={styles.actionButtonIcon}
             />
           ) : (
             <Ionicons
-              name="md-qr-scanner"
+              name="scan"
               size={24}
               color="black"
               style={styles.actionButtonIcon}

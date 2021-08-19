@@ -9,7 +9,7 @@ import {
 
 import InfoCard from "../../components/Helpers/InfoCard";
 import { FontAwesome5 } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Input, Icon, Divider, Button, BottomSheet, ListItem, SearchBar } from "react-native-elements";
 import { TextInput } from 'react-native-paper';
 import DateTimePicker from "@react-native-community/datetimepicker";

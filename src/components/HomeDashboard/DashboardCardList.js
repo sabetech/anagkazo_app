@@ -1,4 +1,5 @@
 import React from "react";
+import { ImageBackground } from "react-native";
 import { View, FlatList } from "react-native";
 import CardInfo from "./CardInfo";
 
@@ -28,8 +29,15 @@ const DashboardCardList = ({ studentInfo }) => {
       type: "material-community"
     }];
   return (
+    
     <View style={{ height: "70%", marginHorizontal: 12 }}>
+      <ImageBackground 
+          source={require('../../res/imgs/geometry.png')} 
+          resizeMode="cover" 
+          style={{flex: 1,
+      justifyContent: "center"}} >
       <FlatList
+        style={{marginTop: "5%"}}
         data={studentInfo.attnData}
         renderItem={({ item, index }) => {
           return (
@@ -47,7 +55,9 @@ const DashboardCardList = ({ studentInfo }) => {
         }}
         keyExtractor={(item) => item.id + ""}
       />
+    </ImageBackground>
     </View>
+    
   );
 };
 

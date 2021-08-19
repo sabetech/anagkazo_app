@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { Picker } from "@react-native-community/picker";
 import { FontAwesome5 } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BASE_URL } from "../../config/index";
 import ContactCounsellingItem from "../../components/Members/ContactCounsellingItem";
 import { Overlay } from 'react-native-elements';

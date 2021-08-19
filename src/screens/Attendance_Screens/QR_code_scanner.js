@@ -5,7 +5,7 @@ import { BASE_URL } from "../../config/index";
 import AwesomeAlert from "react-native-awesome-alerts";
 import * as Haptics from "expo-haptics";
 import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function QR_code_scanner() {
   const [hasPermission, setHasPermission] = useState(null);

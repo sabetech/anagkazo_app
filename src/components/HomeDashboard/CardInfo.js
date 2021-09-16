@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, ImageBackground } from "react-native";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
+import { Icon } from 'react-native-elements'
 import { TouchableHighlight } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
@@ -37,17 +38,14 @@ const CardInfo = ({ id, title, value, studentIndex, description, colorDetail, ic
             borderRadius: 15
           }}
         >
+          <View style={styles.textContainer}>
+            <Text style={styles.textStyle}>
+                {title} : {value}
+            </Text>
+            <Icon name="chevron-right" type={"feather"} color={"#D3D3D3"}/>
+          </View>
           
-          <Text style={{ fontSize: 24, color: colorDetail, marginLeft: 15, padding: 10, }}>
-          <Avatar.Icon size={32} icon="folder" />
-              {title} {value} 
-              <Text >
-                <Feather name="chevron-right" size={24} color={"#D3D3D3"}  />
-              </Text>
-          </Text>
-          
-          
-          <View style={{ flex: 1 }}></View>
+
       </LinearGradient>
     </TouchableHighlight>
   );
@@ -62,7 +60,23 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
   },
-
+  textContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    alignContent: 'center',
+  },
+  textStyle: { 
+    fontSize: 24, 
+    marginStart: 20, 
+    paddingVertical: "7%",
+    color: 'grey'
+  },
+  featherContainer: {
+    flex: 3,
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end'
+  },
   image: {},
   valueTitle: {
     width: 300,

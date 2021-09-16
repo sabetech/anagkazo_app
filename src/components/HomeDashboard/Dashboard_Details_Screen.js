@@ -41,7 +41,7 @@ const Dashboard_Details = ({ navigation, route }) => {
       <View
         style={{
           height: 75,
-          backgroundColor: route.params.colorDetail,
+          backgroundColor: "hsla(152, 50%, 58%, 1)",
           flexDirection: "row",
           elevation: 10,
         }}

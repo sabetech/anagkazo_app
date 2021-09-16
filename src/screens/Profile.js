@@ -11,6 +11,8 @@ import { Card, Icon } from "react-native-elements";
 import CustomProfileField from "../components/Profile/CustomProfileField";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BASE_URL } from "../config/index";
+import PhoneProfileView from "../components/Profile/PhoneProfileView";
+import DropDownField from "../components/Profile/DropDownField";
 
 class Profile extends Component {
   state = {
@@ -101,9 +103,9 @@ class Profile extends Component {
   };
 
   renderTel = () => {
-    let phone = this.state.student.phone; 
+    let phone = this.state.student.phone;
     
-    return <CustomProfileField 
+    return <PhoneProfileView 
       field={"phone"} 
       value={phone}
       userReadableField={"Phone"} 
@@ -129,12 +131,15 @@ class Profile extends Component {
 
   renderGender = () => {
     return (
-      <CustomProfileField
+      <DropDownField
         field={"gender"}
         value={this.state.student.gender == "m" ? "Male" : "Female"}
         userReadableField={"Gender"}
+        index={this.state.student.index_number}
         icon={"gender-male-female"}
         type={"material-community"}
+        url_part={"edit"}
+        options={[{value:"m", dispValue:"Male"}, {value:"f", dispValue: "Female"}]}
         
       />
     );
@@ -161,7 +166,7 @@ class Profile extends Component {
         field={"pastors_name"}
         value={
           this.state.student.pastors_name == ""
-            ? "Not Set"
+            ? "Not Set (Tap to Change)"
             : this.state.student.pastors_name
         }
         icon={"person-outline"}
@@ -175,7 +180,7 @@ class Profile extends Component {
 
   renderPastorsPhone = () => {
     return (
-      <CustomProfileField
+      <PhoneProfileView
         field={"pastors_phone"}
         value={this.state.student.pastors_phone}
         userReadableField={"Pastor's Phone"}
@@ -205,7 +210,7 @@ class Profile extends Component {
 
   renderMaritalStatus = () => {
     return (
-      <CustomProfileField
+      <DropDownField
         field={"marital_status"}
         value={this.state.student.marital_status}
         userReadableField={"Martial Status"}
@@ -213,7 +218,7 @@ class Profile extends Component {
         type={"material-community"}
         index={this.state.student.index_number}
         url_part={"edit"}
-        
+        options={[{value:"single", dispValue: "Single"}, {value:"Married", dispValue: "Married"}]}
       />
     );
   };

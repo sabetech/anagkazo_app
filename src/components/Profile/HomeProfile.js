@@ -122,8 +122,11 @@ const HomeProfile = ({studentInfo}) => {
         <View >
           {renderContactHeader()}
         </View>
-        <DashboardCardList studentInfo={studentInfo} />
-        <MyActionButton icon={"scan"} navigateTo={"qr_code_scanner"} />
+        
+        <View >  
+          <DashboardCardList studentInfo={studentInfo} />
+          <MyActionButton icon={"scan"} navigateTo={"qr_code_scanner"} />
+        </View>
       </View>
     );
 }

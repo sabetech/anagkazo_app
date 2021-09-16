@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from "react";
-import { StyleSheet, Text, View, TouchableOpacity, TextInput } from "react-native";
+import React, {useState, useEffect, useRef} from "react";
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Linking } from "react-native";
 import { Icon } from "react-native-elements";
 import { ActivityIndicator } from "react-native-paper";
 import {BASE_URL} from "../../config/index";
@@ -37,10 +37,16 @@ const submitValChange = (event, index, field, setEdited, url_part) => {
     });
 }
 
-const CustomProfileFieldDropDown = ({ containerStyle, value, field,userReadableField, icon, type, index, url_part, overrideColor='gray', raised=false, onPress=null }) => {
+const PhoneProfileView = ({ containerStyle, value, field,userReadableField, index, url_part, overrideColor='gray', raised=false, onPress=null }) => {
   const [editing, setEditing] = useState(false);
   const [edited, setEdited] = useState(false);
   const [curValue, setCurValue] = useState("Type Here...");
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (editing) inputRef.current.focus();
+  },[editing])
+
 
   useEffect(()=>{
     setCurValue(value);
@@ -53,8 +59,8 @@ const CustomProfileFieldDropDown = ({ containerStyle, value, field,userReadableF
         <Icon
           raised={raised}
           reverseColor={"white"}
-          name={icon}
-          type={type}
+          name={"phone"}
+          type={"feather"}
           underlayColor="transparent"
           iconStyle={[styles.emailIcon,{color:overrideColor}]}
 
@@ -66,21 +72,23 @@ const CustomProfileFieldDropDown = ({ containerStyle, value, field,userReadableF
     <View style={styles.emailRow}>
       <TouchableOpacity onPress={(() => {
           setEditing(true);
-          
         })}>
       <View style={[styles.emailColumn,{justifyContent: "space-between"}]}>
       {
       (editing && <TextInput 
-              style={styles.emailText} 
+                ref={inputRef}
+              style={styles.emailText}
+              selectTextOnFocus={true}
               value={curValue}
+              keyboardType={"phone-pad"}
               onBlur={event => setEditing(false)}
               blurOnSubmit={true}
               onChangeText={text => setCurValue(text)}
               onSubmitEditing={event => {
                 submitValChange(event, index, field, setEdited, url_part);
               }} />)||
-        <Text style={styles.emailText}>{curValue != "" ? curValue : "Not Set"}</Text>
-        }
+        <Text style={styles.emailText}>{curValue != "" ? curValue : "Not Set (Tap to Edit)"}</Text>
+    }
       <View style={styles.editStatusIcon}>
       {(editing &&
         <ActivityIndicator
@@ -149,4 +157,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CustomProfileFieldDropDown;
+export default PhoneProfileView;

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import React, { useState,useEffect } from "react";
+import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Login } from "./src/screens/Login";
@@ -38,7 +38,6 @@ import { SignUp } from "./src/screens/SignUp";
 import PastoralPointSummary from "./src/screens/PastoralPoints/PastoralPointSummary";
 import PastoralPoint_Detail from "./src/screens/PastoralPoints/PastoralPoint_Detail";
 
-
 const MyNavStack = createStackNavigator();
 
 const Drawer = createDrawerNavigator();
@@ -60,8 +59,8 @@ function MainDrawer() {
 }
 
 export default function App() {
+  
   const [initialRoute, setInitialRoute] = useState("login");  
-
 
   const auth = React.useMemo(() => ({
     login: async (index_number, passcode) => {

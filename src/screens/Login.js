@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {
   StyleSheet,
   Text,
@@ -14,6 +14,7 @@ import { Input } from "../components/Input";
 import { AuthContext } from "../contexts/AuthContext";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
 export function Login({ navigation }) {
   const [index_number, setIndexNumber] = React.useState("");
   const [passcode, setPassCode] = React.useState("");
@@ -27,19 +28,17 @@ export function Login({ navigation }) {
       
       if (studentIndex_Value != null) {
           navigation.navigate('home',{
-            screen: 'home',
-            params: {
-              studentIndex: studentIndex_Value
-            }
-          });
+              screen: 'home',
+              params: {
+                studentIndex: studentIndex_Value
+              }
+            });
       }
   }).catch((e) => {
-      console.log("bad async storage");
-  })
+      console.log(e.message());
+  });
 
   },[]);
-
-
 
   return (
     <View style={styles.container}>

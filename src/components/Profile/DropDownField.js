@@ -1,17 +1,17 @@
-import React, {useState, useEffect, useRef} from "react";
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Linking } from "react-native";
+import React, {useState, useEffect} from "react";
+import { StyleSheet, Text, View, TouchableOpacity, TextInput } from "react-native";
 import { Icon } from "react-native-elements";
 import { ActivityIndicator } from "react-native-paper";
 import {BASE_URL} from "../../config/index";
+import { Picker } from "@react-native-community/picker";
 
 
 
 
-const submitValChange = (event, index, field, setEdited, url_part) => {
-  
+const submitValChange = (value, index, field, setEdited, url_part) => {
+    
   //url_part = "edit"
   //url_part = "member/edit"
-
   fetch(`${BASE_URL}/student/${index}/${url_part}`, {
     method: "POST",
     headers: {
@@ -21,14 +21,17 @@ const submitValChange = (event, index, field, setEdited, url_part) => {
     body: JSON.stringify(
       {
         field: field,
-        value: event.nativeEvent.text,
+        value: value,
         member_id: index
     }
     ),
   })
     .then((response) =>
       response.json().then((json) => {
+          
         setEdited(true);
+        console.log("Edited");
+        console.log(json);
       })
     )
     .catch((e) => {
@@ -37,19 +40,25 @@ const submitValChange = (event, index, field, setEdited, url_part) => {
     });
 }
 
-const CustomProfileField = ({ containerStyle, value, field,userReadableField, icon, type, index, url_part, overrideColor='gray', raised=false, onPress=null }) => {
+const DropDownField = ({ containerStyle, value, field,userReadableField, icon, type, index, url_part, options = [], overrideColor='gray', raised=false, onPress=null }) => {
   const [editing, setEditing] = useState(false);
   const [edited, setEdited] = useState(false);
-  const [curValue, setCurValue] = useState("Type Here...");
-  const inputRef = useRef(null);
+  const [pickerDispVal, setPickerDispVal] = useState(options[0].dispValue);
+  const [pickerVal, setPickerVal] = useState(options[0].value);
+    
+    useEffect(() => {
+        console.log(options);
+        let pickerValue = options.find(item => item.dispValue.toLowerCase() === value.toLowerCase());
+        if (typeof pickerValue === 'undefined') return;
+        
+        setPickerVal(pickerValue.value);
+        setPickerDispVal(pickerValue.dispValue);
 
-  useEffect(() => {
-    if (editing) inputRef.current.focus();
-  },[editing])
-  
+    },[]);
+
   useEffect(()=>{
-    setCurValue(value);
-  },[value]);
+    if (edited) setEditing(false);
+  },[edited]);
 
   return (
   <View style={[styles.container, containerStyle]}>
@@ -75,18 +84,26 @@ const CustomProfileField = ({ containerStyle, value, field,userReadableField, ic
         })}>
       <View style={[styles.emailColumn,{justifyContent: "space-between"}]}>
       {
-      (editing && <TextInput 
-              ref={inputRef}
-              style={styles.emailText} 
-              value={curValue}
-              selectTextOnFocus={true}
-              onBlur={event => setEditing(false)}
-              blurOnSubmit={true}
-              onChangeText={text => setCurValue(text)}
-              onSubmitEditing={event => {
-                submitValChange(event, index, field, setEdited, url_part);
-              }} />)||
-        <Text style={styles.emailText}>{curValue != "" ? curValue : "Not Set (Tap to Edit)"}</Text>
+      (editing && <Picker 
+
+                        mode={"dropdown"}
+                        selectedValue={pickerVal}
+                        onValueChange={(itemValue, itemIndex) => {
+                            console.log("Heljife");
+                            setPickerVal(itemValue);
+                            setPickerDispVal(options[itemIndex].dispValue);
+                            submitValChange(itemValue, index, field, setEdited, url_part);
+                        }}
+                        style={{ width: "50%" }}
+                        >
+                            {
+                              options && options.map((item, i) => 
+                            <Picker.Item key={i} label={item.dispValue} value={item.value} />
+                                    )
+                            }
+                </Picker>)
+                ||
+        <Text style={styles.emailText}>{pickerDispVal != "" ? pickerDispVal : "Not Set (Tap to Edit)"}</Text>
         }
       <View style={styles.editStatusIcon}>
       {(editing &&
@@ -156,4 +173,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CustomProfileField;
+export default DropDownField;

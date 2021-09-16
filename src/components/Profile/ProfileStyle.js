@@ -22,6 +22,11 @@ export default {
     height: Dimensions.get("window").width * (1.5 / 4),
     width: Dimensions.get("window").width,
   },
+  dashboardBackground:{
+    height: Dimensions.get("window").height,
+    width: Dimensions.get("window").width,
+    position: "absolute"
+  },
   coverMetaContainer: {
     backgroundColor: "transparent",
     paddingBottom: 10,

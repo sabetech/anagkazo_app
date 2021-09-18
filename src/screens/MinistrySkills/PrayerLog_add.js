@@ -32,7 +32,7 @@ export default function PrayerLog_add({ navigation, route }) {
   const onToggleSnackBar = () => setVisible(!visible);
   const onDismissSnackBar = () => {
       setVisible(false);
-      navigation.navigate('prayer_log');
+      navigation.goBack();
     };
 
   useEffect(() => {
@@ -209,7 +209,7 @@ export default function PrayerLog_add({ navigation, route }) {
             label: 'close',
             onPress: () => {
                 setVisible(false);
-                navigation.navigate('prayer_log');
+                navigation.goBack();
             },
         }}>
         {serverResponseString}

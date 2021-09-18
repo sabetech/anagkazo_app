@@ -4,8 +4,7 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableHighlight,
-  FlatList,
+  TouchableHighlight
 } from "react-native";
 import { Snackbar } from 'react-native-paper';
 import { Icon } from "react-native-elements";
@@ -21,16 +20,24 @@ export default function Members({ navigation }) {
   const [studentIndex, setStudentIndex] = useState('');
   const [visible, setVisible] = React.useState(false);
 
+  let unmounted = false;
+  
   const onToggleSnackBar = () => setVisible(!visible);
   const onDismissSnackBar = () => {
     setVisible(false);
   }
 
   useEffect(() => {
+    if (unmounted) return;
     AsyncStorage.getItem("student_index").then((res) => {
       getStudentMembers(res);
       setStudentIndex(res);
     });
+
+    return () => {
+      unmounted = true;
+    }
+
   }, []);
 
   const getStudentMembers = (myStudentIndex) => {
@@ -39,6 +46,7 @@ export default function Members({ navigation }) {
     })
       .then((response) => response.json())
       .then((responseJson) => {
+        if (unmounted) return;
         setStudentMembers(responseJson);
         setRefreshing(false);
       })
@@ -60,7 +68,6 @@ export default function Members({ navigation }) {
 
   const deleteRow = (rowMap, rowKey) => {
     closeRow(rowMap, rowKey);
-    console.log("you get here? " + rowKey);
     deleteMember(rowKey)
     const newData = [...studentMembers];
     const prevIndex = studentMembers.findIndex(item => item.key === rowKey);
@@ -155,7 +162,7 @@ export default function Members({ navigation }) {
     },
     topBar: {
       height: 75,
-      backgroundColor: "#0F9D58",
+      backgroundColor: "#067E6B",
       flexDirection: "row",
       elevation: 10,
     },
@@ -163,7 +170,7 @@ export default function Members({ navigation }) {
       fontSize: 21,
       marginTop: 32,
       marginLeft: 15,
-      color: "#ffffff",
+      color: "#ffffff"
     },
     backTextWhite: {
       color: '#FFF',

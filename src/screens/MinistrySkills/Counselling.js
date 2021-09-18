@@ -21,6 +21,7 @@ export default function Counselling({ navigation, route }) {
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [studentIndex, setStudentIndex] = useState("");
+  let unmounted = false;
 
   const isFocused = useIsFocused();
 
@@ -30,6 +31,11 @@ export default function Counselling({ navigation, route }) {
       setStudentIndex(res);
       getCounsellings(res);
     });
+
+    return () => {
+      unmounted = true;
+    }
+
   }, [isFocused]);
 
   const getCounsellings = (myStudentIndex) => {
@@ -38,6 +44,7 @@ export default function Counselling({ navigation, route }) {
     })
       .then((response) => response.json())
       .then((responseJson) => {
+        if (unmounted) return;
         setLoading(false);
         setCounsellings(responseJson);
         setRefreshing(false);

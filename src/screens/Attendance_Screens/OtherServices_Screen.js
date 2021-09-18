@@ -5,7 +5,8 @@ import {
   StyleSheet,
   FlatList,
   ActivityIndicator,
-  TouchableHighlight
+  TouchableHighlight,
+  ImageBackground, Dimensions
 } from "react-native";
 import MyActionButton from "../../components/MyActionButton";
 import { BASE_URL } from "../../config/index";
@@ -69,6 +70,9 @@ export default function OtherServices_Screen({navigation}) {
         />
       ) : null}
       <View style={styles.attendanceList}>
+        <ImageBackground 
+              source={require('../../res/imgs/geometry.jpg')}
+              style={styles.dashboardBackground} />
         <FlatList
           data={studentAttendance}
           renderItem={({ item }) => {
@@ -107,5 +111,10 @@ const styles = StyleSheet.create({
   },
   attendanceList: {
     height: "90%",
-  },
+  }, 
+  dashboardBackground:{
+    height: Dimensions.get("window").height,
+    width: Dimensions.get("window").width,
+    position: "absolute"
+  }
 });

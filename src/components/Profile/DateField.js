@@ -1,17 +1,18 @@
-import React, {useState, useEffect} from "react";
-import { StyleSheet, Text, View, TouchableOpacity, TextInput } from "react-native";
+import React, {useState, useEffect, useRef} from "react";
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Linking } from "react-native";
 import { Icon } from "react-native-elements";
 import { ActivityIndicator } from "react-native-paper";
 import {BASE_URL} from "../../config/index";
-import { Picker } from "@react-native-community/picker";
+import DateTimePicker from "@react-native-community/datetimepicker";
+
+import moment from "moment";
 
 
-
-
-const submitValChange = (value, index, field, setEdited, url_part) => {
-    
+const submitValChange = (event, index, field, setEdited, url_part) => {
+  
   //url_part = "edit"
   //url_part = "member/edit"
+
   fetch(`${BASE_URL}/student/${index}/${url_part}`, {
     method: "POST",
     headers: {
@@ -21,16 +22,15 @@ const submitValChange = (value, index, field, setEdited, url_part) => {
     body: JSON.stringify(
       {
         field: field,
-        value: value,
+        value: event.nativeEvent.text,
         member_id: index
     }
     ),
   })
     .then((response) =>
       response.json().then((json) => {
-          
+          console.log(json);
         setEdited(true);
-        
       })
     )
     .catch((e) => {
@@ -39,25 +39,26 @@ const submitValChange = (value, index, field, setEdited, url_part) => {
     });
 }
 
-const DropDownField = ({ containerStyle, value, field,userReadableField, icon, type, index, url_part, options = [], overrideColor='gray', raised=false, onPress=null }) => {
+const CustomDateField = ({ containerStyle, value, field,userReadableField, icon, type, index, url_part, overrideColor='gray', raised=false, onPress=null }) => {
   const [editing, setEditing] = useState(false);
   const [edited, setEdited] = useState(false);
-  const [pickerDispVal, setPickerDispVal] = useState(options[0].dispValue);
-  const [pickerVal, setPickerVal] = useState(options[0].value);
-    
-    useEffect(() => {
-        
-        let pickerValue = options.find(item => item.dispValue.toLowerCase() === value.toLowerCase());
-        if (typeof pickerValue === 'undefined') return;
-        
-        setPickerVal(pickerValue.value);
-        setPickerDispVal(pickerValue.dispValue);
+  const [curValue, setCurValue] = useState("Type Here...");
+  const inputRef = useRef(null);
+  const [show, setShow] = useState(false);
 
-    },[]);
-
+  useEffect(() => {
+    if (editing) inputRef.current.focus();
+  },[editing])
+  
   useEffect(()=>{
-    if (edited) setEditing(false);
-  },[edited]);
+    setCurValue(value);
+  },[value]);
+
+  const onDateChange = (event, selectedDate) => {
+    setShow(false);
+    const currentDate = selectedDate;
+    setCurValue(moment(currentDate).format("YYYY-MM-DD"));
+  };
 
   return (
   <View style={[styles.container, containerStyle]}>
@@ -79,30 +80,23 @@ const DropDownField = ({ containerStyle, value, field,userReadableField, icon, t
     <View style={styles.emailRow}>
       <TouchableOpacity onPress={(() => {
           setEditing(true);
-          
+          setShow(true);
         })}>
       <View style={[styles.emailColumn,{justifyContent: "space-between"}]}>
       {
-      (editing && <Picker 
-
-                        mode={"dropdown"}
-                        selectedValue={pickerVal}
-                        onValueChange={(itemValue, itemIndex) => {
-                            console.log("Heljife");
-                            setPickerVal(itemValue);
-                            setPickerDispVal(options[itemIndex].dispValue);
-                            submitValChange(itemValue, index, field, setEdited, url_part);
-                        }}
-                        style={{ width: "50%" }}
-                        >
-                            {
-                              options && options.map((item, i) => 
-                            <Picker.Item key={i} label={item.dispValue} value={item.value} />
-                                    )
-                            }
-                </Picker>)
-                ||
-        <Text style={styles.emailText}>{pickerDispVal != "" ? pickerDispVal : "Not Set (Tap to Edit)"}</Text>
+      (editing && <TextInput 
+              editable = {false}
+              ref={inputRef}
+              style={styles.emailText} 
+              value={curValue}
+              selectTextOnFocus={true}
+              onBlur={event => setEditing(false)}
+              blurOnSubmit={true}
+              onChangeText={text => setCurValue(text)}
+              onSubmitEditing={event => {
+                submitValChange(event, index, field, setEdited, url_part);
+              }} />)||
+        <Text style={styles.emailText}>{curValue != "" ? curValue : "Not Set (Tap to Edit)"}</Text>
         }
       <View style={styles.editStatusIcon}>
       {(editing &&
@@ -125,6 +119,14 @@ const DropDownField = ({ containerStyle, value, field,userReadableField, icon, t
       </TouchableOpacity>
      
     </View>
+    {show && (
+          <DateTimePicker
+            value={new Date()}
+            mode={"date"}
+            display="default"
+            onChange={onDateChange}
+          />
+        )}
   </View>
   )}
 
@@ -172,4 +174,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default DropDownField;
+export default CustomDateField;

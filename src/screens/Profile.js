@@ -5,7 +5,7 @@ import {
   StyleSheet,
   ImageBackground,
   Image,
-  Text,
+  Text, Dimensions
 } from "react-native";
 import { Card, Icon } from "react-native-elements";
 import CustomProfileField from "../components/Profile/CustomProfileField";
@@ -13,6 +13,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BASE_URL } from "../config/index";
 import PhoneProfileView from "../components/Profile/PhoneProfileView";
 import DropDownField from "../components/Profile/DropDownField";
+import CustomDateField from "../components/Profile/DateField";
+import backGroundImage from "../res/imgs/geometry.jpg";
+
 
 class Profile extends Component {
   state = {
@@ -240,7 +243,7 @@ class Profile extends Component {
 
   renderDateOfBirth = () => {
     return (
-      <CustomProfileField
+      <CustomDateField
         field={"date_of_birth"}
         value={this.state.student.date_of_birth}
         userReadableField={"Date of Birth"}
@@ -320,7 +323,12 @@ const styles = StyleSheet.create({
     padding: 0,
   },
   container: {
-    flex: 1,
+    flex: 1
+  },
+  dashboardBackground:{
+    height: Dimensions.get("window").height,
+    width: Dimensions.get("window").width,
+    position: "absolute"
   },
   emailContainer: {
     backgroundColor: "#FFF",
@@ -350,7 +358,7 @@ const styles = StyleSheet.create({
     fontSize: 26,
   },
   scroll: {
-    backgroundColor: "#FFF",
+    backgroundColor: "#FFF"
   },
   telContainer: {
     backgroundColor: "#FFF",

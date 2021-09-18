@@ -5,7 +5,8 @@ import {
     StyleSheet,
     TouchableOpacity,
     Alert,
-    ScrollView
+    ScrollView,
+    ImageBackground, Dimensions
   } from "react-native";
 
   import PastoralPointInfoCard from "../../components/Helpers/PastoralPointInfoCard";
@@ -93,7 +94,10 @@ export default function PastoralPointSummary({ navigation }) {
             </TouchableOpacity>
             <Text style={styles.header}>Pastoral Point Summary</Text>
           </View>
-          
+          <ImageBackground 
+              source={require('../../res/imgs/geometry.jpg')}
+              style={styles.dashboardBackground} />
+
           <View style={styles.container}>
           <ScrollView>
             <PastoralPointInfoCard
@@ -166,6 +170,11 @@ const styles = StyleSheet.create({
         textAlign:'center',
         padding: 5,
         
+    },
+    dashboardBackground:{
+      height: Dimensions.get("window").height,
+      width: Dimensions.get("window").width,
+      position: "absolute"
     }
 
 

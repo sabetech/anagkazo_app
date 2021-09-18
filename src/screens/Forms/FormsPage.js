@@ -1,9 +1,10 @@
 import React from "react";
-import { View, Text, TouchableHighlight, StyleSheet } from "react-native";
+import { View, Text, TouchableHighlight, StyleSheet,ImageBackground, Dimensions } from "react-native";
 import { Icon } from "react-native-elements";
 import MenuCard from "../../components/Forms/MenuCard";
 import FormMenu from "../../backend/ministry_skills_forms_menu.json";
 import { ScrollView } from "react-native-gesture-handler";
+
 
 export default function FormsPage({ navigation }) {
   const detailColor = ["#4285F4", "#DB4437", "#0F9D58", "#F4B400"];
@@ -25,6 +26,9 @@ export default function FormsPage({ navigation }) {
         </TouchableHighlight>
         <Text style={styles.header}>Ministry Skills</Text>
       </View>
+      <ImageBackground 
+              source={require('../../res/imgs/geometry.jpg')}
+              style={styles.dashboardBackground} />
       <ScrollView>
         <View style={styles.menuList}>
           {FormMenu.map((menuItem, index) => (
@@ -64,4 +68,9 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     flex: 1,
   },
+  dashboardBackground:{
+    height: Dimensions.get("window").height,
+    width: Dimensions.get("window").width,
+    position: "absolute"
+  }
 });

@@ -82,7 +82,7 @@ export function DrawerContent(props) {
                 />
               )}
               onPress={() => {
-                props.navigation.navigate("members");
+                props.navigation.navigate("members_tabs");
               }}
             />
             <DrawerItem

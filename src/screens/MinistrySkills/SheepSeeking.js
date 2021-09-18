@@ -20,7 +20,7 @@ export default function SheepSeeking({ navigation, route }) {
   const [sheepseeking, setSheepSeeking] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const [studentIndex, setStudentIndex] = useState("");
-
+  let unmounted = false;
   const isFocused = useIsFocused();
 
   useEffect(() => {
@@ -28,6 +28,11 @@ export default function SheepSeeking({ navigation, route }) {
       setStudentIndex(res);
       getSheepSeeking(res);
     });
+
+    return () => {
+      unmounted = true
+    }
+
   }, [isFocused]);
 
   const getSheepSeeking = (myStudentIndex) => {
@@ -36,7 +41,7 @@ export default function SheepSeeking({ navigation, route }) {
     })
       .then((response) => response.json())
       .then((responseJson) => {
-        
+        if (unmounted) return;
         setRefreshing(false);
         setSheepSeeking(responseJson);
 

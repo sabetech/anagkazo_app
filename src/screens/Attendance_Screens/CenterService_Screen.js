@@ -5,7 +5,8 @@ import {
   StyleSheet,
   FlatList,
   ActivityIndicator,
-  TouchableHighlight
+  TouchableHighlight,
+  ImageBackground, Dimensions
 } from "react-native";
 import MyActionButton from "../../components/MyActionButton";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -82,6 +83,9 @@ export default function CenterService_Screen({navigation}) {
         />
       ) : null}
       <View style={styles.attendanceList}>
+      <ImageBackground 
+              source={require('../../res/imgs/geometry.jpg')}
+              style={styles.dashboardBackground} />
         <FlatList
           data={studentAttendance}
           renderItem={({ item }) => {
@@ -91,7 +95,7 @@ export default function CenterService_Screen({navigation}) {
                 title={moment(item.date_of_service).format("dddd, MMM DD YYYY")}
                 description="Number of Souls"
                 left={props => <Icon name={"church"} type={"font-awesome-5"} iconStyle={{color:"grey", marginTop:10, paddingRight:20}}/>}
-                right={props => <Text style={{marginTop: "8%", color:"grey"}}>{item.number_of_souls}</Text>}
+                right={props => <Text style={{marginTop: "8%", color:"black"}}>{item.number_of_souls}</Text>}
               />
             );
           }}
@@ -124,4 +128,9 @@ const styles = StyleSheet.create({
   attendanceList: {
     height: "90%",
   },
+  dashboardBackground:{
+    height: Dimensions.get("window").height,
+    width: Dimensions.get("window").width,
+    position: "absolute"
+  }
 });

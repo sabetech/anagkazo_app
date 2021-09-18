@@ -6,6 +6,7 @@ import { Login } from "./src/screens/Login";
 import Home from "./src/screens/Home";
 import { AuthContext } from "./src/contexts/AuthContext";
 import Profile from "./src/screens/Profile";
+import MembersTabs from "./src/screens/Members/MembersTab";
 import Members from "./src/screens/Members/Members";
 import MembersAdd from "./src/screens/Members/MembersAdd";
 import MemberDetail from "./src/screens/Members/Member_Detail";
@@ -13,6 +14,7 @@ import MemberDetail from "./src/screens/Members/Member_Detail";
 import Basonta from "./src/screens/MinistrySkills/Basonta";
 
 import Attendance from "./src/screens/Attendance";
+
 import QR_code_scanner from "./src/screens/Attendance_Screens/QR_code_scanner";
 import CenterService_AttnAdd from "./src/screens/Attendance_Screens/CenterService_AttnAdd";
 import DashboardDetail from "./src/screens/Dashboard/Dashboard-detail";
@@ -50,7 +52,7 @@ function MainDrawer() {
     >
       <Drawer.Screen name="home" component={Home}></Drawer.Screen>
       <Drawer.Screen name="profile" component={Profile}></Drawer.Screen>
-      <Drawer.Screen name="members" component={Members}></Drawer.Screen>
+      <Drawer.Screen name="members_tabs" component={MembersTabs}></Drawer.Screen>
       <Drawer.Screen name="attendance" component={Attendance}></Drawer.Screen>
       <Drawer.Screen name="pastoral_point_summary" component={PastoralPointSummary}></Drawer.Screen>
       <Drawer.Screen name="forms_page" component={FormsPage}></Drawer.Screen>
@@ -60,7 +62,8 @@ function MainDrawer() {
 
 export default function App() {
   
-  const [initialRoute, setInitialRoute] = useState("login");  
+  const [initialRoute, setInitialRoute] = useState("login"); 
+  const [studentIndex, setStudentIndex] = useState();
 
   const auth = React.useMemo(() => ({
     login: async (index_number, passcode) => {
@@ -129,7 +132,20 @@ export default function App() {
     detailsShown: {
       val: false,
     },
+    studentIndex: null
   }));
+  
+  useEffect(() => {  
+    AsyncStorage.getItem('student_index').then((studentIndex_Value) => {
+      if (studentIndex_Value != null) {
+        auth.studentIndex = studentIndex_Value;
+      }
+  }).catch((e) => {
+      console.log(e.message());
+  });
+
+  },[]);
+
 
   return (
     <AuthContext.Provider value={auth}>

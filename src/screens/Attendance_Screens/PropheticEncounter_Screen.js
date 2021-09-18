@@ -5,13 +5,14 @@ import {
   StyleSheet,
   FlatList,
   ActivityIndicator,
-  TouchableHighlight
+  TouchableHighlight,
+  ImageBackground, Dimensions
 } from "react-native";
 import MyActionButton from "../../components/MyActionButton";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BASE_URL } from "../../config/index";
 import { Icon } from "react-native-elements";
-import { List } from 'react-native-paper';
+import { List, Chip } from 'react-native-paper';
 import moment from "moment";
 import { useIsFocused } from '@react-navigation/native';
 
@@ -79,6 +80,9 @@ export default function PropheticEncounter_Screen({navigation}) {
         />
       ) : null}
       <View style={styles.attendanceList}>
+      <ImageBackground 
+              source={require('../../res/imgs/geometry.jpg')}
+              style={styles.dashboardBackground} />
         <FlatList
           data={studentAttendance}
           renderItem={({ item }) => {
@@ -88,7 +92,7 @@ export default function PropheticEncounter_Screen({navigation}) {
                 title={moment(item.title).format("dddd, MMM DD YYYY")}
                 description="Status"
                 left={props => <Icon name={"pillar"} type={"material-community"} iconStyle={{color:"grey", marginTop:10, paddingRight:20}}/>}
-                right={props => <Text style={{marginTop: "8%", color:"grey"}}>{item.status}</Text>}
+                right={props => <Text style={{marginTop: "8%", color:"black"}}>{item.status}</Text>}
               />
             );
           }}
@@ -121,4 +125,9 @@ const styles = StyleSheet.create({
   attendanceList: {
     height: "90%",
   },
+  dashboardBackground:{
+    height: Dimensions.get("window").height,
+    width: Dimensions.get("window").width,
+    position: "absolute"
+  }
 });

@@ -2,17 +2,30 @@ import React from "react";
 import CardInfo from "./CardInfo";
 import ProgressMinistrySkillRing from "./MinistrySkillsProgressRings";
 import { ScrollView } from "react-native-gesture-handler";
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet, Dimensions, View } from "react-native";
+
 
 
 const DashboardCardList = ({ studentInfo }) => {
-  const detailColor = ["#4285F4", "#DB4437", "#0F9D58", "#F4B400"];
-  const descriptions = [
-    "Number of Souls Brought to Service",
-    "Status",
-    "Status",
-    "Number of Souls Bussed On Sunday"
+  // const detailColor = ["#4285F4", "#DB4437", "#0F9D58", "#F4B400"];
+  // const descriptions = [
+  //   "Number of Souls Brought to Service",
+  //   "Status",
+  //   "Status",
+  //   "Number of Souls Bussed On Sunday"
+  // ];
+
+  const ministrySkills = [
+    {name:'ANTIBRUTISH',skill: 'ANTI BRUTISH'},
+    {name:'COUNSELLING', skill: 'COUNSELLING'},
+    {name:'MULTIPLICATION', skill: 'MULTIPLICATION'},
+    {name:'SAT', skill: 'SAT'},
+    {name:'SHEEP_SEEKING', skill:'SHEEP SEEKING'},
+    {name:'UNDERSTANDING', skill: 'UNDERSTANDING CAMPAIGN'},
+    {name:'BASONTA', skill: 'BASONTA'},
+    {name:'BUSSING', skill: 'BUSSING'}
   ];
+
   const icons = [
     {
       icon:"church", 
@@ -38,6 +51,7 @@ const DashboardCardList = ({ studentInfo }) => {
     <ScrollView style={styles.scrollViewDashboardContent} contentContainerStyle={{ paddingBottom: 120 }}>
       
         {
+          
           studentInfo.attnData.map((item, idx) => 
             <CardInfo
                 key={idx}
@@ -51,11 +65,13 @@ const DashboardCardList = ({ studentInfo }) => {
             />
           )
         }
-      <ProgressMinistrySkillRing title={"Anti Brutish"}/>  
-      <ProgressMinistrySkillRing title={"Bussing"}/>
-      <ProgressMinistrySkillRing title={"Sheep Seeking"} />  
-      <ProgressMinistrySkillRing title={"Sheep Seeking"} />
-      <ProgressMinistrySkillRing title={"Bussing"}/>
+         
+        {
+          ministrySkills.map((item, index) => 
+              <ProgressMinistrySkillRing key={index} name={item.name} skill={item.skill}/>
+          )  
+        }
+
     </ScrollView>
     
   );

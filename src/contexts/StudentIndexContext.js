@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, {  useState, useEffect } from "react";
 //this is currently not used: but it is my understanding of the use of useContext
 const StudentIndex = React.createContext();
 export function StudentIndexProvider({children}){

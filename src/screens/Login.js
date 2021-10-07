@@ -20,19 +20,24 @@ export function Login({ navigation }) {
   const [passcode, setPassCode] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const { login } = React.useContext(AuthContext);
-  const { studentIndex } = React.useContext(AuthContext);
 
   useEffect(() => {
-    if (studentIndex != null){
-      navigation.navigate('home',{
-                    screen: 'home',
-                    params: {
-                      studentIndex: studentIndex
-                    }
-                  });
-    }
+    //check if user has already logged before ... if not don't go anywhere
+    AsyncStorage.getItem('student_index').then((studentIndex_Value) => {
+      
+      if (studentIndex_Value != null) {
+          navigation.navigate('home',{
+              screen: 'home',
+              params: {
+                studentIndex: studentIndex_Value
+              }
+            });
+      }
+  }).catch((e) => {
+      console.log(e.message());
+  });
 
-  },[studentIndex]);
+  },[]);
 
   return (
     <View style={styles.container}>

@@ -1,27 +1,66 @@
-import React from "react";
-import {View} from "react-native";
+import React, {useState, useEffect} from "react";
+import {Alert, View} from "react-native";
 import { Chip } from 'react-native-elements';
 import ActivityRings from "react-native-activity-rings";
 import { Divider, Title } from 'react-native-paper';
+import { BASE_URL } from "../../config";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-const ProgressMinistrySkillRing = ({title}) => {
+const ProgressMinistrySkillRing = ({name, skill}) => {
+    
+    const [progress, setProgress] = useState({
+        month36: 0,
+        month18: 0,
+        month9: 0
+    });
+
+    useEffect(() => {
+        
+        AsyncStorage.getItem("student_index").then((res) => {
+            getProgressMinistrySkill(res);
+          });
+      
+          return () => {
+            unmounted = true
+          }
+
+    }, []);
+
+    const getProgressMinistrySkill = (studentIndex) => {
+        fetch(`${BASE_URL}/student/${studentIndex}/getStudentProgress?skill=${name}`, 
+        {
+            method: 'GET'
+        })
+        .then(response => response.json())
+        .then((responseJson) => {
+            console.log(responseJson);
+            setProgress({...progress, 
+                                        month36:responseJson.original.progress36,
+                                        month18:responseJson.original.progress18,
+                                        month9:responseJson.original.progress9            
+                        });
+        }).catch((e) => {
+            Alert.alert("Error", "Check your Internet Connection");
+        });
+    }
+
     const activityData = [ 
         { 
             label: "36 months",
-            value: 0.7,
+            value: progress.month36,
             color: "#c800ff"
         }, 
         { 
             label: "18 months",
-            value: 0.6 ,
+            value: progress.month18 ,
         }, 
         { 
             label: "9 months",
-            value: 0.2 
+            value: progress.month9 
         }
       ];
-  
+      
       const activityConfig = { 
         width: 170,  
         height: 170
@@ -29,7 +68,7 @@ const ProgressMinistrySkillRing = ({title}) => {
       };
     return (
         <View>
-            <Title style={{marginLeft: 20}}>{title}</Title>
+            <Title style={{marginLeft: 20}}>{skill}</Title>
             <ActivityRings 
                 theme={"light"} 
                 legend={true} 

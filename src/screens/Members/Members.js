@@ -12,10 +12,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BASE_URL } from "../../config/index";
 import ContactListItem from "../../components/Members/ContactListItem";
 import MyActionButton from "../../components/MyActionButton";
-
+import { ActivityIndicator } from 'react-native';
 //get members from here
 export default function Members({ navigation }) {
   const [studentMembers, setStudentMembers] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [studentIndex, setStudentIndex] = useState('');
   const [visible, setVisible] = React.useState(false);
@@ -41,6 +42,7 @@ export default function Members({ navigation }) {
   }, []);
 
   const getStudentMembers = (myStudentIndex) => {
+    setLoading(true);
     fetch(`${BASE_URL}/student/${myStudentIndex}/members`, {
       method: "GET",
     })
@@ -49,6 +51,7 @@ export default function Members({ navigation }) {
         if (unmounted) return;
         setStudentMembers(responseJson);
         setRefreshing(false);
+        setLoading(false);
       })
       .catch((error) => {
         alert("check your internet connection.");
@@ -108,6 +111,8 @@ export default function Members({ navigation }) {
         <Text style={styles.header}>Members</Text>
       </View>
       <View style={{ height: "90%" }}>
+        {loading ?  <ActivityIndicator size="large" color="darkblue"
+                    style={{flex: 1, 'justifyContent': 'center'}} /> :
         <SwipeListView
           disableRightSwipe={true}
           data={studentMembers}
@@ -134,7 +139,8 @@ export default function Members({ navigation }) {
         leftOpenValue={0}
         previewOpenValue={-40}
         previewOpenDelay={3000}
-        />
+        /> 
+        }
       </View>
       <MyActionButton icon="md-add" navigateTo="members_add" />
 
@@ -162,7 +168,7 @@ export default function Members({ navigation }) {
     },
     topBar: {
       height: 75,
-      backgroundColor: "#067E6B",
+      backgroundColor: "#694fad",
       flexDirection: "row",
       elevation: 10,
     },
@@ -207,4 +213,9 @@ export default function Members({ navigation }) {
       backgroundColor: 'red',
       right: 0,
   },
+  activityLoader: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    padding: 10
+  }
   });

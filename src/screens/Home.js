@@ -109,7 +109,7 @@ const Home = ({route, navigation}) => {
                 (<ActivityIndicator 
                     size="large"
                     color="darkblue"
-                    style={{flex: 1, alignItems: 'center', 'justifyContent': 'space-around'}}/>)
+                    style={{flex: 1, 'justifyContent': 'center'}}/>)
             }
             
         </View>

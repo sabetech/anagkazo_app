@@ -4,6 +4,7 @@ import { Icon } from "react-native-elements";
 import { ActivityIndicator } from "react-native-paper";
 import {BASE_URL} from "../../config/index";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { Picker } from "@react-native-community/picker";
 
 import moment from "moment";
 

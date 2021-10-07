@@ -63,7 +63,7 @@ function MainDrawer() {
 export default function App() {
   
   const [initialRoute, setInitialRoute] = useState("login"); 
-  const [studentIndex, setStudentIndex] = useState();
+  
 
   const auth = React.useMemo(() => ({
     login: async (index_number, passcode) => {
@@ -131,8 +131,7 @@ export default function App() {
     },
     detailsShown: {
       val: false,
-    },
-    studentIndex: null
+    }
   }));
   
   useEffect(() => {  

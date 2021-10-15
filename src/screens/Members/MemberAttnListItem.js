@@ -6,6 +6,9 @@ import { useNavigation } from "@react-navigation/native";
 import { Chip } from 'react-native-paper';
 
 const MemberAttnListItem = ({ index, name, attn_status, photo_url, navigateTo }) => {
+
+    //get membship attendance status here
+
   
     return (
       <ListItem bottomDivider >
@@ -16,8 +19,8 @@ const MemberAttnListItem = ({ index, name, attn_status, photo_url, navigateTo })
             <ListItem.Subtitle>
               {
                 attn_status === -1 ? <Chip style={{backgroundColor: '#e2dfdf'}}>Not Set!</Chip>
-                                  : (attn_status === 0) ? <Chip icon="close" style={{backgroundColor: '#f55124'}} textStyle={{color:'white'}}>Absent</Chip>
-                                  : <Chip icon="close" style={{backgroundColor: '#7fff0f'}} textStyle={{color:'white'}}>Absent</Chip>
+                                  : (attn_status === 0) ? <Chip style={{backgroundColor: '#f55124'}} textStyle={{color:'white'}}>Absent</Chip>
+                                  : <Chip style={{backgroundColor: '#00fa00'}} textStyle={{color:'black'}}>Present</Chip>
               }
               
             

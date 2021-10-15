@@ -42,11 +42,9 @@ export default function MembersAttn({ navigation }) {
         getMembersEvent();
         setStudentIndex(studentIndex_Value);
         getMembersAttn(studentIndex_Value);
-      });
-     
-        
+      });        
     
-    }, []);
+    }, [pickerVal, dateValue]);
 
     const onDateChange = (event, selectedDate) => {
       setShow(false);
@@ -72,6 +70,9 @@ export default function MembersAttn({ navigation }) {
     }
 
     const getMembersAttn = (studentIndex) => {
+      if (!pickerVal) return;
+      if (!dateValue) return;
+
         fetch(`${BASE_URL}/student/${studentIndex}/membersAttn?date=${dateValue}&event=${pickerVal}`, {
             method: "GET",
           })
@@ -86,12 +87,47 @@ export default function MembersAttn({ navigation }) {
             });
     }
 
+    const markAttn = (rowMap, id, attnStatus) => {
+      fetch(`${BASE_URL}/student/${studentIndex}/members/markAttendance`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(
+          {
+            status: attnStatus,
+            event: pickerVal,
+            date: dateValue,
+            member_id: id
+        }
+        )
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        if (unmounted) return;
+
+        let memberIndex = studentMembersAttn.findIndex(item => item.member_id == responseJson.payload.data.member_id);
+        
+        let studentMembersAttn_Copy = [...studentMembersAttn];
+        studentMembersAttn_Copy.splice(memberIndex, 1, responseJson.payload.data);
+        setStudentMembersAttn(studentMembersAttn_Copy);
+        
+        rowMap[id].closeRow();
+      })
+    }
+
     const makePresent = (rowMap, id) => {
 
+      markAttn(rowMap, id, 1);
     }
 
     const makeAbsent = (rowMap, id) => {
+      markAttn(rowMap, id, 0);
+    }
 
+    const resetAttn = (rowMap, id) => {
+      markAttn(rowMap, id, -1);
     }
 
     return (
@@ -156,21 +192,21 @@ export default function MembersAttn({ navigation }) {
                     <View style={styles.rowBack}>
                         <TouchableHighlight
                           style={[styles.presentMemberStyle]}
-                          onPress={() => makePresent(rowMap, data.item.id)}
+                          onPress={() => makePresent(rowMap, data.item.member_id)}
                         >
                         <Text >Present</Text> 
                         </TouchableHighlight>
                         
                         <TouchableHighlight
                             style={[styles.backRightBtn, styles.backRightBtnLeft]}
-                            onPress={() => closeRow(rowMap, data.item.key)}
+                            onPress={() => resetAttn(rowMap, data.item.member_id)}
                         >
                             <Text style={styles.backTextWhite}>Reset</Text>
                         </TouchableHighlight>
 
                         <TouchableHighlight
                           style={[styles.backRightBtn, styles.backRightBtnRight]}
-                          onPress={() => makeAbsent(rowMap, data.item.id)}
+                          onPress={() => makeAbsent(rowMap, data.item.member_id)}
                         >
                         <Text style={styles.backTextWhite}>Absent</Text>
                       </TouchableHighlight>

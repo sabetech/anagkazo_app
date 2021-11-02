@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {View, ActivityIndicator, StyleSheet} from "react-native";
-
+import {View, ActivityIndicator, StyleSheet, Alert} from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import HomeProfile from "../components/Profile/HomeProfile";
 import { BASE_URL } from "../config/index";
 
@@ -41,12 +41,22 @@ const Home = ({route, navigation}) => {
             .then((response) => response.json())
             .then((responseJson) => {
               
+              if (responseJson.status === 'failed') throw new Error('Student Don\'t exist');
+
               setStudentInfo(responseJson);
               setLoading(false);
               setLoaded(true);
               
             }).catch((error) => {
-              console.error(error);
+              Alert.alert("Error", "Fetching Student Info Did not complete. It may be that the student is no longer a student!",
+                [
+                  { text: "OK", 
+                    onPress: () => AsyncStorage.removeItem("student_index").then(() => {
+                      navigation.navigate("login");
+                    }) 
+                  }
+                ]            
+              )
             });
     }
 

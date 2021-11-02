@@ -7,6 +7,9 @@ import {
   Image,
   ImageBackground,
   ActivityIndicator,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard
 } from "react-native";
 import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
 import { FilledButton } from "../components/FilledButton";
@@ -40,84 +43,91 @@ export function Login({ navigation }) {
   },[]);
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require("../res/imgs/login_background.jpg")}
-        style={styles.image}
-      >
-        
-        <View style={styles.anagkazoLogo}>
-          <Image
-            source={require("../../assets/imgs/logo_anagkazo.png")}
-            style={styles.logo_img}
-          />
-        </View>
-        <View style={styles.form}>
-          <Text style={{ fontSize: 18 }}>Login with your Student ID</Text>
-          <Input
-            style={styles.input}
-            placeholder={"Index Number eg: 700100"}
-            keyboardType={"numeric"}
-            value={index_number}
-            onChangeText={setIndexNumber}
-          />
-          <Text style={{ fontSize: 18, marginTop: 10 }}>Passcode</Text>
-          <Input
-            style={styles.input}
-            placeholder={"passcode eg: 5023"}
-            keyboardType={"numeric"}
-            secureTextEntry={true}
-            value={passcode}
-            onChangeText={setPassCode}
-          />
-
-          {loading ? (
-            <ActivityIndicator
-              style={{ marginTop: 10 }}
-              size="large"
-              color="darkblue"
-            />
-          ) : (
-            <FilledButton
-              title={"Login"}
-              style={styles.loginButton}
-              onPress={() => {
-                setLoading(true);
-                login(index_number, passcode).then(result => 
-                {
-                  if (result){
-                    setLoading(false);
-                    studentIndex = index_number;
-                    navigation.navigate('home',{
-                      screen: 'home',
-                      params: {
-                        studentIndex: index_number
-                      }
-                    });
-                  }else{
-                    setLoading(false);
-                    alert("Wrong Credentials! Try again!");
-                  }
-                } 
-              );
-                
-                
-              }}
-              colors={["rgba(32,150,255,0.9)", "rgba(5,255,163,0.4)"]}
-            />
-            
-          )}
-          <TouchableOpacity
-            onPress={(()=> {
-              navigation.navigate('signup');
-            })}
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <ImageBackground
+            source={require("../res/imgs/login_background.jpg")}
+            style={styles.image}
           >
-            <Text style={styles.link}>I don't have a Passcode! Sign Up</Text>
-          </TouchableOpacity>
+            
+            <View style={styles.anagkazoLogo}>
+              <Image
+                source={require("../../assets/imgs/logo_anagkazo.png")}
+                style={styles.logo_img}
+              />
+            </View>
+            <View style={styles.form}>
+              <Text style={{ fontSize: 18 }}>Login with your Student ID</Text>
+              <Input
+                style={styles.input}
+                placeholder={"Index Number eg: 700100"}
+                keyboardType={"numeric"}
+                value={index_number}
+                onChangeText={setIndexNumber}
+              />
+              <Text style={{ fontSize: 18, marginTop: 10 }}>Passcode</Text>
+              <Input
+                style={styles.input}
+                placeholder={"passcode eg: 5023"}
+                keyboardType={"numeric"}
+                secureTextEntry={true}
+                value={passcode}
+                onChangeText={setPassCode}
+              />
+
+              {loading ? (
+                <ActivityIndicator
+                  style={{ marginTop: 10 }}
+                  size="large"
+                  color="darkblue"
+                />
+              ) : (
+                <FilledButton
+                  title={"Login"}
+                  style={styles.loginButton}
+                  onPress={() => {
+                    setLoading(true);
+                    login(index_number, passcode).then(result => 
+                    {
+                      if (result){
+                        setLoading(false);
+                        studentIndex = index_number;
+                        navigation.navigate('home',{
+                          screen: 'home',
+                          params: {
+                            studentIndex: index_number
+                          }
+                        });
+                      }else{
+                        setLoading(false);
+                        alert("Wrong Credentials! Try again!");
+                      }
+                    } 
+                  );
+                    
+                    
+                  }}
+                  colors={["rgba(32,150,255,0.9)", "rgba(5,255,163,0.4)"]}
+                />
+                
+              )}
+              <TouchableOpacity
+                onPress={(()=> {
+                  navigation.navigate('signup');
+                })}
+              >
+                <Text style={styles.link}>I don't have a Passcode! Sign Up</Text>
+              </TouchableOpacity>
+            </View>
+            {/* </LinearGradient> */}
+          </ImageBackground>
         </View>
-        {/* </LinearGradient> */}
-      </ImageBackground>
-    </View>
+    </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
 

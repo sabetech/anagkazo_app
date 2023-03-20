@@ -16,7 +16,7 @@ This react native app is designed to help students of anagkazo track their progr
 - Run `npm run-android` to start the application. (Be sure to have the android development environment setup
 
 ## Screenshot
-<img src="[drawing.jpg](https://user-images.githubusercontent.com/4713955/226282717-4730118d-b247-435d-ba27-86e6d076e16c.jpeg)" alt="Screenshot_20230119-215554_Anagkazo Pastoral Point" width="200"/>
+<img src="https://user-images.githubusercontent.com/4713955/226282717-4730118d-b247-435d-ba27-86e6d076e16c.jpeg" alt="Screenshot_20230119-215554_Anagkazo Pastoral Point" width="200"/>
 
 ### Prerequisites
 
